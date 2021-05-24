@@ -5,10 +5,10 @@ const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = {
     entry: {
-        background: './src/background/index.js',
-        'content-script': './src/content-script/index.js',
-        options: './src/options/index.js',
-        popup: './src/popup/index.js',
+        background: './src/background/index.ts',
+        'content-script': './src/content-script/index.ts',
+        options: './src/options/index.ts',
+        popup: './src/popup/index.ts',
     },
 
     output: {

@@ -3,20 +3,7 @@
     "name": "Re: ID",
     "version": "0.0.1",
 
-    "action": {
-        "default_icon": {
-          "16": "images/icon16.png",
-          "24": "images/icon24.png",
-          "32": "images/icon32.png"
-        }
-    },
-    "default_locale": "en",
     "description": "This is Re: ID",
-    "icons": {
-        "16": "images/icon16.png",
-        "24": "images/icon24.png",
-        "32": "images/icon32.png"
-    },
 
     "author": "NaturalSelectionLabs",
     "background": {
