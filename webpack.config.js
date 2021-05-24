@@ -3,7 +3,9 @@ const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 
-module.exports = {
+module.exports = (env, argv) => ({
+    devtool: argv.mode === 'production' ? 'source-map' : 'cheap-source-map',
+
     entry: {
         background: './src/background/index.ts',
         'content-script': './src/content-script/index.ts',
@@ -86,4 +88,4 @@ module.exports = {
             VERSION: JSON.stringify(require('./src/assets/manifest.json').version)
         }),
     ],
-};
+});
