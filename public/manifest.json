@@ -1,0 +1,34 @@
+{
+    "manifest_version": 3,
+    "name": "Re: ID",
+    "version": "0.0.1",
+
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+          "16": "images/icon16.png",
+          "24": "images/icon24.png",
+          "32": "images/icon32.png"
+        }
+    },
+    "description": "This is Re: ID",
+    "icons": {
+        "16": "images/icon16.png",
+        "24": "images/icon24.png",
+        "32": "images/icon32.png"
+    },
+
+    "author": "NaturalSelectionLabs",
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [{
+        "matches": ["https://twitter.com/home"],
+        "js": ["content-script.js"]
+    }],
+    "homepage_url": "https://rss3.io/",
+    "permissions": ["tabs"],
+    "host_permissions": [
+        "https://twitter.com/home"
+    ]
+}

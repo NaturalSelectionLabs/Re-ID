@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 
@@ -30,7 +31,7 @@ module.exports = (env, argv) => ({
                 test: /\.tsx?$/,
                 loader: 'ts-loader',
                 options: {
-                  appendTsSuffixTo: [/\.vue$/],
+                    appendTsSuffixTo: [/\.vue$/],
                 },
                 exclude: /node_modules/,
             },
@@ -75,17 +76,33 @@ module.exports = (env, argv) => ({
     },
 
     plugins: [
+        new HtmlWebpackPlugin({
+            chunks: ['popup'],
+            filename: 'popup.html',
+            title: 'Re: ID',
+            favicon: 'src/assets/favicon.ico',
+            hash: true,
+            template: 'src/assets/index.ejs',
+        }),
+        new HtmlWebpackPlugin({
+            chunks: ['options'],
+            filename: 'options.html',
+            title: 'Re: ID',
+            favicon: 'src/assets/favicon.ico',
+            hash: true,
+            template: 'src/assets/index.ejs',
+        }),
         new CopyPlugin({
             patterns: [
                 {
-                    from: 'src/assets',
+                    from: 'public',
                     to: '',
                 },
             ],
         }),
         new VueLoaderPlugin(),
         new webpack.DefinePlugin({
-            VERSION: JSON.stringify(require('./src/assets/manifest.json').version)
+            VERSION: JSON.stringify(require('./public/manifest.json').version)
         }),
     ],
 });
