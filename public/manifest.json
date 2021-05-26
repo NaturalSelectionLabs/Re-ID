@@ -26,6 +26,7 @@
         "matches": ["https://twitter.com/home"],
         "js": ["content-script.js"]
     }],
+    "options_page": "options.html",
     "homepage_url": "https://rss3.io/",
     "permissions": ["tabs"],
     "host_permissions": [
