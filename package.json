@@ -38,6 +38,7 @@
     "devDependencies": {
         "@babel/core": "7.14.3",
         "@babel/preset-env": "7.14.2",
+        "@types/chrome": "0.0.142",
         "@vue/compiler-sfc": "3.0.11",
         "autoprefixer": "10.2.5",
         "babel-loader": "8.2.2",
