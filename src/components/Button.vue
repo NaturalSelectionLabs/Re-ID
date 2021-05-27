@@ -20,7 +20,6 @@
 </template>
 
 <script lang="ts">
-// import { defineComponent, PropType } from 'vue'
 import { Vue, Options } from 'vue-class-component';
 
 @Options({
@@ -34,14 +33,6 @@ export default class Button extends Vue {
     buttonStyle!: String;
     buttonText!: String;
     buttonSize!: String;
-
-    data() {
-        return {
-            buttonText: this.buttonText,
-            buttonStyle: this.buttonStyle,
-            buttonSize: this.buttonSize,
-        };
-    }
 }
 </script>
 

@@ -27,7 +27,6 @@
 </template>
 
 <script lang="ts">
-// import { defineComponent, PropType } from 'vue'
 import { Vue, Options } from 'vue-class-component';
 
 @Options({
@@ -52,15 +51,8 @@ export default class Input extends Vue {
 
     data() {
         return {
-            inputType: this.inputType,
             isSingleLine:
                 this.inputType === 'text' || this.inputType === 'password',
-            placeholderText: this.placeholderText,
-            minLength: this.minLength,
-            maxLength: this.maxLength,
-            originalValue: this.originalValue,
-            viewType: this.viewType,
-            isCompact: this.isCompact,
         };
     }
 }
