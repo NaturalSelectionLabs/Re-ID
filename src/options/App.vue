@@ -1,16 +1,14 @@
 <template>
-  <h1>Re: ID</h1>
+    <h1>Re: ID</h1>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 
 @Options({
-  components: {
-  },
+    components: {},
 })
 export default class App extends Vue {}
 </script>
 
-<style>
-</style>
+<style></style>
