@@ -56,23 +56,23 @@ module.exports = (env, argv) => ({
                                     }),
                                 ],
                             },
-                        }
+                        },
                     },
-                    'less-loader'
+                    'less-loader',
                 ],
             },
             {
                 test: /\.vue$/,
-                loader: 'vue-loader'
+                loader: 'vue-loader',
             },
             {
                 test: /\.(png|jpg)$/,
                 loader: 'url-loader',
                 options: {
-                    'limit': 40000
-                }
+                    limit: 40000,
+                },
             },
-        ]
+        ],
     },
 
     plugins: [
@@ -102,7 +102,7 @@ module.exports = (env, argv) => ({
         }),
         new VueLoaderPlugin(),
         new webpack.DefinePlugin({
-            VERSION: JSON.stringify(require('./public/manifest.json').version)
+            VERSION: JSON.stringify(require('./public/manifest.json').version),
         }),
     ],
 });
