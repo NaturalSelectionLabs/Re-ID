@@ -1,15 +1,12 @@
 <template>
-    <div class="rounded"></div>
+    <div class="popupContainer"></div>
 </template>
 
-<style scoped>
+<style lang="postcss">
 /* modal */
-
-div {
-    width: 260px;
-    height: 421px;
-    border: 0.5px solid rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(50px); /* Customizable? */
-    border-radius: 10px;
+@layer components {
+    .popupContainer {
+        @apply w-65 h-105 rounded-lg bg-white backdrop-filter backdrop-blur;
+    }
 }
 </style>
