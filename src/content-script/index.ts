@@ -1,23 +1,37 @@
-function querySelector(selector: string) {
-    return <Promise<Element>>new Promise((resolve, reject) => {
-        let result: Element | null;
-        const interval = 200;
-        let currentCount = 0;
-        const maxCount = 10000 / interval;
-        const getter = setInterval(() => {
-            result = document.querySelector(selector);
-            if (result) {
-                clearInterval(getter);
-                resolve(result);
-            } else if (currentCount > maxCount) {
-                reject();
-            } else {
-                currentCount++;
-            }
-        }, interval);
-    });
-}
+import { observe } from './utils';
 
-querySelector('[data-testid="fileInput"]').then((ele) => {
-    console.log(ele);
+observe('[data-testid="toolBar"] div', (ele) => {
+    ele.insertAdjacentHTML('beforeend', '<div id="reid">R</div>');
+});
+
+observe('[data-testid="tweetButtonInline"]', (ele) => {
+    document.addEventListener('click', () => {
+        const text = (<HTMLElement>(
+            document.querySelector('.public-DraftStyleDefault-block')
+        ))?.innerText;
+        console.log(text);
+
+        const attachments = document.querySelectorAll(
+            '[data-testid="attachments"] img, [data-testid="attachments"] source',
+        );
+        attachments.forEach(async (attachment) => {
+            await fetch(
+                (<HTMLImageElement | HTMLSourceElement>attachment).src,
+            ).then(async (r) => {
+                const bolb = await r.blob();
+                console.log(bolb);
+            });
+        });
+    });
+});
+
+observe('[data-testid="fileInput"]', (ele) => {
+    ele.addEventListener('change', () => {
+        const files = (<HTMLInputElement>ele).files;
+        if (files?.[0]) {
+            for (let i = 0; i < files.length; i++) {
+                console.log(URL.createObjectURL(files[i]));
+            }
+        }
+    });
 });

@@ -21,7 +21,7 @@ module.exports = (env, argv) => ({
     },
 
     resolve: {
-        extensions: ['.js', '.less'],
+        extensions: ['.js', '.less', '.ts'],
     },
 
     module: {
