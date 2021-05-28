@@ -50,6 +50,8 @@ module.exports = (env, argv) => ({
                         options: {
                             postcssOptions: {
                                 plugins: [
+                                    require('tailwindcss'),
+                                    require('postcss-nested'),
                                     require('autoprefixer'),
                                     require('cssnano')({
                                         preset: 'default',
