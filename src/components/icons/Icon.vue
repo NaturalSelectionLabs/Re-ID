@@ -25,7 +25,7 @@ import { Vue, Options } from 'vue-class-component';
         iconColor: String,
     },
 })
-export default class Button extends Vue {
+export default class Icon extends Vue {
     iconName!: String;
     width: Number = 18;
     height: Number = 18;
