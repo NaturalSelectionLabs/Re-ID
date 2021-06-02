@@ -1,4 +1,3 @@
-import { createApp } from 'vue';
 import { observe } from './utils';
 import './locationChange';
 import { TwitterButtonSync, TwitterButtonFollow } from './components';
