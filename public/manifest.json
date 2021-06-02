@@ -30,6 +30,6 @@
     ],
     "options_page": "options.html",
     "homepage_url": "https://rss3.io/",
-    "permissions": ["tabs"],
+    "permissions": ["tabs", "storage"],
     "host_permissions": ["https://twitter.com/*"]
 }
