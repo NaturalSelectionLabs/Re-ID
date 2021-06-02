@@ -28,8 +28,6 @@ export const TwitterButtonSync = `
         </div>
     </div>
 </div>
-<script>
-</script>
 <style>
 #reid-sync-switch {
     border-width: 1px;
@@ -149,8 +147,6 @@ export const TwitterButtonFollow = `
         </div>
     </div>
 </div>
-<script>
-</script>
 <style>
 #reid-follow {
     border: 1px solid #1da1f2;
