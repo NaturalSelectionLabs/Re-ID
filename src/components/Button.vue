@@ -36,7 +36,7 @@ export default class Button extends Vue {
 }
 </script>
 
-<style lang="postcss">
+<style scoped lang="postcss">
 @layer components {
     .btn {
         @apply text-left;
