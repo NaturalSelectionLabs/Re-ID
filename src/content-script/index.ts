@@ -3,7 +3,10 @@ import './locationChange';
 import { TwitterButtonSync, TwitterButtonFollow } from './components';
 
 observe('[data-testid="toolBar"] div', (ele: Element): void => {
-    if (document.getElementById('reid-sync-active-status') === null) {
+    if (
+        window.location.href === 'https://twitter.com/home' &&
+        document.getElementById('reid-sync-active-status') === null
+    ) {
         ele.insertAdjacentHTML('beforeend', TwitterButtonSync);
 
         {
