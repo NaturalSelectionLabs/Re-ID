@@ -1,6 +1,6 @@
 import { observe } from './utils';
 import './locationChange';
-import { TwitterButtonSync, TwitterButtonFollow } from './components';
+import { TwitterButtonSync } from './components';
 
 observe('[data-testid="toolBar"] div', (ele: Element): void => {
     if (
@@ -50,40 +50,6 @@ observe('[data-testid="toolBar"] div', (ele: Element): void => {
             if (twiBtnSyncDeUut !== null) {
                 twiBtnSyncDeUut.addEventListener('click', () => {
                     setRSS3Sync(false);
-                });
-            }
-        }
-    }
-});
-
-observe('[data-testid="placementTracking"]', (ele: Element): void => {
-    if (document.getElementById('reid-follow-button-toggle') === null) {
-        ele.insertAdjacentHTML('beforebegin', TwitterButtonFollow);
-
-        {
-            // Listen events
-            let followStatus = false;
-            function updateFollowStatusClass(fostat: boolean) {
-                const twiBtnFoUut = document.getElementById('reid-follow');
-                if (twiBtnFoUut !== null) {
-                    if (fostat) {
-                        twiBtnFoUut.classList.add('active');
-                    } else {
-                        twiBtnFoUut.classList.remove('active');
-                    }
-                }
-            }
-            function toggleFollowStatus() {
-                followStatus = !followStatus;
-                updateFollowStatusClass(followStatus);
-            }
-            updateFollowStatusClass(followStatus);
-            const twiBtnFoToUut = document.getElementById(
-                'reid-follow-button-toggle',
-            );
-            if (twiBtnFoToUut !== null) {
-                twiBtnFoToUut.addEventListener('click', () => {
-                    toggleFollowStatus();
                 });
             }
         }
