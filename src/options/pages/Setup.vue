@@ -1,6 +1,5 @@
 <template>
-    <h1>Re: ID</h1>
-    <router-view></router-view>
+    <h1>Setup</h1>
 </template>
 
 <script lang="ts">
@@ -9,7 +8,7 @@ import { Options, Vue } from 'vue-class-component';
 @Options({
     components: {},
 })
-export default class App extends Vue {}
+export default class Setup extends Vue {}
 </script>
 
-<style></style>
+<style lang="postcss" scoped></style>
