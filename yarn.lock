@@ -5632,7 +5632,7 @@ vue-loader@16.2.0:
     hash-sum "^2.0.0"
     loader-utils "^2.0.0"
 
-vue-router@4:
+vue-router@4.0.8:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-4.0.8.tgz#55d4290a3122444edbc91a3cd2492bb1d0cef494"
   integrity sha512-42mWSQaH7CCBQDspQTHv63f34VEnZC20g9QNK4WJ/zW8SdIUeT6TQ2i/78fjF/pVBUPLBWrGhvB7uDnaz7O/pA==
