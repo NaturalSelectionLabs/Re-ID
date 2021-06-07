@@ -1,52 +1,50 @@
 <template>
-    <button
-        :class="{
-            'btn-primary': isPrimary,
-            'btn-secondary': isSecondary,
-        }"
+    <div
+        class="toggleSwitch"
+        :class="{ active: currentState }"
+        v-if="!disabled"
+        v-on:click="switchState"
     >
-        {{ buttonText }}
-    </button>
+        <div class="switchHandle"></div>
+        <div class="switchButton"></div>
+    </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
-
-export default defineComponent({
+import { Vue, Options, setup } from 'vue-class-component';
+@Options({
     props: {
-        buttonStyle: String,
-        viewType: String,
-        buttonText: String,
+        disabled: Boolean,
+        defaultState: Boolean,
     },
+})
+export default class ToggleSwitch extends Vue {
+    disabled: Boolean = false;
+    defaultState: Boolean = true;
 
-    data() {
-        return {
-            buttonText: this.buttonText,
-            isPrimary: this.buttonStyle === 'primary',
-            isSecondary: this.buttonStyle === 'secondary',
-            isPopup: this.viewType === 'popup',
-            isOptions: this.viewType === 'options',
-        };
-    },
-});
+    currentState = this.defaultState;
+
+    switchState() {
+        this.currentState = !this.currentState;
+    }
+}
 </script>
 
-<style lang="postcss">
+<style scoped lang="postcss">
 @layer components {
-    .btn {
-        text-align: left;
-        text-decoration: none;
-    }
-    .btn-primary {
-        @apply bg-primary rounded text-color-white;
-    }
-
-    .btn-secondary {
-        @apply bg-primary bg-opacity-15 rounded text-color-primary;
+    .toggleSwitch {
+        @apply bg-black w-5 h-4;
+        .active {
+            @apply bg-success;
+        }
     }
 
-    .btn-popup {
-        @apply w;
+    .switchButton {
+        @apply bg-opacity-100 absolute block w-4 h-4;
+    }
+
+    .switchHandle {
+        @apply bg-opacity-43 inline-block w-5 h-1 rounded-sm;
     }
 }
 </style>

@@ -1,6 +1,11 @@
 <template>
-    <div class="popupContainer"></div>
+    <div class="popupContainer"><slot /></div>
 </template>
+
+<script lang="ts">
+import { Vue } from 'vue-class-component';
+export default class popupContainer extends Vue {}
+</script>
 
 <style lang="postcss">
 /* modal */

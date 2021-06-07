@@ -41,6 +41,7 @@ module.exports = {
                 15: '0.15',
                 30: '0.3',
                 35: '0.35',
+                43: '0.43',
                 56: '0.56',
                 60: '0.6',
             },
@@ -56,6 +57,8 @@ module.exports = {
                 //40px
             },
             width: {
+                2: '0.5rem', //8px, toggle switch button width
+                5: '1.25rem', //20px, toggle switch handle width
                 8: '2rem', //32px, popup.html [...] button width,
                 21: '5.25rem', //84px, raw rss3 codeblock tooltip width
                 26: '6.5rem', //104px, popup.html selected menu item width
@@ -70,6 +73,8 @@ module.exports = {
                 180: '45rem', //720px, options.html input & content width
             },
             height: {
+                1: '0.25rem', //4px, toggle switch handle height
+                2: '0.5rem', //8px, toggle switch button height
                 4: '1rem', //16px, popup.html [...] button height,
                 5: '1.24rem', //20px, popup.html selected menu item height
                 6: '1.5rem', //24px, raw rss3 codeblock tooltip height
@@ -82,6 +87,9 @@ module.exports = {
                 24: '6rem', //96px, popup.html collapse [...] menu height
                 45: '11.25rem', //180px, options.html bio input textarea height
                 105: '26.25rem', //420px, popup.html height
+            },
+            transitionTimeFunction: {
+                'in-out-expo': 'cubic-bezier(.5, -.5, .5, 1.5)',
             },
         },
     },
