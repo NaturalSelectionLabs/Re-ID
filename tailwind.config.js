@@ -89,7 +89,7 @@ module.exports = {
                 105: '26.25rem', //420px, popup.html height
             },
             transitionTimeFunction: {
-                bezier: 'cubic-bezier(.5, -.5, .5, 1.5)',
+                'in-out-expo': 'cubic-bezier(.5, -.5, .5, 1.5)',
             },
         },
     },

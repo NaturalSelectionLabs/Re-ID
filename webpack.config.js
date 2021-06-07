@@ -22,6 +22,9 @@ module.exports = (env, argv) => ({
 
     resolve: {
         extensions: ['.js', '.less'],
+        alias: {
+            '@': __dirname + '/src',
+        },
     },
 
     module: {
@@ -36,7 +39,7 @@ module.exports = (env, argv) => ({
                 exclude: /node_modules/,
             },
             {
-                test: /\.less$/,
+                test: /\.css$/,
                 use: [
                     'vue-style-loader',
                     {
@@ -60,7 +63,34 @@ module.exports = (env, argv) => ({
                             },
                         },
                     },
-                    'less-loader',
+                    // 'less-loader'
+                ],
+            },
+            {
+                test: /\.postcss$/,
+                use: [
+                    'vue-style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 2,
+                        },
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                plugins: [
+                                    require('tailwindcss'),
+                                    require('postcss-nested'),
+                                    require('autoprefixer'),
+                                    require('cssnano')({
+                                        preset: 'default',
+                                    }),
+                                ],
+                            },
+                        },
+                    },
                 ],
             },
             {

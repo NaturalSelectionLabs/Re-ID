@@ -7,8 +7,8 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import ToggleSwitch from '@components/ToggleSwitch.vue';
-import PopupContainer from '@components/PopupContainer.vue';
+import ToggleSwitch from '@/components/ToggleSwitch.vue';
+import PopupContainer from '@/components/PopupContainer.vue';
 
 @Options({
     components: { PopupContainer, ToggleSwitch },

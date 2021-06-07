@@ -1,30 +1,31 @@
 <template>
-    <label class="toggleSwitch" :class="{ active: currentState }">
-        <input type="checkbox" :disabled="isDisabled" v-model="checkedValue" />
-        <span class="switchButton"></span>
-    </label>
+    <div
+        class="toggleSwitch"
+        :class="{ active: currentState }"
+        v-if="!disabled"
+        v-on:click="switchState"
+    >
+        <div class="switchHandle"></div>
+        <div class="switchButton"></div>
+    </div>
 </template>
 
 <script lang="ts">
-import { Vue, Options } from 'vue-class-component';
+import { Vue, Options, setup } from 'vue-class-component';
 @Options({
     props: {
-        isDisabled: Boolean,
+        disabled: Boolean,
         defaultState: Boolean,
     },
 })
 export default class ToggleSwitch extends Vue {
-    isDisabled: Boolean = false;
+    disabled: Boolean = false;
     defaultState: Boolean = true;
 
     currentState = this.defaultState;
 
-    get checkedValue() {
-        return this.currentState;
-    }
-    set checkedValue(newValue) {
-        this.currentState = newValue;
-        this.$emit('change', newValue);
+    switchState() {
+        this.currentState = !this.currentState;
     }
 }
 </script>
@@ -32,41 +33,18 @@ export default class ToggleSwitch extends Vue {
 <style scoped lang="postcss">
 @layer components {
     .toggleSwitch {
-        @apply align-middle;
-        input[type='checkbox'] {
-            @apply absolute opacity-0 w-0 h-0;
-        }
-
-        .switchButton {
-            @apply relative inline-block w-5 h-1 rounded-sm bg-black bg-opacity-43 transition-all duration-200;
-
-            &:before,
-            &:after {
-                content: '';
-                @apply absolute block w-4 h-4 transform translate-x-0 transition-all duration-200 ease-bezier;
-            }
-            &:before {
-                @apply bg-opacity-0;
-            }
-            &:after {
-                @apply bg-opacity-1;
-            }
-
-            .active & {
-                @apply bg-success bg-opacity-43;
-
-                &:before,
-                &:after {
-                    @apply transform translate-x-3;
-                }
-                &:after {
-                    @apply bg-opacity-1;
-                }
-            }
+        @apply bg-black w-5 h-4;
+        .active {
+            @apply bg-success;
         }
     }
 
     .switchButton {
+        @apply bg-opacity-100 absolute block w-4 h-4;
+    }
+
+    .switchHandle {
+        @apply bg-opacity-43 inline-block w-5 h-1 rounded-sm;
     }
 }
 </style>

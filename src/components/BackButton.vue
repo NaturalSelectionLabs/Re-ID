@@ -36,13 +36,13 @@ export default class BackButton extends Vue {
     .backButton {
         @apply font-medium
         .back-options {
-            @apply font-2xl; //24px
+            @apply text-2xl; //24px
             span {
                 @apply ml-6;
             }
         }
         .back-popup {
-            @apply font-xs; //12px
+            @apply text-xs; //12px
             span {
                 @apply ml-4;
             }
