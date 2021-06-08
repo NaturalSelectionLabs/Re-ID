@@ -6,7 +6,10 @@
                 <span> &#9432; </span>
             </label>
 
-            <ToggleSwitch />
+            <ToggleSwitch
+                :state="syncEnabled"
+                @toggle-state="toggleSyncStatus"
+            />
         </div>
     </div>
 </template>
@@ -18,11 +21,33 @@ import IconMore from '@/components/icons/IconMore.vue';
 
 @Options({
     components: {
-        IconMore,
         ToggleSwitch,
     },
+    mounted() {
+        this.initState();
+    },
 })
-export default class SidebarRight extends Vue {}
+export default class SidebarRight extends Vue {
+    syncEnabled: Boolean = true;
+
+    initState(): void {
+        chrome.storage.sync.get(['reid-twitter-sync-enabled'], (result) => {
+            console.log('Loading sync enable status from local storage...');
+            const enabled = result['reid-twitter-sync-enabled'];
+            if (typeof enabled !== 'undefined') {
+                console.log(enabled);
+                this.syncEnabled = enabled;
+            }
+        });
+    }
+
+    toggleSyncStatus(): void {
+        this.syncEnabled = !this.syncEnabled;
+        chrome.storage.sync.set({
+            'reid-twitter-sync-enabled': this.syncEnabled,
+        });
+    }
+}
 </script>
 
 <style lang="postcss" scoped>

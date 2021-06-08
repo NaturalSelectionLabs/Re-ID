@@ -1,7 +1,7 @@
 <template>
     <div
         class="toggle-switch"
-        :class="{ active: currentState }"
+        :class="{ active: $props.state }"
         v-if="!$props.disabled"
         @click="switchState"
     >
@@ -15,18 +15,12 @@ import { Vue, Options, setup } from 'vue-class-component';
 @Options({
     props: {
         disabled: Boolean,
-        defaultState: Boolean,
-    },
-    computed() {
-        this.currentState = this.$props.defaultState;
+        state: Boolean,
     },
 })
 export default class ToggleSwitch extends Vue {
-    currentState: Boolean = true;
-
     switchState(): void {
-        this.currentState = !this.currentState;
-        this.$emit('toggleStatus', this.currentState);
+        this.$emit('toggleState');
     }
 }
 </script>
