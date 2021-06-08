@@ -45,7 +45,7 @@ export default class ToggleSwitch extends Vue {
 <style scoped lang="postcss">
 @layer components {
     .toggle-switch {
-        @apply bg-black w-10 h-5 rounded-lg relative;
+        @apply bg-black w-9 h-5 rounded-lg relative;
 
         &.active {
             @apply bg-success;
