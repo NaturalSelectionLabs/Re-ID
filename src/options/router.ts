@@ -1,23 +1,23 @@
 import * as VueRouter from 'vue-router';
 
-import Index from './pages/Index.vue';
+import Index from './views/Index.vue';
 
-import StartIndex from './pages/Start/Index.vue';
-import Start from './pages/Start/Base.vue';
-import StartNew from './pages/Start/New.vue';
-import StartLogin from './pages/Start/Login.vue';
-import StartPrivateKey from './pages/Start/PrivateKey.vue';
-import StartSavePrivateKey from './pages/Start/SavePrivateKey.vue';
-import StartAddress from './pages/Start/Address.vue';
-import StartPending from './pages/Start/Pending.vue';
-import StartProfile from './pages/Start/Profile.vue';
-import StartCongrats from './pages/Start/Congrats.vue';
+import StartIndex from './views/Start/Index.vue';
+import Start from './views/Start/Base.vue';
+import StartNew from './views/Start/New.vue';
+import StartLogin from './views/Start/Login.vue';
+import StartPrivateKey from './views/Start/PrivateKey.vue';
+import StartSavePrivateKey from './views/Start/SavePrivateKey.vue';
+import StartAddress from './views/Start/Address.vue';
+import StartPending from './views/Start/Pending.vue';
+import StartProfile from './views/Start/Profile.vue';
+import StartCongrats from './views/Start/Congrats.vue';
 
-import Advanced from './pages/Advanced.vue';
-import Home from './pages/Home.vue';
-import Invite from './pages/Invite.vue';
-import Profile from './pages/Profile.vue';
-import Settings from './pages/Settings.vue';
+import Home from './views/Home.vue';
+import Advanced from './views/Advanced.vue';
+import Profile from './views/Profile.vue';
+import Invite from './views/Invite.vue';
+import Settings from './views/Settings.vue';
 
 const routes = [
     {
