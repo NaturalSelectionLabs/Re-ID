@@ -134,7 +134,8 @@ module.exports = (env, argv) => ({
         }),
         new VueLoaderPlugin(),
         new webpack.DefinePlugin({
-            VERSION: JSON.stringify(require('./public/manifest.json').version),
+            VERSION:
+                JSON.stringify(require('./public/manifest.json').version) + '',
         }),
     ],
 });
