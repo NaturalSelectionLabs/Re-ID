@@ -1,4 +1,4 @@
-<template></template>
+<template>Index</template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
@@ -6,7 +6,7 @@ import { Options, Vue } from 'vue-class-component';
 @Options({
     components: {},
 })
-export default class PrivateKey extends Vue {}
+export default class Advanced extends Vue {}
 </script>
 
 <style lang="postcss" scoped></style>
