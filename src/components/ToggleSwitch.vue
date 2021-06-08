@@ -1,50 +1,63 @@
 <template>
     <div
-        class="toggleSwitch"
+        class="toggle-switch"
         :class="{ active: currentState }"
         v-if="!disabled"
-        v-on:click="switchState"
+        @click="switchState"
     >
-        <div class="switchHandle"></div>
-        <div class="switchButton"></div>
+        <div class="switch-button" />
     </div>
 </template>
 
 <script lang="ts">
 import { Vue, Options, setup } from 'vue-class-component';
+
 @Options({
     props: {
         disabled: Boolean,
-        defaultState: Boolean,
+    },
+    mounted() {
+        this.initState();
     },
 })
 export default class ToggleSwitch extends Vue {
     disabled: Boolean = false;
-    defaultState: Boolean = true;
+    currentState = true;
 
-    currentState = this.defaultState;
-
-    switchState() {
+    switchState(): void {
         this.currentState = !this.currentState;
+        chrome.storage.sync.set({
+            'reid-twitter-sync-enabled': this.currentState,
+        });
+    }
+
+    initState(): void {
+        chrome.storage.sync.get(['reid-twitter-sync-enabled'], (result) => {
+            const enabled = result['reid-twitter-sync-enabled'];
+            if (typeof enabled !== 'undefined') {
+                this.currentState = enabled;
+            }
+        });
     }
 }
 </script>
 
 <style scoped lang="postcss">
 @layer components {
-    .toggleSwitch {
-        @apply bg-black w-5 h-4;
-        .active {
+    .toggle-switch {
+        @apply bg-black w-10 h-5 rounded-lg relative;
+
+        &.active {
             @apply bg-success;
+
+            > .switch-button {
+                @apply left-auto right-0.5;
+            }
         }
-    }
 
-    .switchButton {
-        @apply bg-opacity-100 absolute block w-4 h-4;
-    }
-
-    .switchHandle {
-        @apply bg-opacity-43 inline-block w-5 h-1 rounded-sm;
+        > .switch-button {
+            @apply absolute bg-white block w-4 h-4 rounded-lg top-0.5 left-0.5 right-auto;
+        }
     }
 }
 </style>
