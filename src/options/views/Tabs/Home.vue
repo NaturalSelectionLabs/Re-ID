@@ -1,8 +1,4 @@
-<template>
-    <div class="main">
-        <slot />
-    </div>
-</template>
+<template></template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
@@ -10,7 +6,7 @@ import { Options, Vue } from 'vue-class-component';
 @Options({
     components: {},
 })
-export default class Raw extends Vue {}
+export default class TabsHome extends Vue {}
 </script>
 
 <style lang="postcss" scoped></style>

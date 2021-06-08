@@ -13,11 +13,12 @@ import StartPending from './views/Start/Pending.vue';
 import StartProfile from './views/Start/Profile.vue';
 import StartCongrats from './views/Start/Congrats.vue';
 
-import Home from './views/Home.vue';
-import Advanced from './views/Advanced.vue';
-import Profile from './views/Profile.vue';
-import Invite from './views/Invite.vue';
-import Settings from './views/Settings.vue';
+import TabsBase from './views/Tabs/Base.vue';
+import TabsHome from './views/Tabs/Home.vue';
+import TabsAdvanced from './views/Tabs/Advanced.vue';
+import TabsProfile from './views/Tabs/Profile.vue';
+import TabsInvite from './views/Tabs/Invite.vue';
+import TabsSettings from './views/Tabs/Settings.vue';
 
 const routes = [
     {
@@ -69,24 +70,30 @@ const routes = [
     },
 
     {
-        path: '/advanced',
-        component: Advanced,
-    },
-    {
-        path: '/home',
-        component: Home,
-    },
-    {
-        path: '/invite',
-        component: Invite,
-    },
-    {
-        path: '/profile',
-        component: Profile,
-    },
-    {
-        path: '/settings',
-        component: Settings,
+        path: '/:tabs',
+        component: TabsBase,
+        children: [
+            {
+                path: 'home',
+                component: TabsHome,
+            },
+            {
+                path: 'advanced',
+                component: TabsAdvanced,
+            },
+            {
+                path: 'profile',
+                component: TabsProfile,
+            },
+            {
+                path: 'invite',
+                component: TabsInvite,
+            },
+            {
+                path: 'settings',
+                component: TabsSettings,
+            },
+        ],
     },
 ];
 
