@@ -8,16 +8,6 @@
         role="presentation"
     >
         <title lang="en">RE:ID logo</title>
-        <defs>
-            <style>
-                .cls-1 {
-                    fill: #5c65f4;
-                }
-                .cls-2 {
-                    fill: #f55d66;
-                }
-            </style>
-        </defs>
         <g id="Layer_3" data-name="Layer 3">
             <path
                 class="cls-1"
@@ -45,3 +35,14 @@ export default class Logo extends Vue {
     height: Number = 256;
 }
 </script>
+
+<style lang="postcss">
+@layer components {
+    .cls-1 {
+        @apply fill-current text-primary;
+    }
+    .cls-2 {
+        @apply fill-current text-secondary;
+    }
+}
+</style>
