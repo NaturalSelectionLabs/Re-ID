@@ -2,7 +2,7 @@
     <div
         class="toggle-switch"
         :class="{ active: currentState }"
-        v-if="!disabled"
+        v-if="!$props.disabled"
         @click="switchState"
     >
         <div class="switch-button" />
@@ -15,29 +15,18 @@ import { Vue, Options, setup } from 'vue-class-component';
 @Options({
     props: {
         disabled: Boolean,
+        defaultState: Boolean,
     },
-    mounted() {
-        this.initState();
+    computed() {
+        this.currentState = this.$props.defaultState;
     },
 })
 export default class ToggleSwitch extends Vue {
-    disabled: Boolean = false;
-    currentState = true;
+    currentState: Boolean = true;
 
     switchState(): void {
         this.currentState = !this.currentState;
-        chrome.storage.sync.set({
-            'reid-twitter-sync-enabled': this.currentState,
-        });
-    }
-
-    initState(): void {
-        chrome.storage.sync.get(['reid-twitter-sync-enabled'], (result) => {
-            const enabled = result['reid-twitter-sync-enabled'];
-            if (typeof enabled !== 'undefined') {
-                this.currentState = enabled;
-            }
-        });
+        this.$emit('toggleStatus', this.currentState);
     }
 }
 </script>
