@@ -45,19 +45,24 @@ module.exports = {
                 56: '0.56',
                 60: '0.6',
             },
-            spacing: {
-                //2px
-                //4px
-                //6px
-                //8px
-                //10px
-                //16px
-                //20px
-                //32px
-                //40px
-            },
+            // spacing: {
+
+            //2px, 0.5
+            //4px, 1
+            //6px, 1.5
+            //8px, 2
+            //10px, 2.5
+            //16px, 4
+            //20px, 5
+            //32px, 8
+            //40px, 10
+            //48px, 12
+            //60px, 15
+            //72px, 18
+            // },
             width: {
                 2: '0.5rem', //8px, toggle switch button width
+                4: '1rem', //16px, toggle switch button width
                 5: '1.25rem', //20px, toggle switch handle width
                 8: '2rem', //32px, popup.html [...] button width,
                 21: '5.25rem', //84px, raw rss3 codeblock tooltip width
