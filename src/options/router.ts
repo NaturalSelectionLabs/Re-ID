@@ -3,7 +3,7 @@ import * as VueRouter from 'vue-router';
 import Index from './pages/Index.vue';
 
 import StartIndex from './pages/Start/Index.vue';
-import Start from './pages/Start/StartBase.vue';
+import Start from './pages/Start/Base.vue';
 import StartNew from './pages/Start/New.vue';
 import StartLogin from './pages/Start/Login.vue';
 import StartPrivateKey from './pages/Start/PrivateKey.vue';
