@@ -1,32 +1,73 @@
 import * as VueRouter from 'vue-router';
 
-import Entry from './pages/Entry.vue';
-import About from './pages/About.vue';
-import Address from './pages/Address.vue';
+import Index from './pages/Index.vue';
+
+import StartIndex from './pages/Start/Index.vue';
+import Start from './pages/Start/StartBase.vue';
+import StartNew from './pages/Start/New.vue';
+import StartLogin from './pages/Start/Login.vue';
+import StartPrivateKey from './pages/Start/PrivateKey.vue';
+import StartSavePrivateKey from './pages/Start/SavePrivateKey.vue';
+import StartAddress from './pages/Start/Address.vue';
+import StartPending from './pages/Start/Pending.vue';
+import StartProfile from './pages/Start/Profile.vue';
+import StartCongrats from './pages/Start/Congrats.vue';
+
 import Advanced from './pages/Advanced.vue';
 import Home from './pages/Home.vue';
 import Invite from './pages/Invite.vue';
-import Login from './pages/Login.vue';
-import Pending from './pages/Pending.vue';
-import PrivateKey from './pages/PrivateKey.vue';
 import Profile from './pages/Profile.vue';
 import Settings from './pages/Settings.vue';
-import Setup from './pages/Setup.vue';
-import Start from './pages/Start.vue';
 
 const routes = [
     {
         path: '/',
-        component: Entry,
+        component: Index,
+    },
+
+    {
+        path: '/start',
+        component: StartIndex,
     },
     {
-        path: '/about',
-        component: About,
+        path: '/start',
+        component: Start,
+        children: [
+            {
+                path: 'new',
+                component: StartNew,
+            },
+            {
+                path: 'login',
+                component: StartLogin,
+            },
+            {
+                path: 'privatekey',
+                component: StartPrivateKey,
+            },
+            {
+                path: 'saveprivatekey',
+                component: StartSavePrivateKey,
+            },
+            {
+                path: 'address',
+                component: StartAddress,
+            },
+            {
+                path: 'pending',
+                component: StartPending,
+            },
+            {
+                path: 'profile',
+                component: StartProfile,
+            },
+            {
+                path: 'congrats',
+                component: StartCongrats,
+            },
+        ],
     },
-    {
-        path: '/address',
-        component: Address,
-    },
+
     {
         path: '/advanced',
         component: Advanced,
@@ -40,32 +81,12 @@ const routes = [
         component: Invite,
     },
     {
-        path: '/login',
-        component: Login,
-    },
-    {
-        path: '/pending',
-        component: Pending,
-    },
-    {
-        path: '/privateKey',
-        component: PrivateKey,
-    },
-    {
         path: '/profile',
         component: Profile,
     },
     {
         path: '/settings',
         component: Settings,
-    },
-    {
-        path: '/setup',
-        component: Setup,
-    },
-    {
-        path: '/start',
-        component: Start,
     },
 ];
 
