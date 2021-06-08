@@ -55,17 +55,22 @@ module.exports = {
                 //20px
                 //32px
                 //40px
+                4: '1rem', //16px, options.html sidebar profile margin
+                8: '2rem', //32px, options.html sidebar nav margin
+                18: '4.5rem', //72px, options.html page margin
             },
             width: {
                 2: '0.5rem', //8px, toggle switch button width
                 5: '1.25rem', //20px, toggle switch handle width
                 8: '2rem', //32px, popup.html [...] button width,
+                14: '3.5rem', //56px, options.html profile avatar width
                 21: '5.25rem', //84px, raw rss3 codeblock tooltip width
                 26: '6.5rem', //104px, popup.html selected menu item width
                 27: '6.75rem', //108px, small button width; popup.html collapse [...] menu width
                 45: '11.25rem', //180px, popup.html key text width (full view)
                 55: '13.75rem', //220px, popup.html main button & input width
                 61: '15.25rem', //245px, raw rss3 tooltip width
+                62: '15.5rem', //248px, options.html sidebar width
                 65: '16.25rem', //260px, popup.html width
                 89: '22.25rem', //356px, options.html main button width
                 120: '30rem', //480px, options.html extended button width
@@ -81,6 +86,7 @@ module.exports = {
                 7: '1.75rem', //28px, popup.html & options.html small button height
                 9: '2.25rem', //36px, popup.html main button height
                 12: '3rem', //48px, popup.html key container height
+                14: '3.5rem', //56px, profile avatar width
                 18: '4.5rem', //72px, options.html main button & single line input height
                 19: '4.75rem', //76px, raw rss3 tooltip height
                 23: '5.75rem', //92px, popup.html bio input textarea height

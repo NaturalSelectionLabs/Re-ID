@@ -1,15 +1,16 @@
 <template>
-    <BothSides> </BothSides>
+    <div class="main">
+        <slot />
+    </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import BothSides from '@/options/layout/BothSides.vue';
 
 @Options({
-    components: { BothSides },
+    components: {},
 })
-export default class Home extends Vue {}
+export default class Raw extends Vue {}
 </script>
 
 <style lang="postcss" scoped></style>

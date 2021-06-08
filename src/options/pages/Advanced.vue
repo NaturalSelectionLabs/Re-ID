@@ -1,10 +1,13 @@
-<template></template>
+<template>
+    <BothSides> </BothSides>
+</template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import BothSides from '@/options/layout/BothSides.vue';
 
 @Options({
-    components: {},
+    components: { BothSides },
 })
 export default class Advanced extends Vue {}
 </script>
