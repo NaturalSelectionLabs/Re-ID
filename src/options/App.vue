@@ -1,5 +1,4 @@
 <template>
-    <h1>Re: ID</h1>
     <router-view></router-view>
 </template>
 
