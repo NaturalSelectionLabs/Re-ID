@@ -3,6 +3,7 @@
         <div class="sync-switch">
             <label>
                 Syncing
+
                 <span> &#9432; </span>
             </label>
 
@@ -17,7 +18,6 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import ToggleSwitch from '@/components/ToggleSwitch.vue';
-import IconMore from '@/components/icons/IconMore.vue';
 
 @Options({
     components: {
@@ -66,7 +66,7 @@ export default class SidebarRight extends Vue {
                 @apply font-normal text-2xl text-center mr-8;
 
                 > span {
-                    @apply text-gray-text opacity-30 font-semibold;
+                    @apply text-gray-text text-sm opacity-30 font-semibold;
                 }
             }
         }

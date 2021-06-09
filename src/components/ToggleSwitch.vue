@@ -10,16 +10,20 @@
 
 <script lang="ts">
 import { Vue, Options, setup } from 'vue-class-component';
-
 @Options({
     props: {
         disabled: Boolean,
-        state: Boolean,
+        defaultState: Boolean,
     },
 })
 export default class ToggleSwitch extends Vue {
-    switchState(): void {
-        this.$emit('toggleState');
+    disabled: Boolean = false;
+    defaultState: Boolean = true;
+
+    currentState = this.defaultState;
+
+    switchState() {
+        this.currentState = !this.currentState;
     }
 }
 </script>
