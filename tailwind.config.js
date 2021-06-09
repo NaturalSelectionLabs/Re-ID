@@ -95,6 +95,9 @@ module.exports = {
             transitionTimeFunction: {
                 'in-out-expo': 'cubic-bezier(.5, -.5, .5, 1.5)',
             },
+            fontFamily: {
+                montserrat: 'Montserrat, sans-serif',
+            },
         },
     },
     variants: {
