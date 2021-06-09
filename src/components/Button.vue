@@ -60,12 +60,12 @@ export default class Button extends Vue {
 
     /* popup.html [...] button */
     .btn-xxs {
-        @apply w-8 h-4 rounded-sm px-11 py-3 font-regular text-xs;
+        @apply w-8 h-4 rounded-sm px-11 py-3 font-normal text-xs;
     }
 
     /* popup.html [...] menu each item */
     .btn-xs {
-        @apply w-26 h-6 rounded-sm px-12 py-5 font-regular text-xs;
+        @apply w-26 h-6 rounded-sm px-12 py-5 font-normal text-xs;
     }
 
     /* options.html raw rss3 code block buttons */
