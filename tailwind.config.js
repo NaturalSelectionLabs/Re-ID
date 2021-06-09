@@ -69,6 +69,7 @@ module.exports = {
                 21: '5.25rem', //84px, raw rss3 codeblock tooltip width
                 26: '6.5rem', //104px, popup.html selected menu item width
                 27: '6.75rem', //108px, small button width; popup.html collapse [...] menu width
+                30: '7.5rem', //120px, options.html profile tab avatar size
                 45: '11.25rem', //180px, popup.html key text width (full view)
                 55: '13.75rem', //220px, popup.html main button & input width
                 61: '15.25rem', //245px, raw rss3 tooltip width
@@ -78,6 +79,7 @@ module.exports = {
                 120: '30rem', //480px, options.html extended button width
                 160: '40rem', //640px, raw rss3 codeblock input width
                 180: '45rem', //720px, options.html input & content width
+                186: '46.5rem', //744px, raw rss3 codeblock input private key
             },
             height: {
                 1: '0.25rem', //4px, toggle switch handle height
@@ -93,6 +95,7 @@ module.exports = {
                 19: '4.75rem', //76px, raw rss3 tooltip height
                 23: '5.75rem', //92px, popup.html bio input textarea height
                 24: '6rem', //96px, popup.html collapse [...] menu height
+                30: '7.5rem', //120px, options.html profile tab avatar size
                 45: '11.25rem', //180px, options.html bio input textarea height
                 105: '26.25rem', //420px, popup.html height
             },

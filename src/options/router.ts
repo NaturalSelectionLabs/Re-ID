@@ -70,7 +70,7 @@ const routes = [
     },
 
     {
-        path: '/:tabs',
+        path: '/',
         component: TabsBase,
         children: [
             {

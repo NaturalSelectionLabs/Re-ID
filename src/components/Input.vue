@@ -14,7 +14,7 @@
         }"
     />
     <textarea
-        v-if="!isSingleLine"
+        v-else
         class="input"
         :class="{
             'input-popup': viewType === 'popup',
@@ -58,14 +58,18 @@ export default class Input extends Vue {
 }
 </script>
 
-<style lang="postcss">
+<style scoped lang="postcss">
 @layer components {
     .input {
-        @apply bg-gray-bg focus:bg-white focus:border focus:border-gray-outline rounded text-left font-regular placeholder-gray-text placeholder-opacity-30 text-black;
+        @apply bg-gray-bg rounded text-left font-normal placeholder-gray-text placeholder-opacity-30 text-black;
+    }
+
+    .input:focus {
+        @apply bg-white border border-gray-outline;
     }
 
     .input-popup {
-        @apply w-55 h-9 rounded px-4 py-2.5 text-xs; //font-12px
+        @apply w-55 h-9 rounded px-4 py-2.5 text-xs; /* font-12px */
     }
 
     .input-popup-text {
@@ -76,7 +80,7 @@ export default class Input extends Vue {
     }
 
     .input-options {
-        @apply w-180 h-18 rounded px-8 py-5 text-2xl; //font-24px
+        @apply w-180 h-18 rounded px-8 py-5 text-2xl; /* font-24px */
     }
 
     .input-options-text {

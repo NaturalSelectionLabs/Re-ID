@@ -1,4 +1,6 @@
-<template></template>
+<template>
+    <div>Advanced</div>
+</template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';

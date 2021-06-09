@@ -12,7 +12,7 @@
             <span>
                 {{ $props.address }}
             </span>
-            <span> &#128203; </span>
+            <IconCopy width="12px" height="12px" />
         </div>
         <div class="follows">
             <span>
@@ -49,7 +49,6 @@ import IconCopy from '@/components/icons/IconCopy.vue';
         following: Number,
         balance: Number,
     },
-    setup() {},
 })
 export default class Profile extends Vue {}
 </script>
@@ -75,6 +74,10 @@ export default class Profile extends Vue {}
             > span {
                 @apply mr-4;
             }
+
+            > * {
+                @apply inline-block;
+            }
         }
 
         .follows > * {
@@ -86,7 +89,7 @@ export default class Profile extends Vue {}
                 @apply inline-block text-xl font-semibold;
             }
             > span {
-                @apply ml-1;
+                @apply ml-3.5;
             }
         }
     }

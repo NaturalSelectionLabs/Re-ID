@@ -1,7 +1,10 @@
 <template>
     <div>
         <SidebarLeft />
-        <router-view></router-view>
+        <div class="body">
+            <router-view></router-view>
+            <Footer class="footer" />
+        </div>
         <SidebarRight />
     </div>
 </template>
@@ -10,9 +13,11 @@
 import { Options, Vue } from 'vue-class-component';
 import SidebarLeft from '../../components/sidebars/SidebarLeft.vue';
 import SidebarRight from '../../components/sidebars/SidebarRight.vue';
+import Footer from '@/components/Footer.vue';
 
 @Options({
     components: {
+        Footer,
         SidebarLeft,
         SidebarRight,
     },
@@ -20,4 +25,18 @@ import SidebarRight from '../../components/sidebars/SidebarRight.vue';
 export default class TabsBase extends Vue {}
 </script>
 
-<style lang="postcss" scoped></style>
+<style lang="postcss" scoped>
+@layer components {
+    .body {
+        @apply relative w-180 mx-80 top-18;
+
+        > * {
+            @apply relative;
+        }
+
+        .footer {
+            @apply fixed bottom-16;
+        }
+    }
+}
+</style>

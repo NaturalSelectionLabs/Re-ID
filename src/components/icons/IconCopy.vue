@@ -13,8 +13,12 @@
 
 <script lang="ts">
 import { Vue, Options } from 'vue-class-component';
+import Icon from '@/components/icons/Icon.vue';
 
 @Options({
+    components: {
+        Icon,
+    },
     props: {
         width: Number,
         height: Number,
