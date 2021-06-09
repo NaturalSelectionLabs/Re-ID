@@ -60,38 +60,38 @@ export default class Button extends Vue {
 
     /* popup.html [...] button */
     .btn-xxs {
-        @apply w-8 h-4 rounded-sm px-11 py-3 font-normal text-xs;
+        @apply w-8 h-4 rounded-sm px-2.5 py-1 font-normal text-xs;
     }
 
     /* popup.html [...] menu each item */
     .btn-xs {
-        @apply w-26 h-6 rounded-sm px-12 py-5 font-normal text-xs;
+        @apply w-26 h-6 rounded-sm px-3 py-1.5 font-normal text-xs;
     }
 
     /* options.html raw rss3 code block buttons */
     .btn-sm {
-        @apply w-21 h-6 rounded-sm px-15 py-5 font-medium text-xs;
+        @apply w-21 h-6 rounded-sm px-4 py-1.5 font-medium text-xs;
     }
 
     /* popup.html small button - [Invite] [Expand]; 
    options.html small buttons -  [Personas] [Log out] */
     .btn-md {
-        @apply w-27 h-7 rounded-sm px-14 py-7 font-medium text-xs;
+        @apply w-27 h-7 rounded-sm px-4 py-2 font-medium text-xs;
     }
 
     /* popup.html main button */
     .btn-lg {
-        @apply w-55 h-9 rounded px-16 py-10 font-semibold text-xs;
+        @apply w-55 h-9 rounded px-4 py-2.5 font-semibold text-xs;
     }
 
     /* options.html main button */
     .btn-xl {
-        @apply w-89 h-18 rounded px-32 py-20 font-semibold text-2xl;
+        @apply w-89 h-18 rounded px-8 py-5 font-semibold text-2xl;
     }
 
     /* options.html extended button for long text*/
     .btn-xxl {
-        @apply w-120 h-18 rounded px-32 py-20 font-semibold text-2xl;
+        @apply w-120 h-18 rounded px-8 py-5 font-semibold text-2xl;
     }
 }
 </style>
