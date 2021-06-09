@@ -10,9 +10,9 @@
                     Welcome to RSS3,<br />an open protocol designed for content and social networks in the Web 3.0 era.
                 </p>
                 <p class="flex justify-between">
-                    <Button buttonStyle="primary" buttonSize="xl">
-                        <router-link to="/start/new">Get started</router-link>
-                    </Button>
+                    <Button buttonStyle="primary" buttonSize="xl" @click="$router.push('/start/new')"
+                        >Get started</Button
+                    >
                     <Button buttonStyle="secondary" buttonSize="xl">About RSS3</Button>
                 </p>
             </div>
