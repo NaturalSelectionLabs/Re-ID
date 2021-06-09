@@ -65,7 +65,7 @@ export default class Input extends Vue {
     }
 
     .input-popup {
-        @apply w-55 h-9 rounded px-16 py-10 text-xs; //font-12px
+        @apply w-55 h-9 rounded px-4 py-2.5 text-xs; //font-12px
     }
 
     .input-popup-text {
@@ -76,7 +76,7 @@ export default class Input extends Vue {
     }
 
     .input-options {
-        @apply w-180 h-18 rounded px-32 py-20 text-2xl; //font-24px
+        @apply w-180 h-18 rounded px-8 py-5 text-2xl; //font-24px
     }
 
     .input-options-text {
