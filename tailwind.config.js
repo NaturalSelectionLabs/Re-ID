@@ -2,20 +2,6 @@ module.exports = {
     purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
     darkMode: false, // or 'media' or 'class'
     theme: {
-        colors: {
-            primary: '#5c65f4',
-            secondary: '#f55d66',
-            white: '#fff',
-            black: '#282828',
-            gray: {
-                text: '#3c3c43',
-                bg: '#f3f3f3',
-                outline: '#c5c5c7',
-            },
-            success: '#b2f55d',
-            danger: '#b01a0a',
-            warning: '#f5a05d',
-        },
         borderRadius: {
             sm: '4px',
             DEFAULT: '6px',
@@ -36,6 +22,20 @@ module.exports = {
             DEFAULT: '4px',
         },
         extend: {
+            colors: {
+                primary: '#5c65f4',
+                secondary: '#f55d66',
+                white: '#fff',
+                black: '#282828',
+                gray: {
+                    text: '#3c3c43',
+                    bg: '#f3f3f3',
+                    outline: '#c5c5c7',
+                },
+                success: '#00c700',
+                danger: '#b01a0a',
+                warning: '#f5a05d',
+            },
             opacity: {
                 10: '0.1',
                 15: '0.15',
@@ -46,21 +46,22 @@ module.exports = {
                 60: '0.6',
             },
             spacing: {
-                //2px
-                //4px
-                //6px
-                //8px
-                //10px
-                //16px
-                //20px
-                //32px
-                //40px
-                4: '1rem', //16px, options.html sidebar profile margin
-                8: '2rem', //32px, options.html sidebar nav margin
-                18: '4.5rem', //72px, options.html page margin
+                0.5: '0.125rem', //2px, 0.5
+                1: '0.25rem', //4px, 1
+                1.5: '0.375rem', //6px, 1.5
+                2: '0.5rem', //8px, 2
+                2.5: '0.625rem', //10px, 2.5
+                4: '1rem', //16px, 4
+                5: '1.25rem', //20px, 5
+                8: '2rem', //32px, 8
+                10: '2.5rem', //40px, 10
+                12: '3rem', //48px, 12
+                15: '4.5rem', //60px, 15
+                18: '4.5rem', //72px, 18
             },
             width: {
                 2: '0.5rem', //8px, toggle switch button width
+                4: '1rem', //16px, toggle switch button width
                 5: '1.25rem', //20px, toggle switch handle width
                 8: '2rem', //32px, popup.html [...] button width,
                 14: '3.5rem', //56px, options.html profile avatar width
@@ -102,6 +103,9 @@ module.exports = {
     variants: {
         extend: {
             backgroundColor: ['active'],
+            backgroundOpacity: ['active'],
+            textColor: ['active'],
+            borderColor: ['active'],
         },
     },
     plugins: [],

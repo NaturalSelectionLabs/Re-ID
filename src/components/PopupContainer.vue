@@ -11,7 +11,7 @@ export default class popupContainer extends Vue {}
 /* modal */
 @layer components {
     .popupContainer {
-        @apply w-65 h-105 rounded-lg bg-white backdrop-filter backdrop-blur;
+        @apply w-65 h-105 px-5 pt-8 pb-15 rounded-lg bg-white backdrop-filter backdrop-blur;
     }
 }
 </style>

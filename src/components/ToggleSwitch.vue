@@ -1,11 +1,10 @@
 <template>
-    <div
-        class="toggle-switch"
-        :class="{ active: $props.state }"
-        v-if="!$props.disabled"
-        @click="switchState"
-    >
-        <div class="switch-button" />
+    <div class="toggleSwitch" v-if="!disabled" v-on:click="switchState">
+        <div class="switchHandle" :class="{ active: currentState }"></div>
+        <div
+            class="switchButton"
+            :class="{ active: currentState, switchButton_active: currentState }"
+        ></div>
     </div>
 </template>
 
@@ -27,20 +26,26 @@ export default class ToggleSwitch extends Vue {
 
 <style scoped lang="postcss">
 @layer components {
-    .toggle-switch {
-        @apply bg-black w-9 h-5 rounded-lg relative;
+    .toggleSwitch {
+        @apply w-8 h-4;
+    }
 
-        &.active {
-            @apply bg-success;
-
-            > .switch-button {
-                @apply left-auto right-0.5;
-            }
+    .switchButton {
+        @apply bg-black bg-opacity-100 absolute inline-block w-4 h-4 rounded-lg transition;
+        &_active {
+            @apply transform translate-x-4;
         }
+    }
 
-        > .switch-button {
-            @apply absolute bg-white block w-4 h-4 rounded-lg top-0.5 left-0.5 right-auto;
-        }
+    .switchButton .active {
+        @apply ml-4;
+    }
+    .switchHandle {
+        @apply bg-black opacity-56 absolute inline-block my-1 w-8 h-2 rounded-sm;
+    }
+
+    .active {
+        @apply bg-success;
     }
 }
 </style>
