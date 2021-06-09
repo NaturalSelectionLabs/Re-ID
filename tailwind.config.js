@@ -2,26 +2,28 @@ module.exports = {
     purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
     darkMode: false, // or 'media' or 'class'
     theme: {
-        borderRadius: {
-            sm: '4px',
-            DEFAULT: '6px',
-            lg: '10px',
-        },
-
-        borderWidth: {
-            DEFAULT: '0.5px',
-            1: '1px',
-        },
-        dividerWidth: {
-            DEFAULT: '0.5px',
-        },
-        dropShadow: {
-            DEFAULT: '0px 1px 4px rgba(0, 0, 0, 0.2)',
-        },
-        backdropBlur: {
-            DEFAULT: '4px',
-        },
         extend: {
+            borderRadius: {
+                sm: '4px',
+                DEFAULT: '6px',
+                lg: '10px',
+            },
+
+            borderWidth: {
+                DEFAULT: '0.5px',
+                1: '1px',
+                19: '19px',
+                26: '26px',
+            },
+            dividerWidth: {
+                DEFAULT: '0.5px',
+            },
+            dropShadow: {
+                DEFAULT: '0px 1px 4px rgba(0, 0, 0, 0.2)',
+            },
+            backdropBlur: {
+                DEFAULT: '4px',
+            },
             colors: {
                 primary: '#5c65f4',
                 secondary: '#f55d66',
@@ -91,6 +93,7 @@ module.exports = {
                 23: '5.75rem', //92px, popup.html bio input textarea height
                 24: '6rem', //96px, popup.html collapse [...] menu height
                 45: '11.25rem', //180px, options.html bio input textarea height
+                92: '23rem', // 368px, options.html tips height
                 105: '26.25rem', //420px, popup.html height
             },
             transitionTimeFunction: {
@@ -98,6 +101,9 @@ module.exports = {
             },
             fontFamily: {
                 montserrat: 'Montserrat, sans-serif',
+            },
+            fontSize: {
+                '6.3xl': '4rem',
             },
         },
     },
@@ -107,6 +113,7 @@ module.exports = {
             backgroundOpacity: ['active'],
             textColor: ['active'],
             borderColor: ['active'],
+            display: ['group-hover'],
         },
     },
     plugins: [],
