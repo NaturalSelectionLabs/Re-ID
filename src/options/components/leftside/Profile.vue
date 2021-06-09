@@ -57,8 +57,6 @@ export default class Profile extends Vue {}
 <style lang="postcss" scoped>
 @layer components {
     .profile {
-        @apply font-sans;
-
         > div {
             @apply mt-4;
         }
