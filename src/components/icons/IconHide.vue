@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { Vue, Options } from 'vue-class-component';
-import Icon from '@components/icons/Icon.vue';
+import Icon from '@/components/icons/Icon.vue';
 
 @Options({
     components: {
