@@ -1,10 +1,5 @@
 <template>
-    <Icon
-        iconName="hide"
-        :width="width"
-        :height="height"
-        :iconColor="iconColor"
-    >
+    <Icon iconName="hide" :width="width" :height="height" :iconColor="iconColor">
         <path
             d="M14.2,15c0.2,0.2,0.5,0.2,0.8,0c0.2-0.2,0.2-0.5,0-0.7L3.8,3C3.6,2.8,3.2,2.8,3,3C2.8,3.2,2.8,3.6,3,3.8L14.2,15z M9,3.4
 	c-1.1,0-2.2,0.2-3.1,0.5l1.2,1.2C7.7,5,8.3,4.9,9,4.9c4,0,7.2,3.5,7.2,4.2c0,0.5-1,1.7-2.5,2.7l1.1,1.1c2-1.4,3.2-3.1,3.2-3.9
@@ -17,7 +12,7 @@
 
 <script lang="ts">
 import { Vue, Options } from 'vue-class-component';
-import Icon from '@components/icons/Icon.vue';
+import Icon from '@/components/icons/Icon.vue';
 
 @Options({
     components: {
