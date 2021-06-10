@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import { Vue, Options } from 'vue-class-component';
-import IconCopy from '@components/icons/IconCopy.vue';
+import IconCopy from '@/components/icons/IconCopy.vue';
 @Options({
     props: {
         keyText: String,
@@ -61,18 +61,17 @@ export default class KeyContainer extends Vue {
     }
 
     .key-popup {
-        @apply w-55 h-9 px-16 py-10 text-xs; //font-12px
+        @apply w-55 h-9 px-16 py-10 text-xs; /* font-12px */
         & .key-collapse {
             @apply h-4;
         }
     }
 
     .key-options {
-        @apply w-180 h-18 px-32 py-20 text-2xl; //font-24px
+        @apply w-180 h-18 px-32 py-20 text-2xl; /* font-24px */
         & .key-collapse {
             @apply h-1;
         }
-    }
     }
 }
 </style>
