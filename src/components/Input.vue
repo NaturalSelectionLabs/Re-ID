@@ -23,7 +23,8 @@
             'input-options-textarea': viewType === 'options',
         }"
         :placeholder="placeholderText"
-    ></textarea>
+        >{{ originalValue }}</textarea
+    >
 </template>
 
 <script lang="ts">

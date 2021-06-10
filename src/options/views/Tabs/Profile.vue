@@ -1,18 +1,18 @@
 <template>
     <div class="profile">
         <div class="avatar">
-            <img :src="$props.avatar" :alt="$props.username" />
+            <img :src="avatar" :alt="username" />
         </div>
         <div class="username">
             <Input
-                :original-value="$props.username"
+                :original-value="username"
                 view-type="options"
                 input-type="text"
             />
         </div>
         <div class="bio">
             <Input
-                :placeholder-text="$props.bio"
+                :original-value="bio"
                 view-type="options"
                 input-type="text-area"
             />
@@ -40,14 +40,17 @@ import Input from '@/components/Input.vue';
 import Button from '@/components/Button.vue';
 
 @Options({
-    components: { Button, Input },
-    props: {
-        avatar: String,
-        username: String,
-        bio: String,
+    components: {
+        Button,
+        Input,
     },
 })
-export default class TabsProfile extends Vue {}
+export default class TabsProfile extends Vue {
+    avatar: String = 'https://aka.ms/no';
+    username: String = 'demo';
+    bio: String =
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+}
 </script>
 
 <style lang="postcss" scoped>

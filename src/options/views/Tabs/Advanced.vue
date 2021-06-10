@@ -1,5 +1,7 @@
 <template>
-    <div>Advanced</div>
+    <div class="advanced">
+        <div class="editor"></div>
+    </div>
 </template>
 
 <script lang="ts">
@@ -11,4 +13,10 @@ import { Options, Vue } from 'vue-class-component';
 export default class TabsAdvanced extends Vue {}
 </script>
 
-<style lang="postcss" scoped></style>
+<style lang="postcss" scoped>
+@layer components {
+    .advanced {
+        @apply mt-24;
+    }
+}
+</style>
