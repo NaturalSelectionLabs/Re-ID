@@ -4,8 +4,11 @@
             <div class="header">
                 <div class="title">Raw RSS3</div>
                 <div class="button">
-                    <Button button-style="secondary" button-size="xs"> Edit </Button>
-                    <Button button-style="primary" button-size="xs"> Delete </Button>
+                    <Button button-style="secondary" button-size="xs">
+                        Edit
+                        <span> &#9432; </span>
+                    </Button>
+                    <Button button-style="primary" button-size="xs"> Delete</Button>
                 </div>
             </div>
             <textarea>
