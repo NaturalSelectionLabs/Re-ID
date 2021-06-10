@@ -4,32 +4,16 @@
             <img :src="avatar" :alt="username" />
         </div>
         <div class="username">
-            <Input
-                :original-value="username"
-                view-type="options"
-                input-type="text"
-            />
+            <Input :original-value="username" view-type="options" input-type="text" />
         </div>
         <div class="bio">
-            <Input
-                :original-value="bio"
-                view-type="options"
-                input-type="text-area"
-            />
+            <Input :original-value="bio" view-type="options" input-type="text-area" />
         </div>
         <div class="btn-save">
-            <Button
-                button-style="primary"
-                button-text="Save"
-                button-size="xxl"
-            />
+            <Button button-style="primary" button-size="xxl"> Save </Button>
         </div>
         <div class="btn-discard">
-            <Button
-                button-style="secondary"
-                button-text="Discard"
-                button-size="xxl"
-            />
+            <Button button-style="secondary" button-size="xxl"> Discard </Button>
         </div>
     </div>
 </template>

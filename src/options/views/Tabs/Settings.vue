@@ -1,39 +1,22 @@
 <template>
     <div class="settings">
         <div class="address">
-            <KeyContainer
-                :key-text="publicaddr"
-                view-type="options"
-                is-private="false"
-            />
+            <KeyContainer :key-text="publicaddr" view-type="options" is-private="false" />
         </div>
         <div class="private-key">
-            <KeyContainer
-                :key-text="privateKey"
-                view-type="options"
-                is-private="true"
-            />
+            <KeyContainer :key-text="privateKey" view-type="options" is-private="true" />
         </div>
         <div class="btn-view">
-            <Button
-                button-style="primary"
-                button-text="View private key"
-                button-size="xxl"
-            />
+            <Button button-style="primary" button-size="xxl"> View private key </Button>
         </div>
         <div class="warning">
             <p>
-                Warning: Never disclose your private keys. Anyone with your
-                private keys can steal any asset or information held in your
-                account.
+                Warning: Never disclose your private keys. Anyone with your private keys can steal any asset or
+                information held in your account.
             </p>
         </div>
         <div class="btn-logout">
-            <Button
-                button-style="secondary"
-                button-text="Log out"
-                button-size="xxl"
-            />
+            <Button button-style="secondary" button-size="xxl"> Log out </Button>
         </div>
     </div>
 </template>

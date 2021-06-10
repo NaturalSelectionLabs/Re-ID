@@ -2,18 +2,10 @@
     <div class="invite">
         <h2>You can invite others to RSS3 using their public keys.</h2>
         <div class="address">
-            <Input
-                placeholder-text="Invitee’s public key"
-                view-type="options"
-                input-type="text"
-            />
+            <Input placeholder-text="Invitee’s public key" view-type="options" input-type="text" />
         </div>
         <div class="btn-send">
-            <Button
-                button-style="primary"
-                button-text="Send invitation"
-                button-size="xxl"
-            />
+            <Button button-style="primary" button-size="xxl"> Send invitation </Button>
         </div>
     </div>
 </template>

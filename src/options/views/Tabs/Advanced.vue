@@ -1,17 +1,12 @@
 <template>
     <div class="advanced">
         <div class="editor">
-            <div class="button">
-                <Button
-                    button-style="secondary"
-                    button-size="xs"
-                    button-text="Edit"
-                />
-                <Button
-                    button-style="primary"
-                    button-size="xs"
-                    button-text="Delete"
-                />
+            <div class="header">
+                <div class="title">Raw RSS3</div>
+                <div class="button">
+                    <Button button-style="secondary" button-size="xs"> Edit </Button>
+                    <Button button-style="primary" button-size="xs"> Delete </Button>
+                </div>
             </div>
             <textarea>
 {
@@ -89,7 +84,9 @@ import { Options, Vue } from 'vue-class-component';
 import Button from '@/components/Button.vue';
 
 @Options({
-    components: { Button },
+    components: {
+        Button,
+    },
 })
 export default class TabsAdvanced extends Vue {}
 </script>
@@ -102,11 +99,23 @@ export default class TabsAdvanced extends Vue {}
         > .editor {
             @apply w-max h-auto bg-gray-bg rounded p-4;
 
-            > .button {
-                @apply flex justify-end;
+            > .header {
+                @apply font-semibold text-sm flex;
 
-                > * {
-                    @apply mx-2;
+                > div {
+                    @apply inline-flex;
+                }
+
+                > .title {
+                    @apply m-2;
+                }
+
+                > .button {
+                    @apply ml-auto;
+
+                    > * {
+                        @apply mx-2;
+                    }
                 }
             }
 
