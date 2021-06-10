@@ -1,17 +1,17 @@
 <template>
     <div class="settings">
         <div class="address">
-            <Input
-                :original-value="$props.publicaddr"
+            <KeyContainer
+                :key-text="publicaddr"
                 view-type="options"
-                input-type="text"
+                is-private="false"
             />
         </div>
         <div class="private-key">
-            <Input
-                :original-value="$props.privateKey"
+            <KeyContainer
+                :key-text="privateKey"
                 view-type="options"
-                input-type="text"
+                is-private="true"
             />
         </div>
         <div class="btn-view">
@@ -42,18 +42,19 @@
 import { Options, Vue } from 'vue-class-component';
 import Input from '@/components/Input.vue';
 import Button from '@/components/Button.vue';
+import KeyContainer from '@/components/KeyContainer.vue';
 
 @Options({
     components: {
+        KeyContainer,
         Button,
         Input,
     },
-    props: {
-        publicaddr: String,
-        privateKey: String,
-    },
 })
-export default class TabsSettings extends Vue {}
+export default class TabsSettings extends Vue {
+    publicaddr: String = '0x24793Ef2A065CD38361E5FA5ff2A065CDd5C68B0';
+    privateKey: String = '0x24793Ef2A065CD38361E5FA5ff2A065CDd5C68B0';
+}
 </script>
 
 <style lang="postcss" scoped>

@@ -68,7 +68,7 @@ export default class KeyContainer extends Vue {
     }
 
     .key-options {
-        @apply w-180 h-18 px-32 py-20 text-2xl; /* font-24px */
+        @apply w-180 h-18 px-8 py-5 text-2xl; /* font-24px */
         & .key-collapse {
             @apply h-1;
         }

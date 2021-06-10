@@ -98,6 +98,7 @@ module.exports = {
                 30: '7.5rem', //120px, options.html profile tab avatar size
                 45: '11.25rem', //180px, options.html bio input textarea height
                 105: '26.25rem', //420px, popup.html height
+                160: '40rem', //640px, options.html advanced profile editor height
             },
             transitionTimeFunction: {
                 'in-out-expo': 'cubic-bezier(.5, -.5, .5, 1.5)',

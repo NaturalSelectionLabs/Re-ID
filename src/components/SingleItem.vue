@@ -43,10 +43,10 @@ export default class SingleItem extends Vue {
             @apply font-semibold;
         }
         .summary {
-            @apply font-regular;
+            @apply font-normal;
         }
         .content {
-            @apply font-regular;
+            @apply font-normal;
             img {
                 @apply object-contain;
             }
