@@ -1,10 +1,5 @@
 <template>
-    <Icon
-        iconName="right"
-        :width="width"
-        :height="height"
-        :iconColor="iconColor"
-    >
+    <Icon iconName="right" :width="width" :height="height" :iconColor="iconColor">
         <path
             d="M18,9c0-0.3-0.1-0.7-0.4-0.9L11.5,2c-0.3-0.3-0.6-0.4-0.9-0.4c-0.7,0-1.2,0.5-1.2,1.1c0,0.4,0.1,0.6,0.4,0.9l2.1,2.1
 	l2.4,2.2l-2.1-0.1h-11C0.5,7.8,0,8.3,0,9c0,0.7,0.5,1.2,1.2,1.2h11l2.1-0.1l-2.4,2.2l-2.1,2.1c-0.2,0.2-0.4,0.5-0.4,0.9

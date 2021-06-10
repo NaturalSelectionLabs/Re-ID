@@ -2,26 +2,28 @@ module.exports = {
     purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
     darkMode: false, // or 'media' or 'class'
     theme: {
-        borderRadius: {
-            sm: '4px',
-            DEFAULT: '6px',
-            lg: '10px',
-        },
-
-        borderWidth: {
-            DEFAULT: '0.5px',
-            1: '1px',
-        },
-        dividerWidth: {
-            DEFAULT: '0.5px',
-        },
-        dropShadow: {
-            DEFAULT: '0px 1px 4px rgba(0, 0, 0, 0.2)',
-        },
-        backdropBlur: {
-            DEFAULT: '4px',
-        },
         extend: {
+            borderRadius: {
+                sm: '4px',
+                DEFAULT: '6px',
+                lg: '10px',
+            },
+
+            borderWidth: {
+                DEFAULT: '0.5px',
+                1: '1px',
+                19: '19px',
+                26: '26px',
+            },
+            dividerWidth: {
+                DEFAULT: '0.5px',
+            },
+            dropShadow: {
+                DEFAULT: '0px 1px 4px rgba(0, 0, 0, 0.2)',
+            },
+            backdropBlur: {
+                DEFAULT: '4px',
+            },
             colors: {
                 primary: '#5c65f4',
                 secondary: '#f55d66',
@@ -57,7 +59,7 @@ module.exports = {
                 8: '2rem', //32px, 8
                 10: '2.5rem', //40px, 10
                 12: '3rem', //48px, 12
-                15: '4.5rem', //60px, 15
+                15: '3.75rem', //60px, 15
                 18: '4.5rem', //72px, 18
             },
             width: {
@@ -97,6 +99,7 @@ module.exports = {
                 24: '6rem', //96px, popup.html collapse [...] menu height
                 30: '7.5rem', //120px, options.html profile tab avatar size
                 45: '11.25rem', //180px, options.html bio input textarea height
+                92: '23rem', // 368px, options.html tips height
                 105: '26.25rem', //420px, popup.html height
                 160: '40rem', //640px, options.html advanced profile editor height
             },
@@ -106,6 +109,9 @@ module.exports = {
             fontFamily: {
                 montserrat: 'Montserrat, sans-serif',
             },
+            fontSize: {
+                '6.3xl': '4rem',
+            },
         },
     },
     variants: {
@@ -114,6 +120,7 @@ module.exports = {
             backgroundOpacity: ['active'],
             textColor: ['active'],
             borderColor: ['active'],
+            display: ['group-hover'],
         },
     },
     plugins: [],

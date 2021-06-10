@@ -10,9 +10,7 @@
     >
         <span>{{
             isCollapse
-                ? `${keyText.substring(0, 3)}***${keyText.substring(
-                      keyText.length - 3,
-                  )}` // if collapse only display first and last three chars
+                ? `${keyText.substring(0, 3)}***${keyText.substring(keyText.length - 3)}` // if collapse only display first and last three chars
                 : keyText
         }}</span>
         <IconCopy
