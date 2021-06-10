@@ -19,9 +19,6 @@ import Icon from '@/components/icons/Icon.vue';
         height: Number,
         iconColor: String,
     },
-    components: {
-        Icon,
-    },
 })
 export default class IconBack extends Vue {
     width: Number = 18;
