@@ -15,9 +15,9 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import Profile from '@/options/components/leftside/Profile.vue';
-import NavMenu from '@/options/components/leftside/NavMenu.vue';
-import Footer from '@/options/components/leftside/Footer.vue';
+import Profile from '@/options/views/Tabs/components/leftside/Profile.vue';
+import NavMenu from '@/options/views/Tabs/components/leftside/NavMenu.vue';
+import Footer from '@/options/views/Tabs/components/leftside/Footer.vue';
 
 @Options({
     components: {

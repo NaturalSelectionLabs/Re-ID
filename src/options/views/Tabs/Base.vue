@@ -11,8 +11,8 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import SidebarLeft from '../../components/sidebars/SidebarLeft.vue';
-import SidebarRight from '../../components/sidebars/SidebarRight.vue';
+import SidebarLeft from './components/sidebars/SidebarLeft.vue';
+import SidebarRight from './components/sidebars/SidebarRight.vue';
 import Footer from '@/components/Footer.vue';
 
 @Options({

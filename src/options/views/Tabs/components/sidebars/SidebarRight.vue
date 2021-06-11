@@ -7,10 +7,7 @@
                 <span> &#9432; </span>
             </label>
 
-            <ToggleSwitch
-                :state="syncEnabled"
-                @toggle-state="toggleSyncStatus"
-            />
+            <ToggleSwitch :state="syncEnabled" @toggle-state="toggleSyncStatus" />
         </div>
     </div>
 </template>
