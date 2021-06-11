@@ -1,12 +1,5 @@
 <template>
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        :width="width"
-        :height="height"
-        viewBox="0 0 1024 1024"
-        :aria-labelledby="logo"
-        role="presentation"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" :width="width" :height="height" viewBox="0 0 1024 1024" role="presentation">
         <title lang="en">RE:ID logo</title>
         <g id="Layer_3" data-name="Layer 3">
             <path

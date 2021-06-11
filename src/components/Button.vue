@@ -15,7 +15,7 @@
             'btn-xxl': buttonSize === 'xxl',
         }"
     >
-        {{ buttonText }}
+        <slot></slot>
     </button>
 </template>
 
@@ -31,7 +31,6 @@ import { Vue, Options } from 'vue-class-component';
 })
 export default class Button extends Vue {
     buttonStyle!: String;
-    buttonText!: String;
     buttonSize!: String;
 }
 </script>

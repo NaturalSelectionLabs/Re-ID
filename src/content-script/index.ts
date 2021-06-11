@@ -1,6 +1,6 @@
 import { observe } from './utils';
 import './locationChange';
-import { TwitterButtonSync } from './components';
+import { TwitterButtonSync, twitterColorStyle } from './components';
 
 observe('[data-testid="toolBar"] div', (ele: Element): void => {
     if (
@@ -59,6 +59,23 @@ observe('[data-testid="toolBar"] div', (ele: Element): void => {
 // Sync post area
 
 observe('[data-testid="tweetButtonInline"]', (ele: Element): void => {
+    const tweetButton = document.querySelector(
+        '[data-testid=tweetButtonInline]',
+    );
+    if (tweetButton != null) {
+        const baseColor = window.getComputedStyle(
+            tweetButton,
+            '',
+        ).backgroundColor;
+        const hoverBG = baseColor
+            .replace('rgb(', 'rgba(')
+            .replace(')', ', 0.1)');
+        document.body.insertAdjacentHTML(
+            'beforeend',
+            twitterColorStyle(baseColor, hoverBG),
+        );
+    }
+
     ele.addEventListener('click', (): void => {
         const text = (<HTMLElement>(
             document.querySelector('.public-DraftStyleDefault-block')
