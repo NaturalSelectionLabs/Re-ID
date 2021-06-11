@@ -4,25 +4,15 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import RSS3 from '../common/rss3';
 
 @Options({
     components: {},
-    mounted() {
-        this.checkInit();
-    },
 })
 export default class App extends Vue {
-    isInited = false;
-
-    checkInit(): void {
-        chrome.storage.local.get(['reid-setup'], (key) => {
-            this.isInited = typeof key['reid-setup'] !== 'undefined';
-            if (this.isInited) {
-                this.$router.push('/home');
-            } else {
-                this.$router.push('/setup');
-            }
-        });
+    async mounted() {
+        const rss3 = await RSS3.get();
+        console.log(rss3.persona.id);
     }
 }
 </script>
