@@ -56,7 +56,7 @@ export default class Home extends Vue {
         this.avatarUrl = this.profile.avatar;
         this.username = this.profile.name;
         this.bio = this.profile.bio;
-        this.address = '0x47e18d6c386898b424025cd9db446f779ef24ad33a26c499c87bb3d93u896yhl';
+        this.address = (await RSS3.get()).persona.id;
     }
 
     showingMenu = false;
