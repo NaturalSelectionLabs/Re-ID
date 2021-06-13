@@ -27,21 +27,32 @@ import Button from '@/components/Button.vue';
 import Input from '@/components/Input.vue';
 import KeyContainer from '@/components/KeyContainer.vue';
 import IconAdd from '@/components/icons/IconAdd.vue';
+import RSS3 from '@/common/rss3';
 
 @Options({
     components: { PopupContainer, BackButton, Button, Input, KeyContainer, IconAdd },
 })
 export default class App extends Vue {
-    avatarUrl = 'https://i.imgur.com/vTrCSys.jpg';
-    userID = 'RSS3';
-    address = '0x47e18d6c386898b424025cd9db446f779ef24ad33a26c499c87bb3d93u896yhl';
-    privateKey = '0x47e18d6c386898b424025cd9db446f779ef24ad33a26c499c87bb3d93u896jkl';
-    bio = 'RSS3 is the dopest team yay';
-    showingMenu = false;
+    profile = { name: '', avatar: '', bio: '' };
+    avatarUrl = '';
+    username = '';
+    bio = '';
+    address = ''; // public address
+    privateKey = '';
+
     warningMessage =
         'Warning: Never disclose your private keys. Anyone with your private keys can steal any asset or information held in your account.';
 
     privateKeyVisible = false;
+
+    async mounted() {
+        this.privateKey = (await RSS3.get()).persona.id;
+        this.profile = (await RSS3.get()).profile.get();
+        this.avatarUrl = this.profile.avatar;
+        this.username = this.profile.name;
+        this.bio = this.profile.bio;
+        this.address = '0x47e18d6c386898b424025cd9db446f779ef24ad33a26c499c87bb3d93u896yhl';
+    }
 
     showPrivateKey() {
         this.privateKeyVisible = true;

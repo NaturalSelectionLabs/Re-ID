@@ -16,7 +16,7 @@
                 minlength="1"
                 maxLength="128"
             />
-            <Button buttonStyle="primary" buttonSize="lg" @click="invite()">Send invitation</Button>
+            <Button buttonStyle="primary" buttonSize="lg" @click="invite">Send invitation</Button>
         </div>
     </popup-container>
 </template>
@@ -32,7 +32,7 @@ import KeyContainer from '@/components/KeyContainer.vue';
 @Options({
     components: { PopupContainer, BackButton, Button, Input, KeyContainer },
 })
-export default class App extends Vue {
+export default class Invite extends Vue {
     avatarUrl = 'https://i.imgur.com/vTrCSys.jpg';
     userID = 'RSS3';
     address = '0x47e18d6c386898b424025cd9db446f779ef24ad33a26c499c87bb3d93u896yhl';

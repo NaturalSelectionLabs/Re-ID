@@ -4,7 +4,6 @@
         :type="inputType"
         class="input"
         :placeholder="placeholderText"
-        :value="originalValue"
         :class="{
             'input-popup': viewType === 'popup',
             'input-popup-text': viewType === 'popup',
@@ -12,6 +11,9 @@
             'input-options-text': viewType === 'options',
             'input-options-compact': isCompact,
         }"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
+        :disabled="disabled"
     />
     <textarea
         v-if="!isSingleLine"
@@ -23,6 +25,9 @@
             'input-options-textarea': viewType === 'options',
         }"
         :placeholder="placeholderText"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
+        :disabled="disabled"
     ></textarea>
 </template>
 
@@ -38,16 +43,21 @@ import { Vue, Options } from 'vue-class-component';
         originalValue: String, // for profile related input
         viewType: String,
         isCompact: Boolean, //default: false, true for input private key in the raw rss3 codeblock
+        modelValue: String,
+        disabled: Boolean,
     },
+    emits: ['update:modelValue'],
 })
 export default class Input extends Vue {
     inputType!: String;
-    placeholderText: String = '';
+    placeholderText?: String;
     minLength!: Number;
     maxLength!: Number;
-    originalValue: String = '';
+    originalValue?: String;
     viewType!: String;
-    isCompact: Boolean = false;
+    isCompact?: Boolean;
+    value?: String;
+    disabled?: Boolean;
 
     data() {
         return {
@@ -88,7 +98,7 @@ export default class Input extends Vue {
 
     /*  raw rss3 codeblock input private key */
     .input-options-compact {
-        @apply w-160 h-18;
+        @apply w-45 h-18;
     }
 }
 </style>

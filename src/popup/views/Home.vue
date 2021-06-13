@@ -6,7 +6,7 @@
                 <div class="generalInfo">
                     <img class="avatar" :src="avatarUrl" />
                     <div class="h-10 w-35 flex flex-col">
-                        <p class="font-xs font-semibold pt-0.5">{{ userID }}</p>
+                        <p class="font-xs font-semibold pt-0.5">{{ username }}</p>
                         <key-container :keyText="address" :isPrivate="false" viewType="popup" :isCollapse="true" />
                     </div>
                     <Button buttonStyle="outlined" buttonSize="xxs" @focus="showMenu" @focusout="hideMenu">
@@ -18,7 +18,7 @@
                 </div>
                 <div class="buttons w-55 h-7 grid grid-cols-2 gap-1">
                     <Button buttonStyle="primary" buttonSize="md" @click="$router.push('/Invite')">Invite</Button>
-                    <Button buttonStyle="primary" buttonSize="md"><a href="./options">Expand</a></Button>
+                    <Button buttonStyle="primary" buttonSize="md"><a href="@/options">Expand</a></Button>
                 </div>
             </div>
             <div class="preview">
@@ -38,59 +38,28 @@ import Button from '@/components/Button.vue';
 import CollapseMenu from '@/components/CollapseMenu.vue';
 import IconMore from '@/components/icons/IconMore.vue';
 import SingleItem from '@/components/SingleItem.vue';
+import RSS3 from '@/common/rss3';
 
 @Options({
     components: { PopupContainer, PopupHeader, KeyContainer, Button, CollapseMenu, IconMore, SingleItem },
 })
-export default class App extends Vue {
-    avatarUrl = 'https://i.imgur.com/vTrCSys.jpg';
-    userID = 'RSS3';
-    address = '0x47e18d6c386898b424025cd9db446f779ef24ad33a26c499c87bb3d93u896yhl';
-    bio = 'RSS3 is the dopest team yay';
+export default class Home extends Vue {
+    profile = { name: '', avatar: '', bio: '' };
+    avatarUrl = '';
+    username = '';
+    bio = '';
+    address = ''; // public address
+    items = [];
+    async mounted() {
+        this.profile = (await RSS3.get()).profile.get();
+        this.items = (await RSS3.get()).items.get();
+        this.avatarUrl = this.profile.avatar;
+        this.username = this.profile.name;
+        this.bio = this.profile.bio;
+        this.address = '0x47e18d6c386898b424025cd9db446f779ef24ad33a26c499c87bb3d93u896yhl';
+    }
+
     showingMenu = false;
-
-    items = [
-        {
-            id: '0xC8b960D09C0078c18Dcbe7eB9AB9d816BcCa8944-item-1',
-            authors: ['0xC8b960D09C0078c18Dcbe7eB9AB9d816BcCa8944'],
-            summary: 'Yes!!',
-            date_published: '2021-05-09T16:56:35.529Z',
-            date_modified: '2021-05-09T16:56:35.529Z',
-
-            type: 'comment',
-            upstream: '0xC8b960D09C0078c18Dcbe7eB9AB9d816BcCa8944-item-0',
-        },
-        {
-            id: '0xC8b960D09C0078c18Dcbe7eB9AB9d816BcCa8944-item-0',
-            authors: ['0xC8b960D09C0078c18Dcbe7eB9AB9d816BcCa8944'],
-            title: 'Hello World',
-            summary: 'Hello, this is the first item of RSS3.',
-            date_published: '2021-05-08T16:56:35.529Z',
-            date_modified: '2021-05-08T16:56:35.529Z',
-
-            contents: [
-                {
-                    address: ['dweb://never.html', 'https://example.com/never.html'],
-                    mime_type: 'text/html',
-                },
-                {
-                    address: ['dweb://never.jpg'],
-                    mime_type: 'image/jpeg',
-                },
-            ],
-
-            '@contexts': [
-                {
-                    type: 'comment',
-                    list: '0xC8b960D09C0078c18Dcbe7eB9AB9d816BcCa8944-context@0@comment-0',
-                },
-                {
-                    type: 'like',
-                    list: '0xC8b960D09C0078c18Dcbe7eB9AB9d816BcCa8944-context@0@like-0',
-                },
-            ],
-        },
-    ];
 
     showMenu() {
         this.showingMenu = true;

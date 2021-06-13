@@ -3,8 +3,14 @@
         <div class="row-start-2 row-end-3 flex flex-col justify-start items-left gap-y-5">
             <p><logo width="55" height="55" class="inline" /></p>
             <p><logo-title height="30" width="100" class="inline" /></p>
-            <Input inputType="password" placeholderText="Private Key" viewType="popup" minlength="1" maxLength="128" />
-            <Button buttonStyle="primary" buttonSize="lg" @click="$router.push('/home')">Continue</Button>
+            <Input
+                inputType="password"
+                placeholderText="Private Key"
+                viewType="popup"
+                minlength="1"
+                v-model="privateKey"
+            />
+            <Button buttonStyle="primary" buttonSize="lg" @click="login">Continue</Button>
             <Button buttonStyle="secondary" buttonSize="lg" @click="$router.push('/onboarding')">Go back</Button>
         </div>
     </popup-container>
@@ -17,14 +23,28 @@ import Logo from '@/components/Logo.vue';
 import LogoTitle from '@/components/LogoTitle.vue';
 import Button from '@/components/Button.vue';
 import Input from '@/components/Input.vue';
+import RSS3 from '@/common/rss3';
 
 @Options({
     components: { PopupContainer, Logo, LogoTitle, Button, Input },
 })
-export default class App extends Vue {}
+export default class Login extends Vue {
+    privateKey: String = '';
+    login() {
+        chrome.storage.sync.set(
+            {
+                privateKey: this.privateKey,
+            },
+            async () => {
+                await RSS3.get();
+                this.$router.push('/home');
+            },
+        );
+    }
+}
 </script>
 
-<style lang="postcss">
+<style scoped lang="postcss">
 @layer components {
     .mainContainer {
         @apply w-65 h-105 rounded-lg bg-white backdrop-filter backdrop-blur;

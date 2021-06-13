@@ -1,7 +1,5 @@
 <template>
-    <popup-container>
-        <popup-header> </popup-header>
-    </popup-container>
+    <h1>RE:ID</h1>
 </template>
 
 <script lang="ts">
@@ -18,11 +16,11 @@ export default class Entry extends Vue {
             if (key['reid-set-up'] === 'done') {
                 this.$router.push('/home');
             } else {
-                this.$router.push('/onboarding');
+                this.$router.push('/setup');
             }
         });
     }
 }
 </script>
 
-<style lang="postcss"></style>
+<style scoped lang="postcss"></style>
