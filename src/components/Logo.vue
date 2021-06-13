@@ -29,7 +29,7 @@ export default class Logo extends Vue {
 }
 </script>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
 @layer components {
     .cls-1 {
         @apply fill-current text-primary;

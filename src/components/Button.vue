@@ -38,7 +38,7 @@ export default class Button extends Vue {
 <style scoped lang="postcss">
 @layer components {
     .btn {
-        @apply text-left;
+        @apply text-left focus:outline-none;
     }
     .btn-primary {
         @apply bg-primary text-white;
@@ -54,12 +54,12 @@ export default class Button extends Vue {
     }
 
     .btn-outlined {
-        @apply bg-white active:bg-primary border border-primary text-primary active:text-white;
+        @apply bg-white active:bg-primary border border-primary text-primary active:text-white focus:bg-primary focus:text-white;
     }
 
     /* popup.html [...] button */
     .btn-xxs {
-        @apply w-8 h-4 rounded-sm px-2.5 py-1 font-normal text-xs;
+        @apply w-8 h-4 rounded-sm flex justify-center items-center font-normal text-xs;
     }
 
     /* popup.html [...] menu each item */

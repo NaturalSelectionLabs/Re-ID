@@ -51,21 +51,20 @@ export default class Input extends Vue {
 
     data() {
         return {
-            isSingleLine:
-                this.inputType === 'text' || this.inputType === 'password',
+            isSingleLine: this.inputType === 'text' || this.inputType === 'password',
         };
     }
 }
 </script>
 
-<style lang="postcss">
+<style scoped lang="postcss">
 @layer components {
     .input {
-        @apply bg-gray-bg focus:bg-white focus:border focus:border-gray-outline rounded text-left font-regular placeholder-gray-text placeholder-opacity-30 text-black;
+        @apply bg-gray-bg border border-primary border-opacity-0 focus:bg-white focus:border-opacity-15 rounded text-left font-normal placeholder-gray-text placeholder-opacity-30 text-black;
     }
 
     .input-popup {
-        @apply w-55 h-9 rounded px-4 py-2.5 text-xs; //font-12px
+        @apply w-55 h-9 rounded px-4 py-2.5 text-xs;
     }
 
     .input-popup-text {
@@ -76,7 +75,7 @@ export default class Input extends Vue {
     }
 
     .input-options {
-        @apply w-180 h-18 rounded px-8 py-5 text-2xl; //font-24px
+        @apply w-180 h-18 rounded px-8 py-5 text-2xl;
     }
 
     .input-options-text {
@@ -89,7 +88,7 @@ export default class Input extends Vue {
 
     /*  raw rss3 codeblock input private key */
     .input-options-compact {
-        @apply w-186 h-18;
+        @apply w-160 h-18;
     }
 }
 </style>
