@@ -25,12 +25,15 @@ import { Vue, Options } from 'vue-class-component';
 
 @Options({
     props: {
-        width: Number,
-        height: Number,
+        width: {
+            type: Number,
+            default: 440,
+        },
+        height: {
+            type: Number,
+            default: 120,
+        },
     },
 })
-export default class LogoTitle extends Vue {
-    width: Number = 500;
-    height: Number = 150;
-}
+export default class LogoTitle extends Vue {}
 </script>
