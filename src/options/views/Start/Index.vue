@@ -1,7 +1,7 @@
 <template>
-    <div class="mx-20">
-        <div class="h-screen w-180 flex items-center justify-center">
-            <div class="align-middle">
+    <div class="mx-18">
+        <div class="content w-180 flex items-center justify-center">
+            <div class="align-middle py-15">
                 <p>
                     <Logo :width="128" :height="128" class="inline" />
                     <LogoTitle class="inline ml-8" />
@@ -17,7 +17,7 @@
                 </p>
             </div>
         </div>
-        <Footer class="fixed bottom-16" />
+        <Footer class="mb-18" />
     </div>
 </template>
 
@@ -38,3 +38,9 @@ import Button from '@/components/Button.vue';
 })
 export default class StartIndex extends Vue {}
 </script>
+
+<style lang="postcss" scoped>
+.content {
+    min-height: calc(100vh - 90px);
+}
+</style>

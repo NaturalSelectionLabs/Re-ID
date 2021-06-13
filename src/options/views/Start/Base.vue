@@ -1,50 +1,53 @@
 <template>
-    <div class="mx-16 my-12 w-180">
-        <Logo :width="104" :height="104" />
-        <BackButton viewType="options" class="block mt-9 mb-8" v-if="!content.hideBack" />
-        <h2 class="text-6.3xl font-semibold">{{ content.title }}</h2>
-        <div class="text-2xl font-semibold mt-4 mb-12 relative">
-            <span class="align-middle">{{ content.description }}</span>
-            <span class="group ml-5 text-gray-text text-base align-middle leading-7" v-if="content.tips">
-                <span class="cursor-pointer">ⓘ</span>
-                <span
-                    class="
-                        group-hover:inline
-                        hidden
-                        text-2xl
-                        absolute
-                        top-0
-                        left-full
-                        w-120
-                        h-92
-                        whitespace-pre-line
-                        bg-primary bg-opacity-15
-                        text-primary
-                        box-border
-                        py-7
-                        pl-11
-                        pr-18
-                    "
-                >
-                    <span class="block">Tips</span>
-                    <span class="block font-normal mt-6" v-for="tip in content.tips" :key="tip">{{ tip }}</span>
+    <div class="mx-18">
+        <div class="content my-12 w-180">
+            <Logo :width="104" :height="104" />
+            <BackButton viewType="options" class="block mt-9 mb-8" v-if="!content.hideBack" />
+            <h2 class="text-6.3xl font-semibold">{{ content.title }}</h2>
+            <div class="text-2xl font-semibold mt-4 mb-12 relative">
+                <span class="align-middle">{{ content.description }}</span>
+                <span class="group ml-5 text-gray-text text-base align-middle leading-7" v-if="content.tips">
+                    <span class="cursor-pointer">ⓘ</span>
                     <span
                         class="
-                            block
+                            group-hover:inline
+                            hidden
+                            text-2xl
                             absolute
-                            top-8
-                            right-full
-                            w-0
-                            h-0
-                            border-solid border-t-19 border-r-26 border-b-19 border-l-0
-                            triangle
+                            top-0
+                            left-full
+                            w-120
+                            h-92
+                            whitespace-pre-line
+                            bg-primary bg-opacity-15
+                            text-primary
+                            box-border
+                            py-7
+                            pl-11
+                            pr-18
+                            ml-14
                         "
-                    ></span>
+                    >
+                        <span class="block">Tips</span>
+                        <span class="block font-normal mt-6" v-for="tip in content.tips" :key="tip">{{ tip }}</span>
+                        <span
+                            class="
+                                block
+                                absolute
+                                top-8
+                                right-full
+                                w-0
+                                h-0
+                                border-solid border-t-19 border-r-26 border-b-19 border-l-0
+                                triangle
+                            "
+                        ></span>
+                    </span>
                 </span>
-            </span>
+            </div>
+            <router-view></router-view>
         </div>
-        <router-view></router-view>
-        <Footer class="fixed bottom-16" />
+        <Footer class="mb-18" />
     </div>
 </template>
 
@@ -126,5 +129,9 @@ export default class StartBase extends Vue {
         @apply opacity-15;
         border-color: transparent #5c65f4 transparent transparent;
     }
+}
+
+.content {
+    min-height: calc(100vh - 186px);
 }
 </style>
