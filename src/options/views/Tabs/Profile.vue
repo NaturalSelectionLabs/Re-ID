@@ -22,6 +22,8 @@
 import { Options, Vue } from 'vue-class-component';
 import Input from '@/components/Input.vue';
 import Button from '@/components/Button.vue';
+import RSS3 from '@/common/rss3';
+import { ThirdPartyAddress } from 'rss3/types/rss3';
 
 @Options({
     components: {
@@ -30,10 +32,27 @@ import Button from '@/components/Button.vue';
     },
 })
 export default class TabsProfile extends Vue {
-    avatar: String = 'https://aka.ms/no';
-    username: String = 'demo';
-    bio: String =
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+    avatar: ThirdPartyAddress = [];
+    username: String = '';
+    bio: String = '';
+
+    async mounted() {
+        const rss3 = await RSS3.get();
+        if (typeof rss3 !== 'undefined') {
+            const profile = await rss3.profile.get();
+            if (typeof profile !== 'undefined') {
+                if (typeof profile.avatar !== 'undefined') {
+                    this.avatar = profile.avatar;
+                }
+                if (typeof profile.name !== 'undefined') {
+                    this.username = profile.name;
+                }
+                if (typeof profile.bio !== 'undefined') {
+                    this.bio = profile.bio;
+                }
+            }
+        }
+    }
 }
 </script>
 

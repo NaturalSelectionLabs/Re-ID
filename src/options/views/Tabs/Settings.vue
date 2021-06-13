@@ -26,6 +26,7 @@ import { Options, Vue } from 'vue-class-component';
 import Input from '@/components/Input.vue';
 import Button from '@/components/Button.vue';
 import KeyContainer from '@/components/KeyContainer.vue';
+import RSS3 from '@/common/rss3';
 
 @Options({
     components: {
@@ -35,8 +36,14 @@ import KeyContainer from '@/components/KeyContainer.vue';
     },
 })
 export default class TabsSettings extends Vue {
-    publicaddr: String = '0x24793Ef2A065CD38361E5FA5ff2A065CDd5C68B0';
-    privateKey: String = '0x24793Ef2A065CD38361E5FA5ff2A065CDd5C68B0';
+    publicaddr: String = '';
+    privateKey: String = '';
+
+    async mounted() {
+        const rss3 = await RSS3.get();
+        this.publicaddr = rss3.persona.id;
+        this.privateKey = rss3.persona.privateKey;
+    }
 }
 </script>
 
