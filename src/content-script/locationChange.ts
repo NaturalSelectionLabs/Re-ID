@@ -1,20 +1,16 @@
-// What if user clicks something and href changes?
-let lastHref = window.location.href;
+// What if user clicks something and our element disappears?
 document.addEventListener('click', () => {
-    if (lastHref !== '' && lastHref !== window.location.href) {
-        // Location changed
-        window.dispatchEvent(new Event('locationchange'));
-    }
-    lastHref = window.location.href;
+    setTimeout(() => {
+        if (document.getElementById('reid-sync-active-status') === null) {
+            // Location changed
+            window.dispatchEvent(new Event('locationchange'));
+        }
+    }, 0);
 });
 
 // Learn more about this hack from https://stackoverflow.com/a/52809105/1986338
 history.pushState = ((f) =>
-    function pushState(
-        data: any,
-        title: string,
-        url?: string | null | undefined,
-    ) {
+    function pushState(data: any, title: string, url?: string | null | undefined) {
         const ret = f.apply(history, [data, title, url]);
         window.dispatchEvent(new Event('pushstate'));
         window.dispatchEvent(new Event('locationchange'));
@@ -22,11 +18,7 @@ history.pushState = ((f) =>
     })(history.pushState);
 
 history.replaceState = ((f) =>
-    function replaceState(
-        data: any,
-        title: string,
-        url?: string | null | undefined,
-    ) {
+    function replaceState(data: any, title: string, url?: string | null | undefined) {
         const ret = f.apply(history, [data, title, url]);
         window.dispatchEvent(new Event('replacestate'));
         window.dispatchEvent(new Event('locationchange'));

@@ -79,6 +79,7 @@ module.exports = {
                 65: '16.25rem', //260px, popup.html width
                 89: '22.25rem', //356px, options.html main button width
                 120: '30rem', //480px, options.html extended button width
+                155.5: '38.875rem', //622
                 160: '40rem', //640px, raw rss3 codeblock input width
                 180: '45rem', //720px, options.html input & content width
                 186: '46.5rem', //744px, raw rss3 codeblock input private key

@@ -19,14 +19,17 @@ import { Vue, Options } from 'vue-class-component';
 
 @Options({
     props: {
-        width: Number,
-        height: Number,
+        width: {
+            type: Number,
+            default: 256,
+        },
+        height: {
+            type: Number,
+            default: 256,
+        },
     },
 })
-export default class Logo extends Vue {
-    width: Number = 256;
-    height: Number = 256;
-}
+export default class Logo extends Vue {}
 </script>
 
 <style lang="postcss">
