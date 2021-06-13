@@ -32,7 +32,7 @@ import RSS3 from '@/common/rss3';
 @Options({
     components: { PopupContainer, BackButton, Button, Input, KeyContainer, IconAdd },
 })
-export default class App extends Vue {
+export default class Account extends Vue {
     profile = { name: '', avatar: '', bio: '' };
     avatarUrl = '';
     username = '';
