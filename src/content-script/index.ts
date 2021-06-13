@@ -2,59 +2,62 @@ import { observe } from './utils';
 import './locationChange';
 import { TwitterButtonSync, twitterColorStyle } from './components';
 
-observe('[data-testid="toolBar"] div', (ele: Element): void => {
-    if (
-        window.location.href === 'https://twitter.com/home' &&
-        document.getElementById('reid-sync-active-status') === null
-    ) {
-        ele.insertAdjacentHTML('beforeend', TwitterButtonSync);
+observe(
+    '[data-testid="primaryColumn"] [data-testid="toolBar"] div',
+    (ele: Element): void => {
+        if (document.getElementById('reid-sync-active-status') === null) {
+            ele.insertAdjacentHTML('beforeend', TwitterButtonSync);
 
-        {
-            // Listen events
-            function updateSyncStatusClass(enabled: boolean) {
-                const twiBtnSyncUut = document.getElementById(
-                    'reid-sync-active-status',
-                );
-                if (twiBtnSyncUut !== null) {
-                    if (enabled) {
-                        twiBtnSyncUut.classList.add('active');
-                    } else {
-                        twiBtnSyncUut.classList.remove('active');
+            {
+                // Listen events
+                function updateSyncStatusClass(enabled: boolean) {
+                    const twiBtnSyncUut = document.getElementById(
+                        'reid-sync-active-status',
+                    );
+                    if (twiBtnSyncUut !== null) {
+                        if (enabled) {
+                            twiBtnSyncUut.classList.add('active');
+                        } else {
+                            twiBtnSyncUut.classList.remove('active');
+                        }
                     }
                 }
-            }
 
-            function setRSS3Sync(enabled: boolean) {
-                updateSyncStatusClass(enabled);
-                chrome.storage.sync.set({
-                    'reid-twitter-sync-enabled': enabled,
-                });
-            }
-            chrome.storage.sync.get(['reid-twitter-sync-enabled'], (result) => {
-                const enabled = result['reid-twitter-sync-enabled'];
-                if (typeof enabled !== 'undefined') {
+                function setRSS3Sync(enabled: boolean) {
                     updateSyncStatusClass(enabled);
+                    chrome.storage.sync.set({
+                        'reid-twitter-sync-enabled': enabled,
+                    });
                 }
-            });
-            const twiBtnSyncEnaUut = document.getElementById(
-                'reid-sync-button-activate',
-            );
-            if (twiBtnSyncEnaUut !== null) {
-                twiBtnSyncEnaUut.addEventListener('click', () => {
-                    setRSS3Sync(true);
-                });
-            }
-            const twiBtnSyncDeUut = document.getElementById(
-                'reid-sync-button-deactivate',
-            );
-            if (twiBtnSyncDeUut !== null) {
-                twiBtnSyncDeUut.addEventListener('click', () => {
-                    setRSS3Sync(false);
-                });
+                chrome.storage.sync.get(
+                    ['reid-twitter-sync-enabled'],
+                    (result) => {
+                        const enabled = result['reid-twitter-sync-enabled'];
+                        if (typeof enabled !== 'undefined') {
+                            updateSyncStatusClass(enabled);
+                        }
+                    },
+                );
+                const twiBtnSyncEnaUut = document.getElementById(
+                    'reid-sync-button-activate',
+                );
+                if (twiBtnSyncEnaUut !== null) {
+                    twiBtnSyncEnaUut.addEventListener('click', () => {
+                        setRSS3Sync(true);
+                    });
+                }
+                const twiBtnSyncDeUut = document.getElementById(
+                    'reid-sync-button-deactivate',
+                );
+                if (twiBtnSyncDeUut !== null) {
+                    twiBtnSyncDeUut.addEventListener('click', () => {
+                        setRSS3Sync(false);
+                    });
+                }
             }
         }
-    }
-});
+    },
+);
 
 // Sync post area
 
