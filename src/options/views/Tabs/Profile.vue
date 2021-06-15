@@ -16,7 +16,7 @@
             <Button button-style="primary" button-size="xxl" @click="saveProfile"> Save </Button>
         </div>
         <div class="btn-discard">
-            <Button button-style="secondary" button-size="xxl"> Discard </Button>
+            <Button button-style="secondary" button-size="xxl" @click="resetProfile"> Discard </Button>
         </div>
     </div>
 </template>
@@ -37,7 +37,7 @@ import IconAdd from '@/components/icons/IconAdd.vue';
     },
 })
 export default class TabsProfile extends Vue {
-    avatar: ThirdPartyAddress = [];
+    avatar: string = '';
     username: String = '';
     bio: String = '';
     rss3: any;
@@ -46,17 +46,9 @@ export default class TabsProfile extends Vue {
         this.rss3 = await RSS3.get();
         if (typeof this.rss3 !== 'undefined') {
             const profile = await this.rss3.profile.get();
-            if (typeof profile !== 'undefined') {
-                if (typeof profile.avatar !== 'undefined') {
-                    this.avatar = profile.avatar;
-                }
-                if (typeof profile.name !== 'undefined') {
-                    this.username = profile.name;
-                }
-                if (typeof profile.bio !== 'undefined') {
-                    this.bio = profile.bio;
-                }
-            }
+            this.avatar = profile?.avatar[0] || '';
+            this.username = profile?.name || '';
+            this.bio = profile?.bio || '';
         }
     }
 
@@ -68,6 +60,13 @@ export default class TabsProfile extends Vue {
             bio: this.bio,
         });
         await this.rss3.persona.sync();
+    }
+
+    async resetProfile() {
+        const profile = await this.rss3.profile.get();
+        this.avatar = profile?.avatar[0] || '';
+        this.username = profile?.name || '';
+        this.bio = profile?.bio || '';
     }
 }
 </script>
