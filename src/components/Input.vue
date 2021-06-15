@@ -70,7 +70,7 @@ export default class Input extends Vue {
 <style scoped lang="postcss">
 @layer components {
     .input {
-        @apply bg-gray-bg focus:bg-white focus:border-gray-outline rounded text-left placeholder-gray-text placeholder-opacity-30 text-black;
+        @apply bg-gray-bg border border-primary border-opacity-0 focus:bg-white focus:border-opacity-15 rounded text-left font-normal placeholder-gray-text placeholder-opacity-30 text-black;
     }
 
     .input-popup {
