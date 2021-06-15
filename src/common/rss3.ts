@@ -9,7 +9,7 @@ export default {
                 chrome.storage.sync.get(['privateKey'], (result) => {
                     if (rss3.persona.id !== result.privateKey) {
                         rss3 = new RSS3({
-                            endpoint: 'https://hub.rss3.io/',
+                            endpoint: 'https://hub.rss3.io',
                             privateKey: result.privateKey,
                         });
                     }
@@ -20,7 +20,7 @@ export default {
             return new Promise<RSS3>((resolve) => {
                 chrome.storage.sync.get(['privateKey'], (result) => {
                     rss3 = new RSS3({
-                        endpoint: 'https://hub.rss3.io/',
+                        endpoint: 'https://hub.rss3.io',
                         privateKey: result.privateKey,
                     });
                     if (!result.privateKey) {
