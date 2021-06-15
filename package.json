@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "dev": "webpack -w --mode development",
-        "build": "webpack --mode production",
+        "build": "NODE_ENV=production webpack --mode production",
         "prepare": "husky install"
     },
     "lint-staged": {
