@@ -28,16 +28,24 @@ import BackButton from '@/components/BackButton.vue';
 import Button from '@/components/Button.vue';
 import Input from '@/components/Input.vue';
 import KeyContainer from '@/components/KeyContainer.vue';
+import RSS3 from '@/common/rss3';
 
 @Options({
     components: { PopupContainer, BackButton, Button, Input, KeyContainer },
 })
 export default class Invite extends Vue {
-    avatarUrl = 'https://i.imgur.com/vTrCSys.jpg';
-    userID = 'RSS3';
-    address = '0x47e18d6c386898b424025cd9db446f779ef24ad33a26c499c87bb3d93u896yhl';
-    bio = 'RSS3 is the dopest team yay';
-    showingMenu = false;
+    avatarUrl = <any>'';
+    username = <any>'';
+    bio = <any>'';
+    address = ''; // public address
+
+    async mounted() {
+        const profile = await (await RSS3.get()).profile.get();
+        this.avatarUrl = profile.avatar;
+        this.username = profile.name;
+        this.bio = profile.bio;
+        this.address = await (await RSS3.get()).persona.id;
+    }
 
     invite() {}
 }

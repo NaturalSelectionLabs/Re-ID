@@ -33,10 +33,9 @@ import RSS3 from '@/common/rss3';
     components: { PopupContainer, BackButton, Button, Input, KeyContainer, IconAdd },
 })
 export default class Account extends Vue {
-    profile = { name: '', avatar: '', bio: '' };
-    avatarUrl = '';
-    username = '';
-    bio = '';
+    avatarUrl = <any>'';
+    username = <any>'';
+    bio = <any>'';
     address = ''; // public address
     privateKey = '';
 
@@ -46,11 +45,12 @@ export default class Account extends Vue {
     privateKeyVisible = false;
 
     async mounted() {
+        const profile = await (await RSS3.get()).profile.get();
+        this.avatarUrl = profile.avatar;
+        this.username = profile.name;
+        this.bio = profile.bio;
+
         this.privateKey = (await RSS3.get()).persona.privateKey;
-        this.profile = (await RSS3.get()).profile.get();
-        this.avatarUrl = this.profile.avatar;
-        this.username = this.profile.name;
-        this.bio = this.profile.bio;
         this.address = (await RSS3.get()).persona.id;
     }
 

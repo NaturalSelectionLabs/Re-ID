@@ -46,18 +46,17 @@ import RSS3 from '@/common/rss3';
     components: { PopupContainer, BackButton, Button, Input, KeyContainer, IconAdd },
 })
 export default class Profile extends Vue {
-    profile = { name: '', avatar: '', bio: '' };
-    avatarUrl = <string | ArrayBuffer | null>'';
-    username = '';
-    bio = '';
-    address = ''; // public address
+    avatarUrl = <any>'';
+    username = <any>'';
+    bio = <any>'';
+    address = <any>''; // public address
 
     async mounted() {
-        this.profile = (await RSS3.get()).profile.get();
-        this.avatarUrl = this.profile.avatar;
-        this.username = this.profile.name;
-        this.bio = this.profile.bio;
-        this.address = (await RSS3.get()).persona.id;
+        const profile = await (await RSS3.get()).profile.get();
+        this.avatarUrl = profile.avatar;
+        this.username = profile.name;
+        this.bio = profile.bio;
+        this.address = await (await RSS3.get()).persona.id;
     }
 
     updateAvatar() {
@@ -74,11 +73,11 @@ export default class Profile extends Vue {
     }
 
     async updateProfile() {
-        (await RSS3.get()).profile.patch({
-            name: this.username,
-            avatar: this.avatarUrl,
-            bio: this.bio,
-        });
+        // const newProfile = await (await RSS3.get()).profile.patch({
+        //     name: this.username,
+        //     avatar: this.avatarUrl,
+        //     bio: this.bio,
+        // });
     }
 }
 </script>

@@ -44,19 +44,19 @@ import RSS3 from '@/common/rss3';
     components: { PopupContainer, PopupHeader, KeyContainer, Button, CollapseMenu, IconMore, SingleItem },
 })
 export default class Home extends Vue {
-    profile = { name: '', avatar: '', bio: '' };
-    avatarUrl = '';
-    username = '';
-    bio = '';
+    avatarUrl = <any>'';
+    username = <any>'';
+    bio = <any>'';
     address = ''; // public address
-    items = [];
+    items = <any>[];
     async mounted() {
-        this.profile = (await RSS3.get()).profile.get();
-        this.items = (await RSS3.get()).items.get();
-        this.avatarUrl = this.profile.avatar;
-        this.username = this.profile.name;
-        this.bio = this.profile.bio;
-        this.address = (await RSS3.get()).persona.id;
+        const currentItems = await (await RSS3.get()).items.get();
+        this.items = currentItems.items;
+        const profile = await (await RSS3.get()).profile.get();
+        this.avatarUrl = profile.avatar;
+        this.username = profile.name;
+        this.bio = profile.bio;
+        this.address = await (await RSS3.get()).persona.id;
     }
 
     showingMenu = false;
