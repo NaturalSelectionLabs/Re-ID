@@ -11,13 +11,13 @@ import { Vue, Options } from 'vue-class-component';
 import Icon from '@/components/icons/Icon.vue';
 
 @Options({
+    components: {
+        Icon,
+    },
     props: {
         width: Number,
         height: Number,
         iconColor: String,
-    },
-    components: {
-        Icon,
     },
 })
 export default class IconBack extends Vue {
