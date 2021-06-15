@@ -1,13 +1,19 @@
 <template>
     <div class="collapseMenu">
         <div>
-            <Button buttonText="Profile" buttonStyle="menuItem" buttonSize="xs" />
+            <Button buttonText="Profile" buttonStyle="menuItem" buttonSize="xs" @click="$router.push('/Profile')">
+                Profile</Button
+            >
         </div>
         <div>
-            <Button buttonText="Account" buttonStyle="menuItem" buttonSize="xs" />
+            <Button buttonText="Account" buttonStyle="menuItem" buttonSize="xs" @click="$router.push('/Account')">
+                Account</Button
+            >
         </div>
         <div>
-            <Button buttonText="Log out" buttonStyle="menuItem" buttonSize="xs" />
+            <Button buttonText="Log out" buttonStyle="menuItem" buttonSize="xs" @click="$router.push('/Onboarding')">
+                Log out</Button
+            >
         </div>
     </div>
 </template>
@@ -26,7 +32,7 @@ export default class CollapseMenu extends Vue {}
 <style lang="postcss">
 @layer components {
     .collapseMenu {
-        @apply grid-rows-3 w-27 h-24 px-2 bg-white rounded drop-shadow backdrop-filter backdrop-blur divide-y divide-black divide-opacity-10;
+        @apply grid-rows-3 w-27 h-19.5 py-0.5 px-0.5 bg-white rounded drop-shadow filter backdrop-filter backdrop-blur divide-y divide-gray-outline divide-opacity-10;
     }
 }
 </style>

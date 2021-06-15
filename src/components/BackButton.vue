@@ -1,6 +1,6 @@
 <template>
     <button
-        class="back"
+        class="back justify-start focus:outline-none"
         :class="{
             'back-options': viewType === 'options',
             'back-popup': viewType === 'popup',
@@ -13,7 +13,7 @@
             :width="viewType === 'popup' ? 10 : 18"
             :height="viewType === 'popup' ? 10 : 18"
         />
-        <span class="back-text">Back</span>
+        <span class="back-text" :class="[viewType == 'popup' ? 'ml-4' : 'ml-6']">Back</span>
     </button>
 </template>
 
@@ -40,7 +40,7 @@ export default class BackButton extends Vue {
 <style lang="postcss">
 @layer components {
     .back {
-        @apply font-medium text-primary;
+        @apply font-medium text-primary w-max;
     }
 
     .back-icon {
@@ -48,20 +48,14 @@ export default class BackButton extends Vue {
     }
 
     .back-text {
-        @apply align-middle text-2xl;
+        @apply align-middle;
     }
 
     .back-options {
         @apply text-2xl;
-        span {
-            @apply ml-6;
-        }
     }
     .back-popup {
         @apply text-xs;
-        span {
-            @apply ml-4;
-        }
     }
 }
 </style>

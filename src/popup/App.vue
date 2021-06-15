@@ -1,25 +1,19 @@
 <template>
-    <popup-container>
-        <h1>Re: ID</h1>
-        <toggle-switch />
-    </popup-container>
+    <router-view></router-view>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import ToggleSwitch from '@/components/ToggleSwitch.vue';
-import PopupContainer from '@/components/PopupContainer.vue';
+import RSS3 from '@/common/rss3';
 
 @Options({
-    components: { PopupContainer, ToggleSwitch },
+    components: {},
 })
-export default class App extends Vue {}
-</script>
-
-<style lang="postcss">
-@layer components {
-    .popupContainer {
-        @apply w-65 h-105 rounded-lg bg-white backdrop-filter backdrop-blur;
+export default class App extends Vue {
+    async mounted() {
+        const rss3 = await RSS3.get();
     }
 }
-</style>
+</script>
+
+<style></style>
