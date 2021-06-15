@@ -32,6 +32,7 @@ module.exports = {
                 black: '#282828',
                 gray: {
                     text: '#3c3c43',
+                    light: '#F9FaF9',
                     bg: '#f3f3f3',
                     outline: '#c5c5c7',
                 },

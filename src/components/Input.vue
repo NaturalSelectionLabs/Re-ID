@@ -98,7 +98,7 @@ export default class Input extends Vue {
 
     /*  raw rss3 codeblock input private key */
     .input-options-compact {
-        @apply w-45 h-18;
+        @apply w-160 h-18 rounded px-8 py-5 text-2xl;
     }
 }
 </style>

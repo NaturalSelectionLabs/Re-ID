@@ -1,13 +1,18 @@
 <template>
     <div class="settings">
         <div class="address">
-            <KeyContainer :key-text="publicaddr" view-type="options" is-private="false" />
+            <KeyContainer :key-text="publicaddr" view-type="options" :is-private="!privateIsPrivate" />
         </div>
         <div class="private-key">
-            <KeyContainer :key-text="privateKey" view-type="options" is-private="true" />
+            <KeyContainer
+                :key-text="privateKey"
+                view-type="options"
+                :is-private="privateIsPrivate"
+                :blur="blurPrivateKey"
+            />
         </div>
         <div class="btn-view">
-            <Button button-style="primary" button-size="xxl"> View private key </Button>
+            <Button button-style="primary" button-size="xxl" @click="blurPrivateKey = false"> View private key </Button>
         </div>
         <div class="warning">
             <p>
@@ -38,6 +43,8 @@ import RSS3 from '@/common/rss3';
 export default class TabsSettings extends Vue {
     publicaddr: String = '';
     privateKey: String = '';
+    privateIsPrivate: Boolean = true;
+    blurPrivateKey: Boolean = true;
 
     async mounted() {
         const rss3 = await RSS3.get();

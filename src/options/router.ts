@@ -15,7 +15,9 @@ import StartCongrats from './views/Start/Congrats.vue';
 
 import TabsBase from './views/Tabs/Base.vue';
 import TabsHome from './views/Tabs/Home.vue';
-import TabsAdvanced from './views/Tabs/Advanced.vue';
+import TabsAdvancedBase from './views/Tabs/Advanced/Base.vue';
+import TabsAdvancedView from './views/Tabs/Advanced/View.vue';
+import TabsAdvancedDelete from './views/Tabs/Advanced/Delete.vue';
 import TabsProfile from './views/Tabs/Profile.vue';
 import TabsInvite from './views/Tabs/Invite.vue';
 import TabsSettings from './views/Tabs/Settings.vue';
@@ -79,7 +81,17 @@ const routes = [
             },
             {
                 path: 'advanced',
-                component: TabsAdvanced,
+                component: TabsAdvancedBase,
+                children: [
+                    {
+                        path: '',
+                        component: TabsAdvancedView,
+                    },
+                    {
+                        path: 'delete',
+                        component: TabsAdvancedDelete,
+                    },
+                ],
             },
             {
                 path: 'profile',

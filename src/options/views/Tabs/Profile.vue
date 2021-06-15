@@ -2,15 +2,18 @@
     <div class="profile">
         <div class="avatar">
             <img :src="avatar" :alt="username" />
+            <div class="change">
+                <IconAdd width="36" height="36" icon-color="#fff" />
+            </div>
         </div>
         <div class="username">
-            <Input :original-value="username" view-type="options" input-type="text" />
+            <Input view-type="options" input-type="text" v-model="username" />
         </div>
         <div class="bio">
-            <Input :original-value="bio" view-type="options" input-type="text-area" />
+            <Input view-type="options" input-type="text-area" v-model="bio" />
         </div>
         <div class="btn-save">
-            <Button button-style="primary" button-size="xxl"> Save </Button>
+            <Button button-style="primary" button-size="xxl" @click="saveProfile"> Save </Button>
         </div>
         <div class="btn-discard">
             <Button button-style="secondary" button-size="xxl"> Discard </Button>
@@ -24,9 +27,11 @@ import Input from '@/components/Input.vue';
 import Button from '@/components/Button.vue';
 import RSS3 from '@/common/rss3';
 import { ThirdPartyAddress } from 'rss3/types/rss3';
+import IconAdd from '@/components/icons/IconAdd.vue';
 
 @Options({
     components: {
+        IconAdd,
         Button,
         Input,
     },
@@ -35,11 +40,12 @@ export default class TabsProfile extends Vue {
     avatar: ThirdPartyAddress = [];
     username: String = '';
     bio: String = '';
+    rss3: any;
 
     async mounted() {
-        const rss3 = await RSS3.get();
-        if (typeof rss3 !== 'undefined') {
-            const profile = await rss3.profile.get();
+        this.rss3 = await RSS3.get();
+        if (typeof this.rss3 !== 'undefined') {
+            const profile = await this.rss3.profile.get();
             if (typeof profile !== 'undefined') {
                 if (typeof profile.avatar !== 'undefined') {
                     this.avatar = profile.avatar;
@@ -53,6 +59,16 @@ export default class TabsProfile extends Vue {
             }
         }
     }
+
+    async saveProfile() {
+        console.log(this.username, this.bio);
+        await this.rss3.profile.patch({
+            name: this.username,
+            avatar: this.avatar,
+            bio: this.bio,
+        });
+        await this.rss3.persona.sync();
+    }
 }
 </script>
 
@@ -65,8 +81,14 @@ export default class TabsProfile extends Vue {
             @apply mt-8;
         }
 
-        .avatar > img {
-            @apply w-30 h-30 rounded;
+        .avatar {
+            @apply relative;
+            > img {
+                @apply w-30 h-30 rounded;
+            }
+            > .change {
+                @apply absolute left-12 top-12; /* Change 12 to 10 when icon size applies */
+            }
         }
     }
 }

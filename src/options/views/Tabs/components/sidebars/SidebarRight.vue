@@ -7,7 +7,7 @@
                 <span> &#9432; </span>
             </label>
 
-            <ToggleSwitch :state="syncEnabled" @toggle-state="toggleSyncStatus" />
+            <ToggleSwitch v-if="loadFin" :default-state="syncEnabled" @switch-state="toggleSyncStatus" />
         </div>
     </div>
 </template>
@@ -26,6 +26,7 @@ import ToggleSwitch from '@/components/ToggleSwitch.vue';
 })
 export default class SidebarRight extends Vue {
     syncEnabled: Boolean = true;
+    loadFin: Boolean = false;
 
     initState(): void {
         chrome.storage.sync.get(['reid-twitter-sync-enabled'], (result) => {
@@ -34,12 +35,14 @@ export default class SidebarRight extends Vue {
             if (typeof enabled !== 'undefined') {
                 console.log(enabled);
                 this.syncEnabled = enabled;
+                this.loadFin = true;
             }
         });
     }
 
     toggleSyncStatus(): void {
         this.syncEnabled = !this.syncEnabled;
+        console.log('Saving sync enable status (', this.syncEnabled, ') to local storage...');
         chrome.storage.sync.set({
             'reid-twitter-sync-enabled': this.syncEnabled,
         });
