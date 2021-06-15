@@ -35,6 +35,7 @@ module.exports = {
                     bg: '#f3f3f3',
                     outline: '#c5c5c7',
                 },
+                disabled: '#efefef',
                 success: '#00c700',
                 danger: '#b01a0a',
                 warning: '#f5a05d',

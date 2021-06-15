@@ -4,6 +4,8 @@
         :class="{
             'btn-primary': buttonStyle === 'primary',
             'btn-secondary': buttonStyle === 'secondary',
+            'btn-disabled': buttonStyle === 'danger',
+            'btn-danger': buttonStyle === 'danger',
             'btn-menu-item': buttonStyle === 'menuItem',
             'btn-outlined': buttonStyle === 'outlined',
             'btn-xxs': buttonSize === 'xxs',
@@ -48,6 +50,13 @@ export default class Button extends Vue {
         @apply bg-primary bg-opacity-15 text-primary;
     }
 
+    .btn-disabled {
+        @apply cursor-not-allowed bg-disabled text-gray-text text-opacity-60;
+    }
+
+    .btn-danger {
+        @apply bg-danger bg-opacity-35 text-gray-text text-opacity-60;
+    }
     /* popup.html [...] menu each item */
     .btn-menu-item {
         @apply bg-transparent hover:bg-primary hover:bg-opacity-15 text-primary;
