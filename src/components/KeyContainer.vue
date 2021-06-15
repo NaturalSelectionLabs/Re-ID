@@ -6,7 +6,7 @@
             'key-popup': viewType === 'popup',
             'key-private': isPrivate,
             'key-collapse': isCollapse,
-            'key-blur': blur,
+            'key-blur': $props.blur,
         }"
         @click="copy(keyText)"
     >
@@ -32,7 +32,7 @@
     />
 </template>
 
-<script scoped lang="ts">
+<script lang="ts">
 import { Vue, Options } from 'vue-class-component';
 import IconCopy from '@/components/icons/IconCopy.vue';
 import Tooltip from '@/components/Tooltip.vue';

@@ -13,11 +13,14 @@ import StartPending from './views/Start/Pending.vue';
 import StartProfile from './views/Start/Profile.vue';
 import StartCongrats from './views/Start/Congrats.vue';
 
-import Advanced from './views/Advanced.vue';
-import Home from './views/Home.vue';
-import Invite from './views/Invite.vue';
-import Profile from './views/Profile.vue';
-import Settings from './views/Settings.vue';
+import TabsBase from './views/Tabs/Base.vue';
+import TabsHome from './views/Tabs/Home.vue';
+import TabsAdvancedBase from './views/Tabs/Advanced/Base.vue';
+import TabsAdvancedView from './views/Tabs/Advanced/View.vue';
+import TabsAdvancedDelete from './views/Tabs/Advanced/Delete.vue';
+import TabsProfile from './views/Tabs/Profile.vue';
+import TabsInvite from './views/Tabs/Invite.vue';
+import TabsSettings from './views/Tabs/Settings.vue';
 
 const routes = [
     {
@@ -69,24 +72,40 @@ const routes = [
     },
 
     {
-        path: '/advanced',
-        component: Advanced,
-    },
-    {
-        path: '/home',
-        component: Home,
-    },
-    {
-        path: '/invite',
-        component: Invite,
-    },
-    {
-        path: '/profile',
-        component: Profile,
-    },
-    {
-        path: '/settings',
-        component: Settings,
+        path: '/',
+        component: TabsBase,
+        children: [
+            {
+                path: 'home',
+                component: TabsHome,
+            },
+            {
+                path: 'advanced',
+                component: TabsAdvancedBase,
+                children: [
+                    {
+                        path: '',
+                        component: TabsAdvancedView,
+                    },
+                    {
+                        path: 'delete',
+                        component: TabsAdvancedDelete,
+                    },
+                ],
+            },
+            {
+                path: 'profile',
+                component: TabsProfile,
+            },
+            {
+                path: 'invite',
+                component: TabsInvite,
+            },
+            {
+                path: 'settings',
+                component: TabsSettings,
+            },
+        ],
     },
 ];
 

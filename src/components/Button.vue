@@ -4,7 +4,7 @@
         :class="{
             'btn-primary': buttonStyle === 'primary',
             'btn-secondary': buttonStyle === 'secondary',
-            'btn-disabled': buttonStyle === 'danger',
+            'btn-disabled': buttonStyle === 'disabled',
             'btn-danger': buttonStyle === 'danger',
             'btn-menu-item': buttonStyle === 'menuItem',
             'btn-outlined': buttonStyle === 'outlined',
