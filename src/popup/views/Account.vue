@@ -45,13 +45,16 @@ export default class Account extends Vue {
     privateKeyVisible = false;
 
     async mounted() {
-        const profile = await (await RSS3.get()).profile.get();
-        this.avatarUrl = profile.avatar;
-        this.username = profile.name;
-        this.bio = profile.bio;
+        const rss3 = await RSS3.get();
+        if (rss3) {
+            const profile = await rss3.profile.get();
+            this.avatarUrl = profile.avatar;
+            this.username = profile.name;
+            this.bio = profile.bio;
 
-        this.privateKey = (await RSS3.get()).persona.privateKey;
-        this.address = (await RSS3.get()).persona.id;
+            this.privateKey = rss3.persona.privateKey;
+            this.address = rss3.persona.id;
+        }
     }
 
     showPrivateKey() {

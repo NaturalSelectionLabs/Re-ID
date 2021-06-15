@@ -5492,10 +5492,10 @@ rlp@^2.2.3, rlp@^2.2.4:
   dependencies:
     bn.js "^4.11.1"
 
-rss3@0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/rss3/-/rss3-0.3.3.tgz#be4a6a2411b38c953ac71f0a89d226c98f56372e"
-  integrity sha512-U3RJhkuo5M6F2DrUZN5fXdahwLW3I0WCgvib0fJQzF1yt6LVzC87VaMHmGFja+XX+H9aCLuGiop+eFTDu5JvKA==
+rss3@0.3.5:
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/rss3/-/rss3-0.3.5.tgz#d0e1162cc928513f8e6dea225f58f01945b6ac7f"
+  integrity sha512-ou+2Xkwx44GyklTvOTPNvSqBb6cjnuzjGnsRQvK91SOrsMVlV5XnE2PMWb0hFk2eyGPrXuU7aHqSGHsqzPAqhg==
   dependencies:
     assert "2.0.0"
     axios "0.21.1"

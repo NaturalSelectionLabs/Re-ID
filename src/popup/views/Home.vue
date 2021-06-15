@@ -50,13 +50,16 @@ export default class Home extends Vue {
     address = ''; // public address
     items = <any>[];
     async mounted() {
-        const currentItems = await (await RSS3.get()).items.get();
-        this.items = currentItems.items;
-        const profile = await (await RSS3.get()).profile.get();
-        this.avatarUrl = profile.avatar;
-        this.username = profile.name;
-        this.bio = profile.bio;
-        this.address = await (await RSS3.get()).persona.id;
+        const rss3 = await RSS3.get();
+        if (rss3) {
+            const currentItems = await rss3.items.get();
+            this.items = currentItems.items;
+            const profile = await rss3.profile.get();
+            this.avatarUrl = profile.avatar;
+            this.username = profile.name;
+            this.bio = profile.bio;
+            this.address = rss3.persona.id;
+        }
     }
 
     showingMenu = false;
