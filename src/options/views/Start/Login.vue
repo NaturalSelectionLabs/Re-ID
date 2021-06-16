@@ -18,18 +18,11 @@ import RSS3 from '@/common/rss3';
     },
 })
 export default class StartLogin extends Vue {
-    privateKey: String = '';
+    privateKey: string = '';
 
     login() {
-        chrome.storage.sync.set(
-            {
-                privateKey: this.privateKey,
-            },
-            async () => {
-                await RSS3.get();
-                this.$router.push('/home');
-            },
-        );
+        RSS3.set(this.privateKey);
+        this.$router.push('/home');
     }
 }
 </script>

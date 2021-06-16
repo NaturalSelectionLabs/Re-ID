@@ -5,10 +5,9 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import PopupContainer from '@/components/PopupContainer.vue';
-import PopupHeader from '@/components/PopupHeader.vue';
 
 @Options({
-    components: { PopupContainer, PopupHeader },
+    components: { PopupContainer },
 })
 export default class Entry extends Vue {
     gotoSetup() {

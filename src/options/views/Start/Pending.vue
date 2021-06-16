@@ -20,11 +20,15 @@ export default class StartPrivateKey extends Vue {
     address: string = '';
 
     async mounted() {
-        this.address = (await RSS3.get()).persona.id;
+        const rss3 = await RSS3.get();
+        if (rss3) {
+            this.address = rss3.persona.id;
+        }
     }
 
     async next() {
-        if (await reidInvite.check((await RSS3.get()).persona.id)) {
+        const rss3 = await RSS3.get();
+        if (rss3 && (await reidInvite.check(rss3.persona.id))) {
             this.$router.push('/start/profile');
         } else {
             // TODO

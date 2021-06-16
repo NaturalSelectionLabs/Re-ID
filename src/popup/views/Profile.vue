@@ -4,7 +4,7 @@
         <div class="w-55 h-80 pt-3 grid grid-rows-editProfile gap-3">
             <div class="cursor-pointer" @click="$refs.file.click()">
                 <input ref="file" type="file" hidden @input="updateAvatar" />
-                <img class="avatar-edit" :src="avatarUrl" />
+                <img class="avatar-edit" :src="avatar" />
                 <icon-add class="absolute z-20 left-10 top-20.5" />
             </div>
 
@@ -14,7 +14,7 @@
                 viewType="popup"
                 minlength="1"
                 maxLength="128"
-                v-model="username"
+                v-model="newUsername"
             />
             <Input
                 inputType="textArea"
@@ -22,7 +22,7 @@
                 viewType="popup"
                 minlength="1"
                 maxLength="128"
-                v-model="bio"
+                v-model="newBio"
             />
             <key-container :keyText="address" :isPrivate="false" viewType="popup" :isCollapse="false" />
             <Button class="absolute left-5 bottom-7" buttonStyle="primary" buttonSize="lg" @click="updateProfile"
@@ -40,23 +40,27 @@ import Button from '@/components/Button.vue';
 import Input from '@/components/Input.vue';
 import KeyContainer from '@/components/KeyContainer.vue';
 import IconAdd from '@/components/icons/IconAdd.vue';
-import RSS3 from '@/common/rss3';
+import RSS3, { IRSS3 } from '@/common/rss3';
 
 @Options({
     components: { PopupContainer, BackButton, Button, Input, KeyContainer, IconAdd },
 })
 export default class Profile extends Vue {
-    avatarUrl = <any>'';
-    username = <any>'';
-    bio = <any>'';
-    address = <any>''; // public address
+    avatar: any;
+    username: string = '';
+    bio: string = '';
+    address: string = ''; // public address
+    rss3?: IRSS3 | null;
 
     async mounted() {
-        const profile = await (await RSS3.get()).profile.get();
-        this.avatarUrl = profile.avatar;
-        this.username = profile.name;
-        this.bio = profile.bio;
-        this.address = await (await RSS3.get()).persona.id;
+        this.rss3 = await RSS3.get();
+        if (this.rss3) {
+            const profile = await this.rss3.profile.get();
+            this.avatar = profile?.avatar?.[0] || '';
+            this.username = profile?.name || '';
+            this.bio = profile?.bio || '';
+            this.address = await this.rss3.persona.id;
+        }
     }
 
     updateAvatar() {
@@ -65,7 +69,7 @@ export default class Profile extends Vue {
         if (imagefile && imagefile[0]) {
             let reader = new FileReader();
             reader.onload = (e) => {
-                if (e.target && e.target.result) this.avatarUrl = e.target.result;
+                this.avatar = e.target?.result;
             };
             reader.readAsDataURL(imagefile[0]);
             this.$emit('input', imagefile[0]);
@@ -73,12 +77,22 @@ export default class Profile extends Vue {
     }
 
     async updateProfile() {
-        // const newProfile = await (await RSS3.get()).profile.patch({
-        //     name: this.username,
-        //     avatar: this.avatarUrl,
-        //     bio: this.bio,
-        // });
+        if (this.rss3) {
+            console.log(this.username, this.bio);
+            await this.rss3.profile.patch({
+                name: this.username,
+                avatar: this.avatar,
+                bio: this.bio,
+            });
+            await this.rss3.persona.sync();
+        }
     }
+    //     async resetProfile() {
+    //     const profile = await this.rss3.profile.get();
+    //     this.avatar = profile?.avatar[0] || '';
+    //     this.username = profile?.name || '';
+    //     this.bio = profile?.bio || '';
+    // }
 }
 </script>
 

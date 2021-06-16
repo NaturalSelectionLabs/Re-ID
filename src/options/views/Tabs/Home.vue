@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <ItemList view-type="options">
-            <SingleItem v-for="item in rss3items" view-type="options" :rss3-item="item" />
+            <SingleItem v-for="(item, idx) in rss3items" view-type="options" :rss3-item="item" :key="idx" />
         </ItemList>
     </div>
 </template>
@@ -25,9 +25,13 @@ export default class TabsHome extends Vue {
 
     async mounted() {
         const rss3 = await RSS3.get();
-        const list1 = await rss3.items.get();
-        this.rss3items = list1.items;
-        this.rss3itemsNext = list1.items_next;
+        if (!rss3) {
+            this.$router.push('/start');
+        } else {
+            const list1 = await rss3.items.get();
+            this.rss3items = list1.items;
+            this.rss3itemsNext = list1.items_next;
+        }
     }
 }
 </script>
