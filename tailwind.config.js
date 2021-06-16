@@ -145,6 +145,7 @@ module.exports = {
             },
             gridTemplateColumns: {
                 profile: '40px 140px 32px',
+                context: '1/3 2/3',
             },
         },
     },

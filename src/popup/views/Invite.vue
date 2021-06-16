@@ -15,8 +15,9 @@
                 viewType="popup"
                 minlength="1"
                 maxLength="128"
+                v-model="invitee"
             />
-            <Button buttonStyle="primary" buttonSize="lg" @click="invite">Send invitation</Button>
+            <Button buttonStyle="primary" buttonSize="lg" @click="sendInvitation">Send invitation</Button>
         </div>
     </popup-container>
 </template>
@@ -29,25 +30,34 @@ import Button from '@/components/Button.vue';
 import Input from '@/components/Input.vue';
 import KeyContainer from '@/components/KeyContainer.vue';
 import RSS3 from '@/common/rss3';
+import reidInvite from '@/common/invite';
 
 @Options({
     components: { PopupContainer, BackButton, Button, Input, KeyContainer },
 })
 export default class Invite extends Vue {
-    avatarUrl = <any>'';
-    username = <any>'';
-    bio = <any>'';
-    address = ''; // public address
-
+    avatarUrl: any;
+    username: any;
+    bio: any;
+    address: string = ''; // public address
+    invitee: string = '';
+    rss3: any;
     async mounted() {
-        const profile = await (await RSS3.get()).profile.get();
+        this.rss3 = await RSS3.get();
+        const profile = await this.rss3.profile.get();
         this.avatarUrl = profile.avatar;
         this.username = profile.name;
         this.bio = profile.bio;
-        this.address = await (await RSS3.get()).persona.id;
+        this.address = this.rss3.persona.id;
+
+        const isInvited = await reidInvite.check(this.rss3.persona.id);
+        console.log(isInvited);
     }
 
-    invite() {}
+    async sendInvitation() {
+        const inviteSuccess = await reidInvite.new(this.rss3.persona.id, this.invitee);
+        console.log(inviteSuccess);
+    }
 }
 </script>
 

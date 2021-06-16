@@ -2,7 +2,7 @@
     <popup-container>
         <back-button viewType="popup" />
         <div class="w-55 h-80 pt-3 grid grid-rows-account gap-2">
-            <img class="avatar" :src="avatarUrl" />
+            <img class="avatar" :src="avatar" />
             <p class="font-xs font-semibold">{{ userID }}</p>
             <key-container :keyText="address" :isPrivate="false" viewType="popup" :isCollapse="false" />
             <div
@@ -33,11 +33,11 @@ import RSS3 from '@/common/rss3';
     components: { PopupContainer, BackButton, Button, Input, KeyContainer, IconAdd },
 })
 export default class Account extends Vue {
-    avatarUrl = <any>'';
-    username = <any>'';
-    bio = <any>'';
-    address = ''; // public address
-    privateKey = '';
+    avatar: string = '';
+    username: string = '';
+    bio: string = '';
+    address: string = ''; // public address
+    privateKey: string = '';
 
     warningMessage =
         'Warning: Never disclose your private keys. Anyone with your private keys can steal any asset or information held in your account.';
@@ -45,13 +45,16 @@ export default class Account extends Vue {
     privateKeyVisible = false;
 
     async mounted() {
-        const profile = await (await RSS3.get()).profile.get();
-        this.avatarUrl = profile.avatar;
-        this.username = profile.name;
-        this.bio = profile.bio;
+        const rss3 = await RSS3.get();
+        if (typeof rss3 !== 'undefined') {
+            const profile = await rss3.profile.get();
+            if (profile?.avatar) this.avatar = profile.avatar[0] || '';
+            this.username = profile?.name || '';
+            this.bio = profile?.bio || '';
+        }
 
-        this.privateKey = (await RSS3.get()).persona.privateKey;
-        this.address = (await RSS3.get()).persona.id;
+        this.privateKey = rss3.persona.privateKey;
+        this.address = rss3.persona.id;
     }
 
     showPrivateKey() {

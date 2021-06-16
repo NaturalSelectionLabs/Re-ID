@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <ItemList view-type="options">
-            <SingleItem v-for="item in rss3items" view-type="options" :rss3-item="item" />
+            <SingleItem v-for="(item, idx) in rss3items" view-type="options" :rss3-item="item" :key="idx" />
         </ItemList>
     </div>
 </template>
