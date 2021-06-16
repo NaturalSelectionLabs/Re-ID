@@ -38,8 +38,8 @@ import IconAdd from '@/components/icons/IconAdd.vue';
 })
 export default class TabsProfile extends Vue {
     avatar: string = '';
-    username: String = '';
-    bio: String = '';
+    username: string = '';
+    bio: string = '';
     rss3: any;
 
     async mounted() {
