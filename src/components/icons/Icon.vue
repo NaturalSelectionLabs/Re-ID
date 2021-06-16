@@ -20,15 +20,19 @@ import { Vue, Options } from 'vue-class-component';
 @Options({
     props: {
         iconName: String,
-        width: Number,
-        height: Number,
-        iconColor: String,
+        width: {
+            type: Number,
+            default: 18,
+        },
+        height: {
+            type: Number,
+            default: 18,
+        },
+        iconColor: {
+            type: String,
+            default: 'white',
+        },
     },
 })
-export default class Icon extends Vue {
-    iconName!: String;
-    width: Number = 18;
-    height: Number = 18;
-    iconColor: String = 'currentColor';
-}
+export default class Icon extends Vue {}
 </script>

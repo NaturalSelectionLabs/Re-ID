@@ -15,14 +15,19 @@ import Icon from '@/components/icons/Icon.vue';
         Icon,
     },
     props: {
-        width: Number,
-        height: Number,
-        iconColor: String,
+        width: {
+            type: Number,
+            default: 18,
+        },
+        height: {
+            type: Number,
+            default: 18,
+        },
+        iconColor: {
+            type: String,
+            default: 'white',
+        },
     },
 })
-export default class IconAdd extends Vue {
-    width: Number = 18;
-    height: Number = 18;
-    iconColor: String = 'white';
-}
+export default class IconAdd extends Vue {}
 </script>
