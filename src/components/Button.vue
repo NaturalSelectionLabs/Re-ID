@@ -4,6 +4,8 @@
         :class="{
             'btn-primary': buttonStyle === 'primary',
             'btn-secondary': buttonStyle === 'secondary',
+            'btn-disabled': buttonStyle === 'disabled',
+            'btn-danger': buttonStyle === 'danger',
             'btn-menu-item': buttonStyle === 'menuItem',
             'btn-outlined': buttonStyle === 'outlined',
             'btn-xxs': buttonSize === 'xxs',
@@ -38,7 +40,7 @@ export default class Button extends Vue {
 <style scoped lang="postcss">
 @layer components {
     .btn {
-        @apply text-left;
+        @apply text-left focus:outline-none;
     }
     .btn-primary {
         @apply bg-primary text-white;
@@ -48,18 +50,25 @@ export default class Button extends Vue {
         @apply bg-primary bg-opacity-15 text-primary;
     }
 
+    .btn-disabled {
+        @apply cursor-not-allowed bg-disabled text-gray-text text-opacity-60;
+    }
+
+    .btn-danger {
+        @apply bg-danger bg-opacity-35 text-gray-text text-opacity-60;
+    }
     /* popup.html [...] menu each item */
     .btn-menu-item {
         @apply bg-transparent hover:bg-primary hover:bg-opacity-15 text-primary;
     }
 
     .btn-outlined {
-        @apply bg-white active:bg-primary border border-primary text-primary active:text-white;
+        @apply bg-white active:bg-primary border border-primary text-primary active:text-white focus:bg-primary focus:text-white;
     }
 
     /* popup.html [...] button */
     .btn-xxs {
-        @apply w-8 h-4 rounded-sm px-2.5 py-1 font-normal text-xs;
+        @apply w-8 h-4 rounded-sm flex justify-center items-center font-normal text-xs;
     }
 
     /* popup.html [...] menu each item */

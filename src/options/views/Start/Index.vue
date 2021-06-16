@@ -1,10 +1,10 @@
 <template>
-    <div class="mx-20">
-        <div class="h-screen w-180 flex items-center justify-center">
-            <div class="align-middle">
+    <div class="mx-18">
+        <div class="content w-180 flex items-center justify-center">
+            <div class="align-middle py-15">
                 <p>
                     <Logo :width="128" :height="128" class="inline" />
-                    <LogoTitle :height="128" class="inline ml-8" />
+                    <LogoTitle class="inline ml-8" />
                 </p>
                 <p class="mt-10 mb-28 text-5xl font-medium leading-tight">
                     Welcome to RSS3,<br />an open protocol designed for content and social networks in the Web 3.0 era.
@@ -17,7 +17,7 @@
                 </p>
             </div>
         </div>
-        <Footer class="fixed bottom-16" />
+        <Footer class="mb-18" />
     </div>
 </template>
 
@@ -38,3 +38,9 @@ import Button from '@/components/Button.vue';
 })
 export default class StartIndex extends Vue {}
 </script>
+
+<style lang="postcss" scoped>
+.content {
+    min-height: calc(100vh - 90px);
+}
+</style>

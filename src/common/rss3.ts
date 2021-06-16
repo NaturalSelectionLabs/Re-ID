@@ -6,13 +6,21 @@ export default {
     get: () => {
         if (rss3) {
             return new Promise<RSS3>((resolve) => {
-                resolve(rss3);
+                chrome.storage.sync.get(['privateKey'], (result) => {
+                    if (rss3.persona.id !== result.privateKey) {
+                        rss3 = new RSS3({
+                            endpoint: 'https://hub.rss3.io',
+                            privateKey: result.privateKey,
+                        });
+                    }
+                    resolve(rss3);
+                });
             });
         } else {
             return new Promise<RSS3>((resolve) => {
                 chrome.storage.sync.get(['privateKey'], (result) => {
                     rss3 = new RSS3({
-                        endpoint: 'https://hub.rss3.io/',
+                        endpoint: 'https://hub.rss3.io',
                         privateKey: result.privateKey,
                     });
                     if (!result.privateKey) {
