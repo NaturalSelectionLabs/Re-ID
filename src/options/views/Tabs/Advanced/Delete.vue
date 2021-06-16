@@ -41,7 +41,7 @@ export default class TabsAdvancedDelete extends Vue {
 
     async confirmDelete() {
         const rss3 = await RSS3.get();
-        const privateKey = rss3.persona.privateKey;
+        const privateKey = rss3?.persona.privateKey;
         if (this.inputPrivateKey === privateKey) {
             // Do delete
             console.log('Do delete');

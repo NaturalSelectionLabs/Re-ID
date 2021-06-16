@@ -20,7 +20,7 @@ import { Options, Vue } from 'vue-class-component';
 import Input from '@/components/Input.vue';
 import Button from '@/components/Button.vue';
 import reidInvite from '@/common/invite';
-import RSS3 from '@/common/rss3';
+import RSS3, { IRSS3 } from '@/common/rss3';
 
 @Options({
     components: {
@@ -30,17 +30,24 @@ import RSS3 from '@/common/rss3';
 })
 export default class TabsInvite extends Vue {
     invitee: string = '';
-    RSS3: any;
+    RSS3?: IRSS3;
 
     async mounted() {
-        this.RSS3 = await RSS3.get();
-        const isInvited = await reidInvite.check(this.RSS3.persona.id);
-        console.log(isInvited);
+        const rss3 = await RSS3.get();
+        if (!rss3) {
+            this.$router.push('/start');
+        } else {
+            this.RSS3 = rss3;
+            const isInvited = await reidInvite.check(this.RSS3.persona.id);
+            console.log(isInvited);
+        }
     }
 
     async sendInvitation() {
-        const inviteSuccess = await reidInvite.new(this.RSS3.persona.id, this.invitee);
-        console.log(inviteSuccess);
+        if (this.RSS3) {
+            const inviteSuccess = await reidInvite.new(this.RSS3.persona.id, this.invitee);
+            console.log(inviteSuccess);
+        }
     }
 }
 </script>

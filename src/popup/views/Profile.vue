@@ -40,25 +40,27 @@ import Button from '@/components/Button.vue';
 import Input from '@/components/Input.vue';
 import KeyContainer from '@/components/KeyContainer.vue';
 import IconAdd from '@/components/icons/IconAdd.vue';
-import RSS3 from '@/common/rss3';
+import RSS3, { IRSS3 } from '@/common/rss3';
 
 @Options({
     components: { PopupContainer, BackButton, Button, Input, KeyContainer, IconAdd },
 })
 export default class Profile extends Vue {
     avatar: any;
-    username: String = '';
-    bio: String = '';
+    username: string = '';
+    bio: string = '';
     address: string = ''; // public address
-    rss3: any;
+    rss3?: IRSS3 | null;
 
     async mounted() {
         this.rss3 = await RSS3.get();
-        const profile = await this.rss3.profile.get();
-        this.avatar = profile?.avatar[0] || '';
-        this.username = profile?.name || '';
-        this.bio = profile?.bio || '';
-        this.address = await this.rss3.persona.id;
+        if (this.rss3) {
+            const profile = await this.rss3.profile.get();
+            this.avatar = profile?.avatar?.[0] || '';
+            this.username = profile?.name || '';
+            this.bio = profile?.bio || '';
+            this.address = await this.rss3.persona.id;
+        }
     }
 
     updateAvatar() {
@@ -75,13 +77,15 @@ export default class Profile extends Vue {
     }
 
     async updateProfile() {
-        console.log(this.username, this.bio);
-        await this.rss3.profile.patch({
-            name: this.username,
-            avatar: this.avatar,
-            bio: this.bio,
-        });
-        await this.rss3.persona.sync();
+        if (this.rss3) {
+            console.log(this.username, this.bio);
+            await this.rss3.profile.patch({
+                name: this.username,
+                avatar: this.avatar,
+                bio: this.bio,
+            });
+            await this.rss3.persona.sync();
+        }
     }
     //     async resetProfile() {
     //     const profile = await this.rss3.profile.get();

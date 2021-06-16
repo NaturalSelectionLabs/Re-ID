@@ -5,7 +5,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = (env, argv) => ({
-    devtool: argv.mode === 'production' ? null : 'inline-cheap-module-source-map',
+    devtool: argv.mode === 'production' ? false : 'inline-cheap-module-source-map',
 
     entry: {
         background: './src/background/index.ts',

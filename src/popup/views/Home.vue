@@ -102,17 +102,16 @@ export default class Home extends Vue {
 
     async mounted() {
         const rss3 = await RSS3.get();
-        const profile = await rss3.profile.get();
-        if (typeof rss3 !== 'undefined') {
+        if (rss3) {
+            const profile = await rss3.profile.get();
             if (profile?.avatar) this.avatar = profile.avatar[0] || '';
             this.username = profile?.name || '';
             this.bio = profile?.bio || '';
+            const currentItems = await rss3.items.get();
+            this.items = currentItems.items;
+
+            this.address = rss3.persona.id;
         }
-
-        const currentItems = await rss3.items.get();
-        this.items = currentItems.items;
-
-        this.address = rss3.persona.id;
     }
 
     switchSyncState() {

@@ -35,8 +35,10 @@ export default class SidebarLeft extends Vue {
 
     async mounted() {
         const rss3 = await RSS3.get();
-        this.address = `${rss3.persona.id.substring(0, 6)}***${rss3.persona.id.substring(rss3.persona.id.length - 3)}`;
-        const profile = await rss3.profile.get();
+        this.address = `${rss3?.persona.id.substring(0, 6)}***${rss3?.persona.id.substring(
+            rss3?.persona.id.length - 3,
+        )}`;
+        const profile = await rss3?.profile.get();
         if (typeof profile !== 'undefined') {
             if (typeof profile.avatar !== 'undefined' && typeof profile.avatar[0] !== 'undefined') {
                 this.avatar = profile.avatar[0];

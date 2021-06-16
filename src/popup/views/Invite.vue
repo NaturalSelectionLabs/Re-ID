@@ -29,7 +29,7 @@ import BackButton from '@/components/BackButton.vue';
 import Button from '@/components/Button.vue';
 import Input from '@/components/Input.vue';
 import KeyContainer from '@/components/KeyContainer.vue';
-import RSS3 from '@/common/rss3';
+import RSS3, { IRSS3 } from '@/common/rss3';
 import reidInvite from '@/common/invite';
 
 @Options({
@@ -41,22 +41,26 @@ export default class Invite extends Vue {
     bio: any;
     address: string = ''; // public address
     invitee: string = '';
-    rss3: any;
+    rss3?: IRSS3 | null;
     async mounted() {
         this.rss3 = await RSS3.get();
-        const profile = await this.rss3.profile.get();
-        this.avatarUrl = profile.avatar;
-        this.username = profile.name;
-        this.bio = profile.bio;
-        this.address = this.rss3.persona.id;
+        if (this.rss3) {
+            const profile = await this.rss3.profile.get();
+            this.avatarUrl = profile.avatar;
+            this.username = profile.name;
+            this.bio = profile.bio;
+            this.address = this.rss3.persona.id;
 
-        const isInvited = await reidInvite.check(this.rss3.persona.id);
-        console.log(isInvited);
+            const isInvited = await reidInvite.check(this.rss3.persona.id);
+            console.log(isInvited);
+        }
     }
 
     async sendInvitation() {
-        const inviteSuccess = await reidInvite.new(this.rss3.persona.id, this.invitee);
-        console.log(inviteSuccess);
+        if (this.rss3) {
+            const inviteSuccess = await reidInvite.new(this.rss3.persona.id, this.invitee);
+            console.log(inviteSuccess);
+        }
     }
 }
 </script>
