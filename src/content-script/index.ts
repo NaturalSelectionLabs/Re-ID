@@ -78,15 +78,20 @@ observe('[data-testid="tweetButtonInline"]', (ele: Element): void => {
             }),
         );
 
-        const rss3 = await RSS3.get();
-        if (rss3) {
-            await rss3.item.post({
-                summary,
-                tags: ['Re: ID', 'Twitter'],
-                contents,
-            });
-            await rss3.persona.sync();
-        }
+        chrome.storage.sync.get(['reid-twitter-sync-enabled'], async (result) => {
+            const enabled = result['reid-twitter-sync-enabled'];
+            if (enabled) {
+                const rss3 = await RSS3.get();
+                if (rss3) {
+                    await rss3.item.post({
+                        summary,
+                        tags: ['Re: ID', 'Twitter'],
+                        contents,
+                    });
+                    await rss3.persona.sync();
+                }
+            }
+        });
     });
 });
 
