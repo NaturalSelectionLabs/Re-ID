@@ -48,8 +48,10 @@ export default class TabsSettings extends Vue {
 
     async mounted() {
         const rss3 = await RSS3.get();
-        this.publicaddr = rss3.persona.id;
-        this.privateKey = rss3.persona.privateKey;
+        if (rss3) {
+            this.publicaddr = rss3.persona.id;
+            this.privateKey = rss3.persona.privateKey;
+        }
     }
 }
 </script>

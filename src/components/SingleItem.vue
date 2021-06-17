@@ -21,7 +21,7 @@
             </div>
             <!-- TODO -->
         </div>
-        <div class="status grid grid-cols-2 w-55 text-gray-text text-opacity-60">
+        <div class="status grid grid-cols-context w-55 text-gray-text text-opacity-60">
             <div class="like-comment">
                 <!-- TODO -->
             </div>
@@ -32,6 +32,7 @@
 
 <script lang="ts">
 import { Vue, Options } from 'vue-class-component';
+import moment from 'moment';
 @Options({
     props: {
         viewType: String,
@@ -41,6 +42,17 @@ import { Vue, Options } from 'vue-class-component';
 export default class SingleItem extends Vue {
     viewType?: String;
     rss3Item?: Object;
+
+    formatDate(date: string) {
+        return moment(date).calendar({
+            sameDay: 'LT',
+            nextDay: '',
+            nextWeek: '',
+            lastDay: '[Yesterday] LT',
+            lastWeek: 'DD/MM/YYYY LT',
+            sameElse: 'DD/MM/YYYY LT',
+        });
+    }
 }
 </script>
 
