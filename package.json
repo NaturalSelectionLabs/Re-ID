@@ -33,7 +33,7 @@
         "moment": "2.29.1",
         "postcss-nested": "5.0.5",
         "process": "0.11.10",
-        "rss3": "0.3.6",
+        "rss3": "0.3.7",
         "stream-browserify": "3.0.0",
         "typescript": "4.3.2",
         "vue": "3.0.11",

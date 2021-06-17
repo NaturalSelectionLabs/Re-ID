@@ -1,6 +1,8 @@
 import { observe } from './utils';
 import './locationChange';
 import { TwitterButtonSync, twitterColorStyle } from './components';
+import ipfs from '@/common/ipfs';
+import RSS3 from '@/common/rss3';
 
 observe('[data-testid="primaryColumn"] [data-testid="toolBar"] div', (ele: Element): void => {
     if (document.getElementById('reid-sync-active-status') === null) {
@@ -57,19 +59,34 @@ observe('[data-testid="tweetButtonInline"]', (ele: Element): void => {
         document.body.insertAdjacentHTML('beforeend', twitterColorStyle(baseColor, hoverBG));
     }
 
-    ele.addEventListener('click', (): void => {
-        const text = (<HTMLElement>document.querySelector('.public-DraftStyleDefault-block'))?.innerText;
-        console.log(text);
+    ele.addEventListener('click', async () => {
+        const summary = (<HTMLElement>document.querySelector('.public-DraftStyleDefault-block'))?.innerText;
 
         const attachments = document.querySelectorAll(
             '[data-testid="attachments"] img, [data-testid="attachments"] source',
         );
-        attachments.forEach(async (attachment) => {
-            await fetch((<HTMLImageElement | HTMLSourceElement>attachment).src).then(async (r) => {
-                const blob = await r.blob();
-                console.log(blob);
+
+        const contents = await Promise.all(
+            [...attachments].map(async (attachment) => {
+                const result = await fetch((<HTMLImageElement | HTMLSourceElement>attachment).src);
+                const blob = await result.blob();
+                return {
+                    address: [await ipfs.upload(blob)],
+                    mime_type: blob.type,
+                    size_in_bytes: blob.size + '',
+                };
+            }),
+        );
+
+        const rss3 = await RSS3.get();
+        if (rss3) {
+            await rss3.item.post({
+                summary,
+                tags: ['Re: ID', 'Twitter'],
+                contents,
             });
-        });
+            await rss3.persona.sync();
+        }
     });
 });
 
