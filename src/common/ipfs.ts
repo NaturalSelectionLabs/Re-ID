@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 export default {
-    upload: (file: File) => {
+    upload: (file: File | Blob) => {
         return new Promise<string>(async (resolve) => {
             if (file) {
                 let pinataMetadataStringify = JSON.stringify({
@@ -19,7 +19,7 @@ export default {
                         pinata_secret_api_key: 'eed51e69e8c6ffc04700f83597b46c617f275e9aae3218d9bbe037ea3889ad58',
                     },
                 });
-                resolve(response.data.IpfsHash);
+                resolve('https://gateway.pinata.cloud/ipfs/' + response.data.IpfsHash);
             }
         });
     },

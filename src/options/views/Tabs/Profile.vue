@@ -60,7 +60,7 @@ export default class TabsProfile extends Vue {
 
     async saveProfile() {
         if (this.rss3) {
-            const avatarHash = await (<any>this.$refs.avatar).upload();
+            const avatarUrl = await (<any>this.$refs.avatar).upload();
             console.log(this.username, this.bio);
             const profile: {
                 name: string;
@@ -70,8 +70,8 @@ export default class TabsProfile extends Vue {
                 name: this.username,
                 bio: this.bio,
             };
-            if (avatarHash) {
-                profile.avatar = ['https://gateway.pinata.cloud/ipfs/' + avatarHash];
+            if (avatarUrl) {
+                profile.avatar = [avatarUrl];
             }
             await this.rss3.profile.patch(profile);
             await this.rss3.persona.sync();

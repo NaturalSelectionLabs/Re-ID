@@ -45,7 +45,7 @@ export default class StartProfile extends Vue {
     async save() {
         const rss3 = await RSS3.get();
         if (rss3) {
-            const avatarHash = await (<any>this.$refs.avatar).upload();
+            const avatarUrl = await (<any>this.$refs.avatar).upload();
             const profile: {
                 name: string;
                 bio: string;
@@ -54,11 +54,12 @@ export default class StartProfile extends Vue {
                 name: this.name,
                 bio: this.bio,
             };
-            if (avatarHash) {
-                profile.avatar = ['https://gateway.pinata.cloud/ipfs/' + avatarHash];
+            if (avatarUrl) {
+                profile.avatar = [avatarUrl];
             }
             await rss3.profile.patch(profile);
             await rss3.persona.sync();
+            this.$router.push('/start/congrats');
         }
     }
 }
