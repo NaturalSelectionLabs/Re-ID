@@ -54,7 +54,7 @@ export default class Profile extends Vue {
             this.avatar = profile?.avatar?.[0] || '';
             this.username = profile?.name || '';
             this.bio = profile?.bio || '';
-            this.address = await this.rss3.persona.id;
+            this.address = this.rss3.persona.id;
         }
     }
 

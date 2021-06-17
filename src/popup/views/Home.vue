@@ -48,7 +48,7 @@
                 </div>
                 <div class="buttons w-55 h-7 grid grid-cols-2 gap-1">
                     <Button buttonStyle="primary" buttonSize="md" @click="$router.push('/Invite')">Invite</Button>
-                    <Button buttonStyle="primary" buttonSize="md"><a href="@/options">Expand</a></Button>
+                    <Button buttonStyle="primary" buttonSize="md" @click="openOptionsPage">Expand</Button>
                 </div>
             </div>
             <item-list viewType="popup">
@@ -112,6 +112,7 @@ export default class Home extends Vue {
 
             this.address = rss3.persona.id;
         }
+        this.initState();
     }
 
     switchSyncState() {
@@ -135,6 +136,19 @@ export default class Home extends Vue {
 
     hideMenu() {
         this.showingMenu = false;
+    }
+
+    openOptionsPage() {
+        chrome.runtime.openOptionsPage();
+    }
+
+    initState(): void {
+        chrome.storage.sync.get(['reid-twitter-sync-enabled'], (result) => {
+            const enabled = result['reid-twitter-sync-enabled'];
+            if (typeof enabled !== 'undefined') {
+                this.currentState = enabled;
+            }
+        });
     }
 }
 </script>
