@@ -4,20 +4,19 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import PopupContainer from '@/components/PopupContainer.vue';
+import RSS3 from '@/common/rss3';
 
 @Options({
-    components: { PopupContainer },
+    components: {},
 })
 export default class Entry extends Vue {
-    gotoSetup() {
-        chrome.storage.local.get(['reid-set-up'], (key) => {
-            if (key['reid-set-up'] === 'done') {
-                this.$router.push('/home');
-            } else {
-                this.$router.push('/setup');
-            }
-        });
+    async mounted() {
+        const rss3 = await RSS3.get();
+        if (!rss3) {
+            this.$router.push('/onboarding');
+        } else {
+            this.$router.push('/home');
+        }
     }
 }
 </script>

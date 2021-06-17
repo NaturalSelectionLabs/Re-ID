@@ -2,12 +2,7 @@
     <popup-container>
         <back-button viewType="popup" />
         <div class="w-55 h-80 pt-3 grid grid-rows-editProfile gap-3">
-            <div class="cursor-pointer" @click="$refs.file.click()">
-                <input ref="file" type="file" hidden @input="updateAvatar" />
-                <img class="avatar-edit" :src="avatar" />
-                <icon-add class="absolute z-20 left-10 top-20.5" />
-            </div>
-
+            <Avatar size="sm" :url="avatar" />
             <Input
                 inputType="text"
                 :originalValue="userID"
@@ -39,11 +34,11 @@ import BackButton from '@/components/BackButton.vue';
 import Button from '@/components/Button.vue';
 import Input from '@/components/Input.vue';
 import KeyContainer from '@/components/KeyContainer.vue';
-import IconAdd from '@/components/icons/IconAdd.vue';
+import Avatar from '@/components/icons/Avatar.vue';
 import RSS3, { IRSS3 } from '@/common/rss3';
 
 @Options({
-    components: { PopupContainer, BackButton, Button, Input, KeyContainer, IconAdd },
+    components: { PopupContainer, BackButton, Button, Input, KeyContainer, Avatar },
 })
 export default class Profile extends Vue {
     avatar: any;
