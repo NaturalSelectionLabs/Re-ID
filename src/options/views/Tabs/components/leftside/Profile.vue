@@ -8,27 +8,20 @@
                 {{ $props.username }}
             </h1>
         </div>
-        <div class="address">
+        <div class="address" @click="copy($props.address)">
             <span>
-                {{ $props.address }}
+                {{ $props.address.substring(0, 6) + '***' + $props.address.substring($props.address.length - 3) }}
             </span>
             <IconCopy width="12px" height="12px" />
-        </div>
-        <div class="follows">
-            <span>
-                {{ $props.followers }}
-                <label> Followers </label>
-            </span>
-            <span>
-                {{ $props.following }}
-                <label> Following </label>
-            </span>
-        </div>
-        <div class="balance">
-            <label> Balance </label>
-            <span>
-                {{ $props.balance }}
-            </span>
+            <Tooltip
+                class="z-10"
+                v-show="showingTooltip"
+                marginLeftClass="ml-8"
+                widthClass="w-15"
+                heightClass="h-6"
+                text="Copied"
+                viewType="popup"
+            />
         </div>
     </div>
 </template>
@@ -36,21 +29,28 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import IconCopy from '@/components/icons/IconCopy.vue';
+import Tooltip from '@/components/Tooltip.vue';
 
 @Options({
     components: {
+        Tooltip,
         IconCopy,
     },
     props: {
         avatar: String,
         username: String,
         address: String,
-        followers: Number,
-        following: Number,
-        balance: Number,
     },
 })
-export default class Profile extends Vue {}
+export default class Profile extends Vue {
+    showingTooltip = false;
+
+    async copy(text: string) {
+        await navigator.clipboard.writeText(text);
+        this.showingTooltip = true;
+        setTimeout(() => (this.showingTooltip = false), 500);
+    }
+}
 </script>
 
 <style lang="postcss" scoped>
@@ -69,7 +69,7 @@ export default class Profile extends Vue {}
         }
 
         .address {
-            @apply text-gray-text opacity-30 font-semibold;
+            @apply text-gray-text opacity-30 font-semibold cursor-pointer;
 
             > span {
                 @apply mr-4;
@@ -77,19 +77,6 @@ export default class Profile extends Vue {}
 
             > * {
                 @apply inline-block;
-            }
-        }
-
-        .follows > * {
-            @apply inline-block text-sm font-normal mr-4;
-        }
-
-        .balance {
-            > * {
-                @apply inline-block text-xl font-semibold;
-            }
-            > span {
-                @apply ml-3.5;
             }
         }
     }

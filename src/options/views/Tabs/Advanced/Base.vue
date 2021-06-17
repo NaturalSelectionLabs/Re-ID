@@ -5,14 +5,21 @@
             <div class="header">
                 <div class="title">Raw RSS3</div>
                 <div class="button">
-                    <Button button-style="disabled" button-size="xs" @click="showEditTooltip = !showEditTooltip">
+                    <Button
+                        button-style="disabled"
+                        button-size="xs"
+                        @mouseenter="showEditTooltip = true"
+                        @mouseleave="showEditTooltip = false"
+                    >
                         Edit
-                        <Tooltip
-                            view-type="options"
-                            text="Editing raw RSS3 file can result in unwanted chaos and therefore disabled here."
-                            width-class="w-56"
-                            v-show="showEditTooltip"
-                        />
+                        <div class="tooltip">
+                            <Tooltip
+                                view-type="options"
+                                text="Editing raw RSS3 file can result in unwanted chaos and therefore disabled here."
+                                width-class="w-56"
+                                v-show="showEditTooltip"
+                            />
+                        </div>
                     </Button>
                     <router-link to="/advanced/delete">
                         <Button button-style="danger" button-size="xs"> Delete </Button>
@@ -69,6 +76,10 @@ export default class TabsAdvancedBase extends Vue {
 
                 > .button {
                     @apply ml-auto;
+
+                    > * > .tooltip {
+                        @apply -left-20 top-2;
+                    }
 
                     > * {
                         @apply mx-2;

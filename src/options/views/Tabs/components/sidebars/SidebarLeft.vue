@@ -1,13 +1,6 @@
 <template>
     <div class="sidebar-left">
-        <Profile
-            :avatar="avatar"
-            :username="username"
-            :address="address"
-            followers="93"
-            following="193"
-            balance="150"
-        />
+        <Profile :avatar="avatar" :username="username" :address="address" />
         <NavMenu />
         <Footer />
     </div>
@@ -35,9 +28,7 @@ export default class SidebarLeft extends Vue {
 
     async mounted() {
         const rss3 = await RSS3.get();
-        this.address = `${rss3?.persona.id.substring(0, 6)}***${rss3?.persona.id.substring(
-            rss3?.persona.id.length - 3,
-        )}`;
+        this.address = rss3?.persona.id || '';
         const profile = await rss3?.profile.get();
         if (typeof profile !== 'undefined') {
             if (typeof profile.avatar !== 'undefined' && typeof profile.avatar[0] !== 'undefined') {
