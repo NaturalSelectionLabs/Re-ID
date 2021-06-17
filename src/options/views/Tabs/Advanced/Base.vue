@@ -5,13 +5,10 @@
             <div class="header">
                 <div class="title">Raw RSS3</div>
                 <div class="button">
-                    <Button
-                        button-style="disabled"
-                        button-size="xs"
-                        @mouseenter="showEditTooltip = true"
-                        @mouseleave="showEditTooltip = false"
-                    >
+                    <Button button-style="disabled" button-size="xs">
                         Edit
+
+                        <span @mouseover="showEditTooltip = true" @mouseleave="showEditTooltip = false"> &#9432; </span>
                         <div class="tooltip">
                             <Tooltip
                                 view-type="options"

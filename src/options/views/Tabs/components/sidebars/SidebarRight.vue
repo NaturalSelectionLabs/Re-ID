@@ -4,8 +4,17 @@
             <label>
                 Syncing
 
-                <span> &#9432; </span>
+                <span @mouseover="showingTooltip = true" @mouseleave="showingTooltip = false"> &#9432; </span>
             </label>
+
+            <div class="tooltip">
+                <Tooltip
+                    v-show="showingTooltip"
+                    widthClass="w-32"
+                    text="Toggle syncing with RSS3"
+                    view-type="options"
+                />
+            </div>
 
             <ToggleSwitch v-if="loadFin" :default-state="syncEnabled" @switch-state="toggleSyncStatus" />
         </div>
@@ -15,9 +24,11 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import ToggleSwitch from '@/components/ToggleSwitch.vue';
+import Tooltip from '@/components/Tooltip.vue';
 
 @Options({
     components: {
+        Tooltip,
         ToggleSwitch,
     },
     mounted() {
@@ -27,6 +38,7 @@ import ToggleSwitch from '@/components/ToggleSwitch.vue';
 export default class SidebarRight extends Vue {
     syncEnabled: Boolean = true;
     loadFin: Boolean = false;
+    showingTooltip: Boolean = false;
 
     initState(): void {
         chrome.storage.sync.get(['reid-twitter-sync-enabled'], (result) => {
@@ -68,6 +80,10 @@ export default class SidebarRight extends Vue {
                 > span {
                     @apply text-gray-text text-sm opacity-30 font-semibold;
                 }
+            }
+
+            > div.tooltip {
+                @apply -left-26;
             }
         }
     }
