@@ -34,7 +34,7 @@ import BackButton from '@/components/BackButton.vue';
 import Button from '@/components/Button.vue';
 import Input from '@/components/Input.vue';
 import KeyContainer from '@/components/KeyContainer.vue';
-import Avatar from '@/components/icons/Avatar.vue';
+import Avatar from '@/components/Avatar.vue';
 import RSS3, { IRSS3 } from '@/common/rss3';
 
 @Options({
@@ -54,7 +54,7 @@ export default class Profile extends Vue {
             this.avatar = profile?.avatar?.[0] || '';
             this.username = profile?.name || '';
             this.bio = profile?.bio || '';
-            this.address = await this.rss3.persona.id;
+            this.address = this.rss3.persona.id;
         }
     }
 
