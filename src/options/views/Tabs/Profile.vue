@@ -1,10 +1,7 @@
 <template>
     <div class="profile">
         <div class="avatar">
-            <img :src="avatar" :alt="username" />
-            <div class="change">
-                <IconAdd width="36" height="36" icon-color="#fff" />
-            </div>
+            <Avatar ref="avatar" size="lg" :url="avatarUrl" />
         </div>
         <div class="username">
             <Input view-type="options" input-type="text" v-model="username" />
@@ -16,7 +13,7 @@
             <Button button-style="primary" button-size="xxl" @click="saveProfile"> Save </Button>
         </div>
         <div class="btn-discard">
-            <Button button-style="secondary" button-size="xxl" @click="resetProfile"> Discard </Button>
+            <Button button-style="secondary" button-size="xxl" @click="initialize"> Discard </Button>
         </div>
     </div>
 </template>
@@ -28,16 +25,18 @@ import Button from '@/components/Button.vue';
 import RSS3, { IRSS3 } from '@/common/rss3';
 import { ThirdPartyAddress } from 'rss3/types/rss3';
 import IconAdd from '@/components/icons/IconAdd.vue';
+import Avatar from '@/components/Avatar.vue';
 
 @Options({
     components: {
+        Avatar,
         IconAdd,
         Button,
         Input,
     },
 })
 export default class TabsProfile extends Vue {
-    avatar: string = '';
+    avatarUrl: string = '';
     username: string = '';
     bio: string = '';
     rss3?: IRSS3;
@@ -48,31 +47,34 @@ export default class TabsProfile extends Vue {
             this.$router.push('/start');
         } else {
             this.rss3 = rss3;
-            const profile = await this.rss3.profile.get();
-            this.avatar = profile?.avatar?.[0] || '';
-            this.username = profile?.name || '';
-            this.bio = profile?.bio || '';
+            await this.initialize();
         }
+    }
+
+    async initialize() {
+        const profile = await this.rss3?.profile.get();
+        this.avatarUrl = profile?.avatar?.[0] || '';
+        this.username = profile?.name || '';
+        this.bio = profile?.bio || '';
     }
 
     async saveProfile() {
         if (this.rss3) {
+            const avatarHash = await (<any>this.$refs.avatar).upload();
             console.log(this.username, this.bio);
-            await this.rss3.profile.patch({
+            const profile: {
+                name: string;
+                bio: string;
+                avatar?: string[];
+            } = {
                 name: this.username,
-                avatar: [this.avatar],
                 bio: this.bio,
-            });
+            };
+            if (avatarHash) {
+                profile.avatar = ['https://gateway.pinata.cloud/ipfs/' + avatarHash];
+            }
+            await this.rss3.profile.patch(profile);
             await this.rss3.persona.sync();
-        }
-    }
-
-    async resetProfile() {
-        if (this.rss3) {
-            const profile = await this.rss3.profile.get();
-            this.avatar = profile?.avatar?.[0] || '';
-            this.username = profile?.name || '';
-            this.bio = profile?.bio || '';
         }
     }
 }
@@ -85,16 +87,6 @@ export default class TabsProfile extends Vue {
 
         > div {
             @apply mt-8;
-        }
-
-        .avatar {
-            @apply relative;
-            > img {
-                @apply w-30 h-30 rounded;
-            }
-            > .change {
-                @apply absolute left-12 top-12; /* Change 12 to 10 when icon size applies */
-            }
         }
     }
 }
