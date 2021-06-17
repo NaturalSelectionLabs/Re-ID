@@ -48,7 +48,7 @@
                 </div>
                 <div class="buttons w-55 h-7 grid grid-cols-2 gap-1">
                     <Button buttonStyle="primary" buttonSize="md" @click="$router.push('/Invite')">Invite</Button>
-                    <Button buttonStyle="primary" buttonSize="md"><a href="@/options">Expand</a></Button>
+                    <Button buttonStyle="primary" buttonSize="md" @click="openOptionsPage">Expand</Button>
                 </div>
             </div>
             <item-list viewType="popup">
@@ -135,6 +135,10 @@ export default class Home extends Vue {
 
     hideMenu() {
         this.showingMenu = false;
+    }
+
+    openOptionsPage() {
+        chrome.runtime.openOptionsPage();
     }
 }
 </script>
