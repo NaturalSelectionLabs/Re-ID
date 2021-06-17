@@ -3,7 +3,9 @@
         <div class="row-start-2 row-end-3 flex flex-col justify-start items-left gap-y-5">
             <p><logo width="55" height="55" class="inline" /></p>
             <p><logo-title height="30" width="100" class="inline" /></p>
-            <Button buttonStyle="primary" buttonSize="lg"><a href="@/options">I'm new here</a></Button>
+            <Button buttonStyle="primary" buttonSize="lg"
+                ><a target="_blank" href="./options.html">I'm new here</a></Button
+            >
             <Button buttonStyle="secondary" buttonSize="lg" @click="$router.push('/login')"
                 >I've got my private key</Button
             >

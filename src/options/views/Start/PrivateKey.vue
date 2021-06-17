@@ -25,7 +25,7 @@ export default class StartPrivateKey extends Vue {
     privateKey: string = '';
 
     async mounted() {
-        const rss3 = await RSS3.get();
+        const rss3 = await RSS3.set();
         if (rss3) {
             this.privateKey = rss3.persona.privateKey;
         }
