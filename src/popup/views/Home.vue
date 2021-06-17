@@ -112,6 +112,7 @@ export default class Home extends Vue {
 
             this.address = rss3.persona.id;
         }
+        this.initState();
     }
 
     switchSyncState() {
@@ -139,6 +140,15 @@ export default class Home extends Vue {
 
     openOptionsPage() {
         chrome.runtime.openOptionsPage();
+    }
+
+    initState(): void {
+        chrome.storage.sync.get(['reid-twitter-sync-enabled'], (result) => {
+            const enabled = result['reid-twitter-sync-enabled'];
+            if (typeof enabled !== 'undefined') {
+                this.currentState = enabled;
+            }
+        });
     }
 }
 </script>
