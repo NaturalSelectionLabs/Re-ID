@@ -11,7 +11,8 @@ export default class TabsAdvancedView extends Vue {
 
     async mounted() {
         const rss3 = await RSS3.get();
-        this.rawData = await rss3.persona.raw();
+        const rawPersona = await rss3?.persona.raw();
+        this.rawData = JSON.stringify(rawPersona, null, 4);
     }
 }
 </script>
