@@ -95,8 +95,8 @@ export default class Home extends Vue {
     username: String = '';
     bio: String = '';
     address: string = ''; // public address
-    items: any;
-
+    items: RSS3Item[] = [];
+    itemsNext: string | undefined;
     showingMenu = false;
     showingTooltip = false;
 
@@ -107,9 +107,9 @@ export default class Home extends Vue {
             if (profile?.avatar) this.avatar = profile.avatar[0] || '';
             this.username = profile?.name || '';
             this.bio = profile?.bio || '';
-            const currentItems = await rss3.items.get();
-            this.items = currentItems.items;
-
+            const list1 = await rss3.items.get();
+            this.items = list1.items;
+            this.itemsNext = list1.items_next;
             this.address = rss3.persona.id;
         }
         this.initState();
