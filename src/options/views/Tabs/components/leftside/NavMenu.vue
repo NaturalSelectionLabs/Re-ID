@@ -1,18 +1,34 @@
 <template>
     <div class="routers-link">
-        <router-link to="/home"> Home </router-link>
-        <router-link to="/advanced"> Advanced </router-link>
-        <router-link to="/profile"> Profile </router-link>
-        <router-link to="/invite"> Invite others </router-link>
-        <router-link to="/settings"> Settings </router-link>
+        <router-link to="/home">
+            Home
+            <IconRight />
+        </router-link>
+        <router-link to="/advanced">
+            Advanced
+            <IconRight />
+        </router-link>
+        <router-link to="/profile">
+            Profile
+            <IconRight />
+        </router-link>
+        <router-link to="/invite">
+            Invite others
+            <IconRight />
+        </router-link>
+        <router-link to="/settings">
+            Settings
+            <IconRight />
+        </router-link>
     </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import IconRight from '@/components/icons/IconRight.vue';
 
 @Options({
-    components: {},
+    components: { IconRight },
 })
 export default class Navmenu extends Vue {}
 </script>
@@ -25,13 +41,15 @@ export default class Navmenu extends Vue {}
         > a {
             @apply block font-semibold text-2xl leading-7 mb-8;
 
+            > * {
+                @apply ml-8 hidden;
+            }
+
             &.router-link-active {
                 @apply text-primary;
 
-                &::after {
-                    content: '\279C';
-
-                    @apply ml-8;
+                > * {
+                    @apply inline-block;
                 }
             }
         }
