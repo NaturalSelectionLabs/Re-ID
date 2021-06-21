@@ -35,7 +35,7 @@ export default class TabsInvite extends Vue {
     async mounted() {
         const rss3 = await RSS3.get();
         if (!rss3) {
-            this.$router.push('/start');
+            await this.$router.push('/start');
         } else {
             this.RSS3 = rss3;
             const isInvited = await reidInvite.check(this.RSS3.persona.id);
