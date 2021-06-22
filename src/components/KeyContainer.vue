@@ -5,7 +5,8 @@
             'key-options': viewType === 'options',
             'key-popup': viewType === 'popup',
             'key-private': isPrivate,
-            'key-collapse': isCollapse,
+            'key-collapse-popup': isCollapse && viewType === 'popup',
+            'key-collapse-options': isCollapse && viewType === 'options',
             'key-blur': $props.blur,
         }"
         @click="copy(keyText)"
@@ -119,6 +120,13 @@ export default class KeyContainer extends Vue {
     .tooltip {
         @apply absolute left-1/2 transform -translate-x-1/2;
         top: calc(100% + 12px);
+    }
+
+    .key-collapse-popup {
+        @apply bg-transparent text-opacity-30 h-4 w-21 p-0;
+    }
+    .key-collapse-options {
+        @apply bg-transparent text-opacity-30 h-4 w-35 p-0;
     }
 }
 </style>
