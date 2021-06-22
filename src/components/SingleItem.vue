@@ -6,10 +6,10 @@
             'item-options': viewType === 'options',
         }"
     >
-        <div v-if="rss3Item.title" class="title font-semibold">{{ rss3Item.title }}</div>
-        <div v-if="rss3Item.summary" class="summary font-normal">{{ rss3Item.summary }}</div>
-        <div v-if="rss3Item.contents" class="content font-normal">
-            <div class="eachContent" v-for="(each, index) in rss3Item.contents" :key="index">
+        <div v-if="rss3Item.title" class="title font-semibold mb-1">{{ rss3Item.title }}</div>
+        <div v-if="rss3Item.summary" class="font-normal mb-1">{{ rss3Item.summary }}</div>
+        <div v-if="rss3Item.contents" class="font-normal h-31 flex gap-1 mb-1">
+            <div class="eachContent flex-1" v-for="(each, index) in rss3Item.contents" :key="index">
                 <img
                     v-if="each.mime_type.startsWith('image')"
                     :class="['object-cover', 'rounded', viewType === 'popup' ? 'img-popup' : 'img-options']"
@@ -21,10 +21,7 @@
             </div>
             <!-- TODO -->
         </div>
-        <div class="status grid grid-cols-context w-55 text-gray-text text-opacity-60">
-            <div class="like-comment">
-                <!-- TODO -->
-            </div>
+        <div class="status text-gray-text text-opacity-60">
             <div class="timestamp justify-end">{{ rss3Item.date_published }}</div>
         </div>
     </div>
@@ -60,11 +57,11 @@ export default class SingleItem extends Vue {
 @layer components {
     .itemContainer {
         /* height: max-content; */
-        @apply flex flex-col;
+        @apply flex flex-col py-2;
     }
 
     .item-popup {
-        @apply w-55 text-xs;
+        @apply text-xs;
     }
 
     .item-options {
@@ -72,7 +69,7 @@ export default class SingleItem extends Vue {
     }
 
     .img-popup {
-        @apply w-55 h-31;
+        @apply h-31;
     }
 
     .img-options {

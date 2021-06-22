@@ -1,7 +1,9 @@
 <template>
-    <div class="tooltip" :class="[viewType === 'popup' ? 'font-xs' : 'font-sm', marginLeftClass]">
-        <span class="tooltipText" :class="[widthClass, heightClass]">{{ text }}</span>
-    </div>
+    <span
+        class="tooltip"
+        :class="[viewType === 'popup' ? 'font-xs' : 'font-sm', marginLeftClass, widthClass, heightClass]"
+        >{{ text }}</span
+    >
 </template>
 
 <script lang="ts">
@@ -29,14 +31,10 @@ export default class Tooltip extends Vue {
 /* modal */
 @layer components {
     .tooltip {
-        @apply relative inline-block w-0 h-0;
+        @apply absolute inline-block top-3/2 left-1/2 rounded-sm px-2 py-1 bg-secondary text-black font-normal;
     }
 
-    .tooltipText {
-        @apply absolute top-3/2 left-1/2 rounded-sm px-2 py-1 bg-secondary text-black font-normal;
-    }
-
-    .tooltip .tooltipText::after {
+    .tooltip::after {
         content: '';
         @apply absolute bottom-full left-1/2 -ml-1.5 border-6 border-solid;
         border-color: transparent transparent #e7e8fe transparent;

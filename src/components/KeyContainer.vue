@@ -10,26 +10,37 @@
         }"
         @click="copy(keyText)"
     >
-        <span :class="['pr-1', viewType === 'popup' ? 'w-45' : '', 'break-all', 'key-content']">{{
-            isCollapse
-                ? `${keyText.substring(0, 3)}***${keyText.substring(keyText.length - 3)}` // if collapse only display first and last three chars
-                : keyText
-        }}</span>
-        <IconCopy
-            :class="[isCollapse ? 'opacity-30' : 'opacity-60', 'cursor-pointer', 'key-copy']"
-            :width="viewType === 'popup' ? 12 : 18"
-            :height="viewType === 'popup' ? 12 : 18"
-        />
+        <span
+            :class="[
+                'pr-1',
+                viewType === 'popup' ? (!isCollapse ? 'w-45' : '') : 'w-155.5',
+                'break-all',
+                'truncate',
+                'flex-1',
+                'align-middle',
+            ]"
+            >{{
+                isCollapse
+                    ? `${keyText.substring(0, 3)}***${keyText.substring(keyText.length - 3)}` // if collapse only display first and last three chars
+                    : keyText
+            }}</span
+        >
+        <div class="inline-block relative align-middle">
+            <IconCopy
+                :class="[isCollapse ? 'opacity-30' : 'opacity-60', 'cursor-pointer']"
+                :width="viewType === 'popup' ? 12 : 18"
+                :height="viewType === 'popup' ? 12 : 18"
+            />
+            <tooltip
+                class="z-10"
+                v-show="showingTooltip"
+                widthClass="w-15"
+                heightClass="h-6"
+                text="Copied"
+                viewType="popup"
+            />
+        </div>
     </div>
-    <tooltip
-        class="z-10"
-        v-show="showingTooltip"
-        marginLeftClass="ml-8"
-        widthClass="w-15"
-        heightClass="h-6"
-        text="Copied"
-        viewType="popup"
-    />
 </template>
 
 <script lang="ts">
@@ -86,11 +97,6 @@ export default class KeyContainer extends Vue {
         @apply filter blur;
     }
 
-    .key-collapse {
-        @apply bg-transparent text-opacity-30;
-        width: max-content;
-    }
-
     .key-popup {
         @apply w-55 h-9 px-4 py-3 text-xs;
         & .key-collapse {
@@ -106,16 +112,13 @@ export default class KeyContainer extends Vue {
         @apply w-180 h-18 px-8 py-5 text-2xl;
     }
 
-    .key-content {
-        @apply w-155.5 truncate flex-1;
-    }
-
-    .key-copy {
-        width: 18px;
-    }
-
     .key-collapse {
-        @apply bg-transparent text-opacity-30 h-4 w-35 p-0;
+        @apply bg-transparent text-opacity-30 h-4 w-auto p-0 inline-block;
+    }
+
+    .tooltip {
+        @apply absolute left-1/2 transform -translate-x-1/2;
+        top: calc(100% + 12px);
     }
 }
 </style>

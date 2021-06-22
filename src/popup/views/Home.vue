@@ -2,7 +2,7 @@
     <popup-container>
         <div>
             <div class="popupHeader">
-                <logo height="25" width="25" />
+                <logo :height="25" :width="25" />
                 <div class="syncIndicator">
                     <span
                         :class="[
@@ -13,7 +13,14 @@
                         >Syncing</span
                     >
                     <span
-                        class="cursor-pointer text-gray-text text-opacity-60 font-normal font-xs"
+                        class="
+                            cursor-pointer
+                            text-gray-text text-opacity-60
+                            font-normal font-xs
+                            transform
+                            origin-center
+                            scale-75
+                        "
                         @mouseover="showTooltip"
                         @mouseleave="hideTooltip"
                         >ⓘ</span
@@ -35,15 +42,18 @@
             <div class="profileContainer">
                 <div class="generalInfo">
                     <img class="avatar" :src="avatar" />
-                    <div class="h-10 w-35 flex flex-col">
-                        <p class="font-xs font-semibold pt-0.5">{{ username }}</p>
+                    <div class="h-10 flex flex-col justify-between ml-3">
+                        <p class="font-xs font-semibold">{{ username }}</p>
                         <key-container :keyText="address" :isPrivate="false" viewType="popup" :isCollapse="true" />
                     </div>
-                    <Button buttonStyle="outlined" buttonSize="xxs" @focus="showMenu" @focusout="hideMenu">
-                        <icon-more class="fill-current" width="16" height="16" />
-                    </Button>
+                    <div class="relative">
+                        <Button buttonStyle="outlined" buttonSize="xxs" @focus="showMenu" @focusout="hideMenu">
+                            <icon-more class="fill-current" :width="16" :height="16" />
+                        </Button>
+                        <collapse-menu v-show="showingMenu" class="absolute z-20 top-5 right-0" />
+                    </div>
                 </div>
-                <div class="bio font-xs font-normal text-gray-text text-opacity-60">
+                <div class="break-words font-xs font-normal text-gray-text text-opacity-60">
                     {{ bio }}
                 </div>
                 <div class="buttons w-55 h-7 grid grid-cols-2 gap-1">
@@ -56,7 +66,6 @@
             </item-list>
         </div>
     </popup-container>
-    <collapse-menu v-show="showingMenu" class="absolute z-20 top-18 right-5" />
 </template>
 
 <script lang="ts">
@@ -72,8 +81,7 @@ import Logo from '@/components/Logo.vue';
 import ToggleSwitch from '@/components/ToggleSwitch.vue';
 import Tooltip from '@/components/Tooltip.vue';
 import RSS3 from '@/common/rss3';
-import { RSS3Item, RSS3Items } from 'rss3/types/rss3';
-import { ThirdPartyAddress } from 'rss3/types/rss3';
+import { RSS3Item } from 'rss3/types/rss3';
 
 @Options({
     components: {
@@ -91,11 +99,11 @@ import { ThirdPartyAddress } from 'rss3/types/rss3';
 })
 export default class Home extends Vue {
     currentState = true;
-    avatar: any;
+    avatar: any = '';
     username: String = '';
     bio: String = '';
     address: string = ''; // public address
-    items: any;
+    items: RSS3Item[] = [];
 
     showingMenu = false;
     showingTooltip = false;
@@ -135,7 +143,9 @@ export default class Home extends Vue {
     }
 
     hideMenu() {
-        this.showingMenu = false;
+        setTimeout(() => {
+            this.showingMenu = false;
+        }, 100);
     }
 
     openOptionsPage() {
@@ -156,7 +166,7 @@ export default class Home extends Vue {
 <style scoped lang="postcss">
 @layer components {
     .mainContainer {
-        @apply absolute top-14 left-5 w-55 h-79 divide-y divide-gray-outline divide-opacity-20;
+        @apply absolute top-14 left-5 w-55 h-79 divide-y divide-gray-outline divide-opacity-20 mt-2;
     }
 
     .popupHeader {
@@ -170,7 +180,7 @@ export default class Home extends Vue {
         @apply flex flex-col gap-2 pb-2 w-55;
     }
     .generalInfo {
-        @apply grid grid-cols-profile gap-x-1 h-10 w-35 items-center;
+        @apply grid grid-cols-profile h-10 w-35 items-center;
     }
 
     .avatar {

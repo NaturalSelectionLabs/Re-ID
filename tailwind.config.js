@@ -86,6 +86,7 @@ module.exports = {
                 10: '2.5rem', //40px,
                 12: '3rem', //48px,
                 14: '3.5rem', //56px, options.html profile avatar width
+                19: '4.75rem', //75px
                 21: '5.25rem', //84px, raw rss3 codeblock tooltip width
                 26: '6.5rem', //104px, popup.html selected menu item width
                 27: '6.75rem', //108px, small button width; popup.html collapse [...] menu width
@@ -98,7 +99,7 @@ module.exports = {
                 65: '16.25rem', //260px, popup.html width
                 89: '22.25rem', //356px, options.html main button width
                 120: '30rem', //480px, options.html extended button width
-                155.5: '38.875rem', //622
+                155.5: '38.875rem', //622px
                 160: '40rem', //640px, raw rss3 codeblock input width
                 180: '45rem', //720px, options.html input & content width
                 186: '46.5rem', //744px, raw rss3 codeblock input private key

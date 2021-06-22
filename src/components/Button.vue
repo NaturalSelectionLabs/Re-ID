@@ -84,7 +84,7 @@ export default class Button extends Vue {
     /* popup.html small button - [Invite] [Expand]; 
    options.html small buttons -  [Personas] [Log out] */
     .btn-md {
-        @apply w-27 h-7 rounded-sm px-4 py-2 font-medium text-xs;
+        @apply w-27 h-7 rounded-sm px-4 py-2 font-medium text-xs leading-3;
     }
 
     /* popup.html main button */
