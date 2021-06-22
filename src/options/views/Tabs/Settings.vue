@@ -21,7 +21,7 @@
             </p>
         </div>
         <div class="btn-logout">
-            <Button button-style="secondary" button-size="xxl"> Log out </Button>
+            <Button button-style="secondary" button-size="xxl" @click="logOut"> Log out </Button>
         </div>
     </div>
 </template>
@@ -52,6 +52,11 @@ export default class TabsSettings extends Vue {
             this.publicaddr = rss3.persona.id;
             this.privateKey = rss3.persona.privateKey;
         }
+    }
+
+    logOut() {
+        chrome.storage.sync.remove(['privateKey']);
+        this.$router.push('/start');
     }
 }
 </script>
