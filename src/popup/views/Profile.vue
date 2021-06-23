@@ -2,7 +2,7 @@
     <popup-container>
         <back-button viewType="popup" />
         <div class="w-55 h-80 pt-3 grid grid-rows-editProfile gap-3">
-            <Avatar size="sm" :url="avatar" />
+            <Avatar ref="avatar" size="sm" :url="avatarUrl" />
             <Input
                 inputType="text"
                 viewType="popup"
@@ -20,9 +20,9 @@
                 v-model="bio"
             />
             <key-container :keyText="address" :isPrivate="false" viewType="popup" :isCollapse="false" />
-            <Button class="absolute left-5 bottom-7" buttonStyle="primary" buttonSize="lg" @click="updateProfile"
-                >Save</Button
-            >
+            <Button class="absolute left-5 bottom-7" buttonStyle="primary" buttonSize="lg" @click="updateProfile">{{
+                saveButtonText
+            }}</Button>
         </div>
     </popup-container>
 </template>
@@ -41,45 +41,42 @@ import RSS3, { IRSS3 } from '@/common/rss3';
     components: { PopupContainer, BackButton, Button, Input, KeyContainer, Avatar },
 })
 export default class Profile extends Vue {
-    avatar: any = '';
+    avatarUrl: any = 'https://gateway.pinata.cloud/ipfs/QmewKetg1XR4wX68w52FMzGiA2vK77LgqK7j86Lh5Lzpsp';
     username: string = '';
     bio: string = '';
     address: string = ''; // public address
     rss3?: IRSS3 | null;
+    saveButtonText = 'Save';
 
     async mounted() {
         this.rss3 = await RSS3.get();
         if (this.rss3) {
             const profile = await this.rss3.profile.get();
-            this.avatar = profile?.avatar?.[0] || '';
+            this.avatarUrl = profile?.avatar?.[0] || this.avatarUrl;
             this.username = profile?.name || '';
             this.bio = profile?.bio || '';
             this.address = this.rss3.persona.id;
         }
     }
 
-    updateAvatar() {
-        let input = this.$refs.file as HTMLInputElement;
-        let imagefile = input.files;
-        if (imagefile && imagefile[0]) {
-            let reader = new FileReader();
-            reader.onload = (e) => {
-                this.avatar = e.target?.result;
-            };
-            reader.readAsDataURL(imagefile[0]);
-            this.$emit('input', imagefile[0]);
-        }
-    }
-
     async updateProfile() {
         if (this.rss3) {
-            console.log(this.username, this.bio);
-            await this.rss3.profile.patch({
+            this.saveButtonText = 'Saving...';
+            const avatarUrl = await (<any>this.$refs.avatar).upload();
+            const profile: {
+                name: string;
+                bio: string;
+                avatar?: string[];
+            } = {
                 name: this.username,
-                avatar: this.avatar,
                 bio: this.bio,
-            });
+            };
+            if (avatarUrl) {
+                profile.avatar = [avatarUrl];
+            }
+            await this.rss3.profile.patch(profile);
             await this.rss3.persona.sync();
+            this.saveButtonText = 'Save';
         }
     }
     //     async resetProfile() {

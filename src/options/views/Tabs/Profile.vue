@@ -10,7 +10,7 @@
             <Input view-type="options" input-type="text-area" placeholderText="Bio" v-model="bio" />
         </div>
         <div class="btn-save">
-            <Button button-style="primary" button-size="xxl" @click="saveProfile"> Save </Button>
+            <Button button-style="primary" button-size="xxl" @click="saveProfile">{{ saveButtonText }}</Button>
         </div>
         <div class="btn-discard">
             <Button button-style="secondary" button-size="xxl" @click="initialize"> Discard </Button>
@@ -36,10 +36,11 @@ import Avatar from '@/components/Avatar.vue';
     },
 })
 export default class TabsProfile extends Vue {
-    avatarUrl: string = '';
+    avatarUrl: string = 'https://gateway.pinata.cloud/ipfs/QmewKetg1XR4wX68w52FMzGiA2vK77LgqK7j86Lh5Lzpsp';
     username: string = '';
     bio: string = '';
     rss3?: IRSS3;
+    saveButtonText = 'Save';
 
     async mounted() {
         const rss3 = await RSS3.get();
@@ -53,7 +54,7 @@ export default class TabsProfile extends Vue {
 
     async initialize() {
         const profile = await this.rss3?.profile.get();
-        this.avatarUrl = profile?.avatar?.[0] || '';
+        this.avatarUrl = profile?.avatar?.[0] || this.avatarUrl;
         console.log(profile);
         this.username = profile?.name || '';
         this.bio = profile?.bio || '';
@@ -61,6 +62,7 @@ export default class TabsProfile extends Vue {
 
     async saveProfile() {
         if (this.rss3) {
+            this.saveButtonText = 'Saving...';
             const avatarUrl = await (<any>this.$refs.avatar).upload();
             console.log(this.username, this.bio);
             const profile: {
@@ -76,6 +78,7 @@ export default class TabsProfile extends Vue {
             }
             await this.rss3.profile.patch(profile);
             await this.rss3.persona.sync();
+            this.saveButtonText = 'Save';
         }
     }
 }
