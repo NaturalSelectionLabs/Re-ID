@@ -4,10 +4,10 @@
             <Avatar ref="avatar" size="lg" :url="avatarUrl" />
         </div>
         <div class="username">
-            <Input view-type="options" input-type="text" v-model="username" />
+            <Input view-type="options" input-type="text" placeholderText="Name" v-model="username" />
         </div>
         <div class="bio">
-            <Input view-type="options" input-type="text-area" v-model="bio" />
+            <Input view-type="options" input-type="text-area" placeholderText="Bio" v-model="bio" />
         </div>
         <div class="btn-save">
             <Button button-style="primary" button-size="xxl" @click="saveProfile"> Save </Button>
@@ -54,6 +54,7 @@ export default class TabsProfile extends Vue {
     async initialize() {
         const profile = await this.rss3?.profile.get();
         this.avatarUrl = profile?.avatar?.[0] || '';
+        console.log(profile);
         this.username = profile?.name || '';
         this.bio = profile?.bio || '';
     }

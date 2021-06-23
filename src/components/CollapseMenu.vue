@@ -11,9 +11,7 @@
             >
         </div>
         <div>
-            <Button buttonText="Log out" buttonStyle="menuItem" buttonSize="xs" @click="$router.push('/Onboarding')">
-                Log out</Button
-            >
+            <Button buttonText="Log out" buttonStyle="menuItem" buttonSize="xs" @click="logout()"> Log out</Button>
         </div>
     </div>
 </template>
@@ -21,12 +19,19 @@
 <script lang="ts">
 import { Vue, Options } from 'vue-class-component';
 import Button from '@/components/Button.vue';
+import RSS3 from '@/common/rss3';
+
 @Options({
     components: {
         Button,
     },
 })
-export default class CollapseMenu extends Vue {}
+export default class CollapseMenu extends Vue {
+    async logout() {
+        await RSS3.clear();
+        this.$router.push('/Onboarding');
+    }
+}
 </script>
 
 <style lang="postcss">

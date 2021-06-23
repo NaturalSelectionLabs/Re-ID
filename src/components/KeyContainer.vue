@@ -106,7 +106,7 @@ export default class KeyContainer extends Vue {
     }
 
     .key-popup {
-        @apply w-55 h-16 px-4 py-2.5 text-xs;
+        @apply w-55 h-9 px-4 py-2.5 text-xs;
     }
 
     .key-options {

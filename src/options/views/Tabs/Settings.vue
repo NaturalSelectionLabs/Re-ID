@@ -54,8 +54,8 @@ export default class TabsSettings extends Vue {
         }
     }
 
-    logOut() {
-        chrome.storage.sync.remove(['privateKey']);
+    async logOut() {
+        await RSS3.clear();
         this.$router.push('/start');
     }
 }

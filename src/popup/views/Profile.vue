@@ -5,19 +5,19 @@
             <Avatar size="sm" :url="avatar" />
             <Input
                 inputType="text"
-                :originalValue="userID"
                 viewType="popup"
-                minlength="1"
-                maxLength="128"
-                v-model="newUsername"
+                :minlength="1"
+                :maxLength="128"
+                placeholderText="Name"
+                v-model="username"
             />
             <Input
                 inputType="textArea"
-                :originalValue="bio"
                 viewType="popup"
-                minlength="1"
-                maxLength="128"
-                v-model="newBio"
+                :minlength="1"
+                :maxLength="128"
+                placeholderText="Bio"
+                v-model="bio"
             />
             <key-container :keyText="address" :isPrivate="false" viewType="popup" :isCollapse="false" />
             <Button class="absolute left-5 bottom-7" buttonStyle="primary" buttonSize="lg" @click="updateProfile"
@@ -41,7 +41,7 @@ import RSS3, { IRSS3 } from '@/common/rss3';
     components: { PopupContainer, BackButton, Button, Input, KeyContainer, Avatar },
 })
 export default class Profile extends Vue {
-    avatar: any;
+    avatar: any = '';
     username: string = '';
     bio: string = '';
     address: string = ''; // public address
