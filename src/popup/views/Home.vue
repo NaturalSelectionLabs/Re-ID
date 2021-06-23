@@ -12,31 +12,32 @@
                         ]"
                         >Syncing</span
                     >
-                    <span
-                        class="
-                            cursor-pointer
-                            text-gray-text text-opacity-60
-                            font-normal font-xs
-                            transform
-                            origin-center
-                            scale-75
-                        "
-                        @mouseover="showTooltip"
-                        @mouseleave="hideTooltip"
-                        >ⓘ</span
-                    >
+                    <span class="relative">
+                        <span
+                            class="
+                                cursor-pointer
+                                text-gray-text text-opacity-60
+                                font-normal font-xs
+                                transform
+                                origin-center
+                                scale-75
+                            "
+                            @mouseover="showTooltip"
+                            @mouseleave="hideTooltip"
+                            >ⓘ</span
+                        >
+                        <tooltip
+                            class="z-10"
+                            v-show="showingTooltip"
+                            widthClass="w-27"
+                            heightClass="h-12"
+                            text="Toggle syncing with RSS3"
+                            viewType="popup"
+                        />
+                    </span>
                     <toggle-switch :defaultState="currentState" @switchState="switchSyncState" />
                 </div>
             </div>
-            <tooltip
-                class="z-10"
-                v-show="showingTooltip"
-                marginLeftClass="ml-28"
-                widthClass="w-27"
-                heightClass="h-12"
-                text="Toggle syncing with RSS3"
-                viewType="popup"
-            />
         </div>
         <div class="mainContainer">
             <div class="profileContainer">

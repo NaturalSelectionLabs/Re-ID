@@ -31,7 +31,8 @@ export default class Tooltip extends Vue {
 /* modal */
 @layer components {
     .tooltip {
-        @apply absolute inline-block top-3/2 left-1/2 rounded-sm px-2 py-1 bg-secondary text-black font-normal;
+        @apply absolute transform -translate-x-1/2 inline-block top-3/2 left-1/2 rounded-sm px-2 py-1 bg-secondary text-black font-normal;
+        top: calc(100% + 12px);
     }
 
     .tooltip::after {

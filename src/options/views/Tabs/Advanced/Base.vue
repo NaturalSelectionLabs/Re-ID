@@ -7,16 +7,17 @@
                 <div class="button">
                     <Button button-style="disabled" button-size="xs">
                         Edit
-
-                        <span @mouseover="showEditTooltip = true" @mouseleave="showEditTooltip = false"> &#9432; </span>
-                        <div class="tooltip">
+                        <span class="relative">
+                            <span @mouseover="showEditTooltip = true" @mouseleave="showEditTooltip = false">
+                                &#9432;
+                            </span>
                             <Tooltip
                                 view-type="options"
                                 text="Editing raw RSS3 file can result in unwanted chaos and therefore disabled here."
                                 width-class="w-56"
                                 v-show="showEditTooltip"
                             />
-                        </div>
+                        </span>
                     </Button>
                     <router-link to="/advanced/delete">
                         <Button button-style="danger" button-size="xs"> Delete </Button>

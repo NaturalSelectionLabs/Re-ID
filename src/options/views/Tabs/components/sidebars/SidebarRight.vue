@@ -3,18 +3,18 @@
         <div class="sync-switch">
             <label>
                 Syncing
-
-                <span @mouseover="showingTooltip = true" @mouseleave="showingTooltip = false"> &#9432; </span>
+                <span class="relative text-gray-text text-sm font-semibold">
+                    <span class="opacity-30" @mouseover="showingTooltip = true" @mouseleave="showingTooltip = false">
+                        &#9432;
+                    </span>
+                    <Tooltip
+                        v-show="showingTooltip"
+                        widthClass="w-32"
+                        text="Toggle syncing with RSS3"
+                        view-type="options"
+                    />
+                </span>
             </label>
-
-            <div class="tooltip">
-                <Tooltip
-                    v-show="showingTooltip"
-                    widthClass="w-32"
-                    text="Toggle syncing with RSS3"
-                    view-type="options"
-                />
-            </div>
 
             <ToggleSwitch v-if="loadFin" :default-state="syncEnabled" @switch-state="toggleSyncStatus" />
         </div>
@@ -76,14 +76,6 @@ export default class SidebarRight extends Vue {
 
             > label {
                 @apply font-normal text-2xl text-center mr-8;
-
-                > span {
-                    @apply text-gray-text text-sm opacity-30 font-semibold;
-                }
-            }
-
-            > div.tooltip {
-                @apply -left-26;
             }
         }
     }

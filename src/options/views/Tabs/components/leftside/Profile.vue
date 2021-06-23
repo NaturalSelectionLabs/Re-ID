@@ -9,19 +9,20 @@
             </h1>
         </div>
         <div class="address" @click="copy($props.address)">
-            <span>
+            <span class="mr-4">
                 {{ $props.address.substring(0, 6) + '***' + $props.address.substring($props.address.length - 3) }}
             </span>
-            <IconCopy width="12px" height="12px" />
-            <Tooltip
-                class="z-10"
-                v-show="showingTooltip"
-                marginLeftClass="ml-8"
-                widthClass="w-15"
-                heightClass="h-6"
-                text="Copied"
-                viewType="popup"
-            />
+            <span class="relative">
+                <IconCopy width="12px" height="12px" />
+                <Tooltip
+                    class="z-10"
+                    v-show="showingTooltip"
+                    widthClass="w-15"
+                    heightClass="h-6"
+                    text="Copied"
+                    viewType="popup"
+                />
+            </span>
         </div>
     </div>
 </template>
@@ -70,10 +71,6 @@ export default class Profile extends Vue {
 
         .address {
             @apply text-gray-text opacity-30 font-semibold cursor-pointer;
-
-            > span {
-                @apply mr-4;
-            }
 
             > * {
                 @apply inline-block;
