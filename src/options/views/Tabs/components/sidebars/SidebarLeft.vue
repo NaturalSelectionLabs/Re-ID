@@ -22,7 +22,7 @@ import RSS3 from '@/common/rss3';
     },
 })
 export default class SidebarLeft extends Vue {
-    avatar: String = '';
+    avatar: String = 'https://gateway.pinata.cloud/ipfs/QmewKetg1XR4wX68w52FMzGiA2vK77LgqK7j86Lh5Lzpsp';
     username: String = '';
     address: String = '';
 

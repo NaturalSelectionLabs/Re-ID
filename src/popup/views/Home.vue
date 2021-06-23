@@ -100,7 +100,7 @@ import { RSS3Item } from 'rss3/types/rss3';
 })
 export default class Home extends Vue {
     currentState = true;
-    avatar: any = '';
+    avatar: any = 'https://gateway.pinata.cloud/ipfs/QmewKetg1XR4wX68w52FMzGiA2vK77LgqK7j86Lh5Lzpsp';
     username: String = '';
     bio: String = '';
     address: string = ''; // public address
@@ -113,7 +113,7 @@ export default class Home extends Vue {
         const rss3 = await RSS3.get();
         if (rss3) {
             const profile = await rss3.profile.get();
-            if (profile?.avatar) this.avatar = profile.avatar[0] || '';
+            if (profile?.avatar) this.avatar = profile.avatar[0] || this.avatar;
             this.username = profile?.name || '';
             this.bio = profile?.bio || '';
             const list1 = await rss3.items.get();
