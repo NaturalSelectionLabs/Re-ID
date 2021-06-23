@@ -8,7 +8,7 @@
     >
         <div v-if="rss3Item.title" class="title font-semibold mb-1">{{ rss3Item.title }}</div>
         <div v-if="rss3Item.summary" class="font-normal mb-1">{{ rss3Item.summary }}</div>
-        <div v-if="rss3Item.contents" class="font-normal h-31 flex gap-1 mb-1">
+        <div v-if="rss3Item.contents" class="font-normal flex gap-1 mb-1">
             <div class="eachContent flex-1" v-for="(each, index) in rss3Item.contents" :key="index">
                 <img
                     v-if="each.mime_type.startsWith('image')"
@@ -65,7 +65,7 @@ export default class SingleItem extends Vue {
     }
 
     .item-options {
-        @apply w-180 text-lg;
+        @apply text-lg;
     }
 
     .img-popup {
@@ -73,7 +73,7 @@ export default class SingleItem extends Vue {
     }
 
     .img-options {
-        @apply w-180 h-101;
+        @apply h-101;
     }
 }
 </style>
