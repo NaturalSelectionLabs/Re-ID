@@ -42,19 +42,21 @@ export default class SidebarRight extends Vue {
 
     initState(): void {
         chrome.storage.sync.get(['reid-twitter-sync-enabled'], (result) => {
-            console.log('Loading sync enable status from local storage...');
             const enabled = result['reid-twitter-sync-enabled'];
             if (typeof enabled !== 'undefined') {
-                console.log(enabled);
                 this.syncEnabled = enabled;
-                this.loadFin = true;
+            } else {
+                // Init sync status
+                chrome.storage.sync.set({
+                    'reid-twitter-sync-enabled': true,
+                });
             }
+            this.loadFin = true;
         });
     }
 
     toggleSyncStatus(): void {
         this.syncEnabled = !this.syncEnabled;
-        console.log('Saving sync enable status (', this.syncEnabled, ') to local storage...');
         chrome.storage.sync.set({
             'reid-twitter-sync-enabled': this.syncEnabled,
         });
