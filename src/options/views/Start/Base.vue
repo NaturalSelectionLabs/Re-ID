@@ -113,7 +113,7 @@ export default class StartBase extends Vue {
         },
         congrats: {
             title: 'Congrats!',
-            description: 'You’ve all set! Welcome to RSS3: )',
+            description: 'You’ve all set! Welcome to RE: ID : )',
         },
     };
 

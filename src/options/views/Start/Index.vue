@@ -7,7 +7,8 @@
                     <LogoTitle class="inline ml-8" />
                 </p>
                 <p class="mt-10 mb-28 text-5xl font-medium leading-tight">
-                    Welcome to RSS3,<br />an open protocol designed for content and social networks in the Web 3.0 era.
+                    Welcome to RE: ID,<br />an open protocol designed for content and social networks in the Web 3.0
+                    era.
                 </p>
                 <p class="flex justify-between">
                     <Button buttonStyle="primary" buttonSize="xl" @click="$router.push('/start/new')"
