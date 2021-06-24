@@ -22,7 +22,7 @@ export default class StartLogin extends Vue {
 
     login() {
         RSS3.set(this.privateKey);
-        this.$router.push('/home');
+        this.$router.push('/');
     }
 }
 </script>

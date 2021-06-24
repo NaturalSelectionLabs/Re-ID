@@ -13,7 +13,7 @@ export const TwitterButtonSync = `
             <span> Toggle RSS3 file syncing for this post</span>
         </div>
         <div class="card-body">
-            <ul id="reid-sync-active-status" class="switch active">
+            <ul id="reid-sync-active-status" class="switch">
                 <li id="reid-sync-button-activate" class="only-active">
                     <div>Syncing on</div>
                 </li>

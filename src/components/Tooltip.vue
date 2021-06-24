@@ -1,7 +1,13 @@
 <template>
     <span
         class="tooltip"
-        :class="[viewType === 'popup' ? 'font-xs' : 'font-sm', marginLeftClass, widthClass, heightClass]"
+        :class="[
+            viewType === 'popup' ? 'font-xs' : 'font-sm',
+            marginLeftClass,
+            widthClass,
+            heightClass,
+            !widthClass && !heightClass ? 'whitespace-nowrap' : '',
+        ]"
         >{{ text }}</span
     >
 </template>

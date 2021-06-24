@@ -83,6 +83,7 @@ import ToggleSwitch from '@/components/ToggleSwitch.vue';
 import Tooltip from '@/components/Tooltip.vue';
 import RSS3 from '@/common/rss3';
 import { RSS3Item } from 'rss3/types/rss3';
+import syncControl from '@/common/sync-control';
 
 @Options({
     components: {
@@ -99,7 +100,7 @@ import { RSS3Item } from 'rss3/types/rss3';
     },
 })
 export default class Home extends Vue {
-    currentState = true;
+    currentState = false;
     avatar: any = 'https://gateway.pinata.cloud/ipfs/QmewKetg1XR4wX68w52FMzGiA2vK77LgqK7j86Lh5Lzpsp';
     username: String = '';
     bio: String = '';
@@ -120,16 +121,18 @@ export default class Home extends Vue {
             this.items = list1.items;
             this.itemsNext = list1.items_next;
             this.address = rss3.persona.id;
+
+            this.currentState = await syncControl.get();
         }
-        this.initState();
     }
 
-    switchSyncState() {
-        this.currentState = !this.currentState;
-        console.log(this.currentState);
-        chrome.storage.sync.set({
-            'reid-twitter-sync-enabled': this.currentState,
-        });
+    async switchSyncState() {
+        const status = !this.currentState;
+        if (!(await syncControl.set(status))) {
+            window.open('options.html', '_blank');
+            return;
+        }
+        this.currentState = status;
     }
 
     showTooltip() {
@@ -151,15 +154,6 @@ export default class Home extends Vue {
 
     openOptionsPage() {
         chrome.runtime.openOptionsPage();
-    }
-
-    initState(): void {
-        chrome.storage.sync.get(['reid-twitter-sync-enabled'], (result) => {
-            const enabled = result['reid-twitter-sync-enabled'];
-            if (typeof enabled !== 'undefined') {
-                this.currentState = enabled;
-            }
-        });
     }
 }
 </script>
