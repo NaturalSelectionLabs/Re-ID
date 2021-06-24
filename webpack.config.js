@@ -139,4 +139,8 @@ module.exports = (env, argv) => ({
             __VUE_PROD_DEVTOOLS__: false,
         }),
     ],
+
+    experiments: {
+        topLevelAwait: true,
+    },
 });

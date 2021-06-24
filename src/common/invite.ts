@@ -5,8 +5,21 @@ const inviteEndpoint = 'https://re-id-invite-database-q335m.ondigitalocean.app';
 
 export default {
     check: async (addr: string): Promise<boolean> => {
-        const res = await axios.get(inviteEndpoint + '/check/' + addr);
-        return res.data.ok;
+        return new Promise<boolean>((resolve) => {
+            chrome.storage.sync.get(['invited'], async (result) => {
+                if (result.invited) {
+                    resolve(true);
+                } else {
+                    const res = await axios.get(inviteEndpoint + '/check/' + addr);
+                    if (res.data.ok) {
+                        chrome.storage.sync.set({
+                            invited: true,
+                        });
+                    }
+                    resolve(res.data.ok);
+                }
+            });
+        });
     },
 
     new: async (inviter: string, invitee: string): Promise<boolean> => {

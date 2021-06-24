@@ -1,6 +1,6 @@
 <template>
     <div class="invite">
-        <h2>You can invite others to RSS3 using their public keys.</h2>
+        <h2>You can invite others to Re: ID using their public keys.</h2>
         <div class="address">
             <Input
                 placeholder-text="Invitee’s public address"

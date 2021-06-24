@@ -16,7 +16,7 @@
                 </span>
             </label>
 
-            <ToggleSwitch v-if="loadFin" :default-state="syncEnabled" @switch-state="toggleSyncStatus" />
+            <ToggleSwitch :default-state="syncEnabled" @switch-state="toggleSyncStatus" />
         </div>
     </div>
 </template>
@@ -25,39 +25,29 @@
 import { Options, Vue } from 'vue-class-component';
 import ToggleSwitch from '@/components/ToggleSwitch.vue';
 import Tooltip from '@/components/Tooltip.vue';
+import syncControl from '@/common/sync-control';
 
 @Options({
     components: {
         Tooltip,
         ToggleSwitch,
     },
-    mounted() {
-        this.initState();
-    },
 })
 export default class SidebarRight extends Vue {
-    syncEnabled: Boolean = true;
-    loadFin: Boolean = false;
+    syncEnabled: Boolean = false;
     showingTooltip: Boolean = false;
 
-    initState(): void {
-        chrome.storage.sync.get(['reid-twitter-sync-enabled'], (result) => {
-            console.log('Loading sync enable status from local storage...');
-            const enabled = result['reid-twitter-sync-enabled'];
-            if (typeof enabled !== 'undefined') {
-                console.log(enabled);
-                this.syncEnabled = enabled;
-                this.loadFin = true;
-            }
-        });
+    async mounted() {
+        this.syncEnabled = await syncControl.get();
     }
 
-    toggleSyncStatus(): void {
-        this.syncEnabled = !this.syncEnabled;
-        console.log('Saving sync enable status (', this.syncEnabled, ') to local storage...');
-        chrome.storage.sync.set({
-            'reid-twitter-sync-enabled': this.syncEnabled,
-        });
+    async toggleSyncStatus() {
+        const status = !this.syncEnabled;
+        if (!(await syncControl.set(status))) {
+            this.$router.push('/start/address');
+            return;
+        }
+        this.syncEnabled = status;
     }
 }
 </script>
