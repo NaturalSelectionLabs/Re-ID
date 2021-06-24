@@ -1,10 +1,7 @@
 <template>
     <div class="toggleSwitch" v-if="!disabled" v-on:click="switchState">
         <div class="switchHandle" :class="{ active: $props.defaultState }"></div>
-        <div
-            class="switchButton"
-            :class="{ active: $props.defaultState, switchButton_active: $props.defaultState }"
-        ></div>
+        <div class="switchButton" :class="{ active: $props.defaultState }"></div>
     </div>
 </template>
 
@@ -31,7 +28,7 @@ export default class ToggleSwitch extends Vue {
 
     .switchButton {
         @apply bg-gray-outline bg-opacity-100 absolute inline-block w-4 h-4 rounded-lg transition;
-        &_active {
+        &.active {
             @apply transform translate-x-4;
         }
     }
