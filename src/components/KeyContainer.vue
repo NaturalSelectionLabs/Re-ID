@@ -32,14 +32,7 @@
                 :width="viewType === 'popup' ? 12 : 18"
                 :height="viewType === 'popup' ? 12 : 18"
             />
-            <tooltip
-                class="z-10"
-                v-show="showingTooltip"
-                widthClass="w-15"
-                heightClass="h-6"
-                text="Copied"
-                viewType="popup"
-            />
+            <tooltip class="z-10" v-show="showingTooltip" text="Copied" viewType="popup" />
         </div>
     </div>
 </template>
