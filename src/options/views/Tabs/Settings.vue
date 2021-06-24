@@ -56,7 +56,7 @@ export default class TabsSettings extends Vue {
 
     async logOut() {
         await RSS3.clear();
-        this.$router.push('/start');
+        await this.$router.push('/start');
     }
 }
 </script>
