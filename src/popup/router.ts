@@ -3,6 +3,8 @@ import * as VueRouter from 'vue-router';
 import Index from './views/Index.vue';
 
 import Onboarding from './views/Onboarding.vue';
+import Pending from './views/Pending.vue';
+
 import Login from './views/Login.vue';
 
 import Home from './views/Home.vue';
@@ -19,6 +21,10 @@ const routes = [
     {
         path: '/onboarding',
         component: Onboarding,
+    },
+    {
+        path: '/pending',
+        component: Pending,
     },
     {
         path: '/login',

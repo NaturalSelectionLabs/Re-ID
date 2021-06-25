@@ -1,6 +1,9 @@
 <template>
     <KeyContainer :keyText="address" viewType="options" />
-    <Button class="mb-12 mt-12" buttonStyle="primary" buttonSize="xxl" @click="next()">Continue</Button>
+    <p class="flex justify-between mt-12">
+        <Button buttonStyle="primary" buttonSize="xl" @click="next()">Continue</Button>
+        <Button buttonStyle="secondary" buttonSize="xl" @click="tweetForInvitation">Ask on Twitter</Button>
+    </p>
 </template>
 
 <script lang="ts">
@@ -33,6 +36,12 @@ export default class StartPrivateKey extends Vue {
         } else {
             alert('Sorry, you are not invited yet.');
         }
+    }
+    tweetForInvitation() {
+        window.open(
+            `https://twitter.com/intent/tweet?hashtags=REID,REIDinvitation&text=Looking%20for%20an%20invitation!%20My%20address:%20${this.address}`,
+            '_blank',
+        );
     }
 }
 </script>
