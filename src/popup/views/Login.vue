@@ -10,7 +10,7 @@
                 minlength="1"
                 v-model="privateKey"
             />
-            <Button buttonStyle="primary" buttonSize="lg" @click="login">Continue</Button>
+            <Button buttonStyle="primary" buttonSize="lg" @click="next()">Continue</Button>
             <Button buttonStyle="secondary" buttonSize="lg" @click="$router.push('/onboarding')">Go back</Button>
         </div>
     </popup-container>
@@ -24,6 +24,7 @@ import LogoTitle from '@/components/LogoTitle.vue';
 import Button from '@/components/Button.vue';
 import Input from '@/components/Input.vue';
 import RSS3 from '@/common/rss3';
+import reidInvite from '@/common/invite';
 
 @Options({
     components: { PopupContainer, Logo, LogoTitle, Button, Input },
@@ -31,9 +32,14 @@ import RSS3 from '@/common/rss3';
 export default class Login extends Vue {
     privateKey: string = '';
 
-    login() {
-        RSS3.set(this.privateKey);
-        this.$router.push('/home');
+    async next() {
+        const rss3 = await RSS3.get();
+        if (rss3 && (await reidInvite.check(rss3.persona.id))) {
+            RSS3.set(this.privateKey);
+            this.$router.push('/home');
+        } else {
+            this.$router.push('/pending');
+        }
     }
 }
 </script>
