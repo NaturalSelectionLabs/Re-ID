@@ -77,7 +77,7 @@ export default class Pending extends Vue {
     currentState = false;
 
     address: string = ''; // public address
-
+    privateKey: string = '';
     showingTooltip = false;
 
     async mounted() {

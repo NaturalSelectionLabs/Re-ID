@@ -33,9 +33,8 @@ export default class Login extends Vue {
     privateKey: string = '';
 
     async next() {
-        const rss3 = await RSS3.get();
+        const rss3 = await RSS3.set(this.privateKey);
         if (rss3 && (await reidInvite.check(rss3.persona.id))) {
-            RSS3.set(this.privateKey);
             this.$router.push('/home');
         } else {
             this.$router.push('/pending');
