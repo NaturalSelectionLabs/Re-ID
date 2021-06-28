@@ -13,7 +13,7 @@
                 {{ $props.address.substring(0, 6) + '***' + $props.address.substring($props.address.length - 3) }}
             </span>
             <span class="relative">
-                <IconCopy width="12px" height="12px" />
+                <IconCopy :width="copyButtonSize" :height="copyButtonSize" />
                 <Tooltip
                     class="z-10"
                     v-show="showingTooltip"
@@ -45,6 +45,7 @@ import Tooltip from '@/components/Tooltip.vue';
 })
 export default class Profile extends Vue {
     showingTooltip = false;
+    copyButtonSize: Number = 12;
 
     async copy(text: string) {
         await navigator.clipboard.writeText(text);
