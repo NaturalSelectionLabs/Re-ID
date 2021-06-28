@@ -57,7 +57,7 @@
         "lint-staged": "11.0.0",
         "postcss": "8.3.5",
         "postcss-loader": "6.1.0",
-        "prettier": "2.3.1",
+        "prettier": "2.3.2",
         "tailwindcss": "2.2.4",
         "terser-webpack-plugin": "5.1.4",
         "ts-loader": "9.2.3",
