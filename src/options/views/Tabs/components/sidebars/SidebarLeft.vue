@@ -11,7 +11,6 @@ import { Options, Vue } from 'vue-class-component';
 import Profile from '@/options/views/Tabs/components/leftside/Profile.vue';
 import NavMenu from '@/options/views/Tabs/components/leftside/NavMenu.vue';
 import Footer from '@/options/views/Tabs/components/leftside/Footer.vue';
-import { ThirdPartyAddress } from 'rss3/types/rss3';
 import RSS3 from '@/common/rss3';
 
 @Options({
@@ -27,6 +26,11 @@ export default class SidebarLeft extends Vue {
     address: String = '';
 
     async mounted() {
+        await this.initProfile();
+        document.addEventListener('profileUpdate', this.initProfile);
+    }
+
+    async initProfile() {
         const rss3 = await RSS3.get();
         this.address = rss3?.persona.id || '';
         const profile = await rss3?.profile.get();
