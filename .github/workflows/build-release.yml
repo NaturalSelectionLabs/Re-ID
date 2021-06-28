@@ -1,8 +1,5 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Release build
 
-# Controls when the workflow will run
 on:
   push:
     tags:
@@ -14,7 +11,6 @@ jobs:
       matrix:
         node-version: [16.x]
     steps:
-
       - name: Checkout code
         uses: actions/checkout@v2
 
