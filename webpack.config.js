@@ -3,9 +3,10 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = (env, argv) => ({
-    devtool: argv.mode === 'production' ? 'source-map' : 'cheap-source-map',
+    devtool: argv.mode === 'production' ? false : 'inline-cheap-module-source-map',
 
     entry: {
         background: './src/background/index.ts',
@@ -21,7 +22,10 @@ module.exports = (env, argv) => ({
     },
 
     resolve: {
-        extensions: ['.js', '.less'],
+        extensions: ['.js', '.less', '.ts'],
+        alias: {
+            '@': __dirname + '/src',
+        },
     },
 
     module: {
@@ -36,7 +40,7 @@ module.exports = (env, argv) => ({
                 exclude: /node_modules/,
             },
             {
-                test: /\.less$/,
+                test: /\.css$/,
                 use: [
                     'vue-style-loader',
                     {
@@ -50,29 +54,58 @@ module.exports = (env, argv) => ({
                         options: {
                             postcssOptions: {
                                 plugins: [
+                                    require('tailwindcss'),
+                                    require('postcss-nested'),
                                     require('autoprefixer'),
                                     require('cssnano')({
                                         preset: 'default',
                                     }),
                                 ],
                             },
-                        }
+                        },
                     },
-                    'less-loader'
+                    // 'less-loader'
+                ],
+            },
+            {
+                test: /\.postcss$/,
+                use: [
+                    'vue-style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 2,
+                        },
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                plugins: [
+                                    require('tailwindcss'),
+                                    require('postcss-nested'),
+                                    require('autoprefixer'),
+                                    require('cssnano')({
+                                        preset: 'default',
+                                    }),
+                                ],
+                            },
+                        },
+                    },
                 ],
             },
             {
                 test: /\.vue$/,
-                loader: 'vue-loader'
+                loader: 'vue-loader',
             },
             {
                 test: /\.(png|jpg)$/,
                 loader: 'url-loader',
                 options: {
-                    'limit': 40000
-                }
+                    limit: 40000,
+                },
             },
-        ]
+        ],
     },
 
     plugins: [
@@ -102,7 +135,24 @@ module.exports = (env, argv) => ({
         }),
         new VueLoaderPlugin(),
         new webpack.DefinePlugin({
-            VERSION: JSON.stringify(require('./public/manifest.json').version)
+            VERSION: JSON.stringify(require('./public/manifest.json').version) + '',
+            __VUE_OPTIONS_API__: true,
+            __VUE_PROD_DEVTOOLS__: false,
         }),
     ],
+    optimization: {
+        minimizer: [
+            new TerserPlugin({
+                extractComments: false,
+                terserOptions: {
+                    output: {
+                        ascii_only: true,
+                    },
+                },
+            }),
+        ],
+    },
+    experiments: {
+        topLevelAwait: true,
+    },
 });

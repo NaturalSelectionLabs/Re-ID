@@ -7,7 +7,7 @@ yarn
 yarn dev
 ```
 
-or 
+or
 
 ```bash
 npm install
