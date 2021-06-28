@@ -79,6 +79,7 @@ export default class TabsProfile extends Vue {
             await this.rss3.profile.patch(profile);
             await this.rss3.persona.sync();
             this.saveButtonText = 'Save';
+            document.dispatchEvent(new Event('profileUpdate'));
         }
     }
 }
