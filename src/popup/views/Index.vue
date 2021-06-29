@@ -13,9 +13,9 @@ export default class Entry extends Vue {
     async mounted() {
         const rss3 = await RSS3.get();
         if (!rss3) {
-            this.$router.push('/onboarding');
+            await this.$router.push('/onboarding');
         } else {
-            this.$router.push('/home');
+            await this.$router.push('/home');
         }
     }
 }

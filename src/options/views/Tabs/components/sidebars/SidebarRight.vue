@@ -44,7 +44,7 @@ export default class SidebarRight extends Vue {
     async toggleSyncStatus() {
         const status = !this.syncEnabled;
         if (!(await syncControl.set(status))) {
-            this.$router.push('/start/address');
+            await this.$router.push('/start/address');
             return;
         }
         this.syncEnabled = status;
