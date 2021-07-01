@@ -2,19 +2,13 @@
     <footer>
         <ol>
             <li class="ml-0">
-                <a href="https://reid.town/" target="_blank">Re:ID</a>
-            </li>
-            <li>
-                <a href="https://reid.town/" target="_blank">About</a>
+                <a href="https://reid.town/" target="_blank">Re: ID</a>
             </li>
             <li>
                 <span>Version {{ version }}</span>
             </li>
             <li>
                 <a href="https://github.com/NaturalSelectionLabs/Re-ID" target="_blank">Source Code</a>
-            </li>
-            <li>
-                <a href="https://reid.town/" target="_blank">Term of Use</a>
             </li>
         </ol>
     </footer>
