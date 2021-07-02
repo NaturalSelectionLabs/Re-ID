@@ -1,50 +1,50 @@
-name: Release build
+name: Build release pack
 
 on:
-  push:
-    tags:
-      - "v*.*.*"
+    push:
+        tags:
+            - 'v*.*.*'
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x]
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    build:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [16.x]
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
 
-      - name: Checkout tag
-        run: |
-          git fetch --depth=1 origin +refs/tags/*:refs/tags/*
-          tag_name="${GITHUB_REF##*/}"
-          echo Tag $tag_name
-          git checkout $tag_name
-          echo "TAG_NAME=${tag_name}" >> $GITHUB_ENV
-        
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-          
-      - name: Install Dependencies
-        run: yarn install --frozen-lockfile
+            - name: Checkout tag
+              run: |
+                  git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+                  tag_name="${GITHUB_REF##*/}"
+                  echo Tag $tag_name
+                  git checkout $tag_name
+                  echo "TAG_NAME=${tag_name}" >> $GITHUB_ENV
 
-      - name: Build
-        run: yarn build
-        
-      - name: Package
-        run: |
-          cd ./dist/ 
-          zip -r ../re-id.zip ./
-          cd ../
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v2
+              with:
+                  node-version: ${{ matrix.node-version }}
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          draft: true
-          name: ${{ env.TAG_NAME }}
-          tag_name: ${{ env.TAG_NAME }}
-          files: ./re-id.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Install Dependencies
+              run: yarn install --frozen-lockfile
+
+            - name: Build
+              run: yarn build
+
+            - name: Package
+              run: |
+                  cd ./dist/ 
+                  zip -r ../re-id.zip ./
+                  cd ../
+
+            - name: Release
+              uses: softprops/action-gh-release@v1
+              with:
+                  draft: true
+                  name: ${{ env.TAG_NAME }}
+                  tag_name: ${{ env.TAG_NAME }}
+                  files: ./re-id.zip
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
