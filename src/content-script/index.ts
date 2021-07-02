@@ -7,14 +7,14 @@ import syncControl from '@/common/sync-control';
 
 (async () => {
     if (await syncControl.allow()) {
-        observe('[data-testid="primaryColumn"] [data-testid="toolBar"] div', async (ele: Element) => {
-            if (document.getElementById('reid-sync-active-status') === null) {
+        observe('[data-testid="toolBar"] div', async (ele: Element) => {
+            if (ele.lastElementChild?.id !== 'reid-sync-switch') {
                 ele.insertAdjacentHTML('beforeend', TwitterButtonSync);
 
                 {
                     // Listen events
                     function updateSyncStatusClass(enabled: boolean) {
-                        const twiBtnSyncUut = document.getElementById('reid-sync-active-status');
+                        const twiBtnSyncUut = ele.getElementsByClassName('reid-sync-active-status')[0];
                         if (twiBtnSyncUut !== null) {
                             if (enabled) {
                                 twiBtnSyncUut.classList.add('active');
@@ -27,15 +27,21 @@ import syncControl from '@/common/sync-control';
                     async function setRSS3Sync(enabled: boolean) {
                         await syncControl.set(enabled);
                         updateSyncStatusClass(enabled);
+                        window.dispatchEvent(new Event('reid-sync-status-change'));
                     }
+
+                    window.addEventListener('reid-sync-status-change', async () => {
+                        updateSyncStatusClass(await syncControl.get());
+                    });
+
                     updateSyncStatusClass(await syncControl.get());
-                    const twiBtnSyncEnaUut = document.getElementById('reid-sync-button-activate');
+                    const twiBtnSyncEnaUut = ele.getElementsByClassName('reid-sync-button-activate')[0];
                     if (twiBtnSyncEnaUut !== null) {
                         twiBtnSyncEnaUut.addEventListener('click', () => {
                             setRSS3Sync(true);
                         });
                     }
-                    const twiBtnSyncDeUut = document.getElementById('reid-sync-button-deactivate');
+                    const twiBtnSyncDeUut = ele.getElementsByClassName('reid-sync-button-deactivate')[0];
                     if (twiBtnSyncDeUut !== null) {
                         twiBtnSyncDeUut.addEventListener('click', () => {
                             setRSS3Sync(false);
@@ -47,45 +53,45 @@ import syncControl from '@/common/sync-control';
 
         // Sync post area
 
-        observe('[data-testid="tweetButtonInline"]', (ele: Element): void => {
-            const tweetButton = document.querySelector('[data-testid=tweetButtonInline]');
-            if (tweetButton != null) {
-                const baseColor = window.getComputedStyle(tweetButton, '').backgroundColor;
-                const hoverBG = baseColor.replace('rgb(', 'rgba(').replace(')', ', 0.1)');
-                document.body.insertAdjacentHTML('beforeend', twitterColorStyle(baseColor, hoverBG));
-            }
+        const syncPost = async () => {
+            const summary = (<HTMLElement>document.querySelector('.public-DraftStyleDefault-block'))?.innerText;
 
-            ele.addEventListener('click', async () => {
-                const summary = (<HTMLElement>document.querySelector('.public-DraftStyleDefault-block'))?.innerText;
+            const attachments = document.querySelectorAll(
+                '[data-testid="attachments"] img, [data-testid="attachments"] source',
+            );
 
-                const attachments = document.querySelectorAll(
-                    '[data-testid="attachments"] img, [data-testid="attachments"] source',
-                );
+            const contents = await Promise.all(
+                [...attachments].map(async (attachment) => {
+                    const result = await fetch((<HTMLImageElement | HTMLSourceElement>attachment).src);
+                    const blob = await result.blob();
+                    return {
+                        address: [await ipfs.upload(blob)],
+                        mime_type: blob.type,
+                        size_in_bytes: blob.size + '',
+                    };
+                }),
+            );
 
-                const contents = await Promise.all(
-                    [...attachments].map(async (attachment) => {
-                        const result = await fetch((<HTMLImageElement | HTMLSourceElement>attachment).src);
-                        const blob = await result.blob();
-                        return {
-                            address: [await ipfs.upload(blob)],
-                            mime_type: blob.type,
-                            size_in_bytes: blob.size + '',
-                        };
-                    }),
-                );
-
-                if (await syncControl.get()) {
-                    const rss3 = await RSS3.get();
-                    if (rss3) {
-                        await rss3.item.post({
-                            summary,
-                            tags: ['Re: ID', 'Twitter'],
-                            contents,
-                        });
-                        await rss3.persona.sync();
-                    }
+            if (await syncControl.get()) {
+                const rss3 = await RSS3.get();
+                if (rss3) {
+                    await rss3.item.post({
+                        summary,
+                        tags: ['Re: ID', 'Twitter'],
+                        contents,
+                    });
+                    await rss3.persona.sync();
                 }
-            });
+            }
+        };
+
+        observe('[data-testid="tweetButtonInline"], [data-testid="tweetButton"]', (ele: Element): void => {
+            const baseColor = window.getComputedStyle(ele, '').backgroundColor;
+            const hoverBG = baseColor.replace('rgb(', 'rgba(').replace(')', ', 0.1)');
+            document.body.insertAdjacentHTML('beforeend', twitterColorStyle(baseColor, hoverBG));
+
+            ele.removeEventListener('click', syncPost); // if any, prevent multiple trigger
+            ele.addEventListener('click', syncPost);
         });
 
         observe('[data-testid="fileInput"]', (ele: Element): void => {

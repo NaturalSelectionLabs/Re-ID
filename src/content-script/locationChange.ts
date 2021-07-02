@@ -1,10 +1,8 @@
 // What if user clicks something and our element disappears?
 document.addEventListener('click', () => {
     setTimeout(() => {
-        if (document.getElementById('reid-sync-active-status') === null) {
-            // Location changed
-            window.dispatchEvent(new Event('locationchange'));
-        }
+        // Location changed
+        window.dispatchEvent(new Event('locationchange'));
     }, 0);
 });
 
