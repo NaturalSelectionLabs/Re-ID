@@ -28,15 +28,9 @@ jobs:
     - run: yarn install --frozen-lockfile
     - run: yarn build
     
-    - name: Pack
-      run: |
-        cd ./dist/ 
-        zip -r ../re-id.zip ./
-        cd ../
-    
-    - name: Upload Artifact
+    - name: Pack and upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: build-pack
-        path: re-id.zip
+        name: reid-test-pack
+        path: dist/ # this will pack automatically, so no other packs needed
         retention-days: 7
