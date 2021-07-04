@@ -3,27 +3,7 @@ const ReIDLogoOutlined = `
 `;
 
 export const TwitterButtonSync = `
-<div id="reid-sync-switch">
-    <div class="button">
-        ${ReIDLogoOutlined}
-    </div>
-    <div class="switch-wrapper">
-        <div class="card-title">
-            <h2>Sync to RSS3 file?</h2>
-            <span> Toggle RSS3 file syncing for this post</span>
-        </div>
-        <div class="card-body">
-            <ul id="reid-sync-active-status" class="switch">
-                <li id="reid-sync-button-activate" class="only-active">
-                    <div>Syncing on</div>
-                </li>
-                <li id="reid-sync-button-deactivate" class="no-active">
-                    <div>Syncing off</div>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
+
 <style>
 #reid-sync-switch {
     border-width: 1px;
@@ -130,6 +110,28 @@ export const TwitterButtonSync = `
     color: var(--twitter-theme-color);
 }
 </style>
+<div id="reid-sync-switch">
+    <div class="button">
+        ${ReIDLogoOutlined}
+    </div>
+    
+    <div class="switch-wrapper">
+        <div class="card-title">
+            <h2>Sync to RSS3 file?</h2>
+            <span> Toggle RSS3 file syncing for this post</span>
+        </div>
+        <div class="card-body">
+            <ul class="reid-sync-active-status switch">
+                <li class="reid-sync-button-activate only-active">
+                    <div>Syncing on</div>
+                </li>
+                <li class="reid-sync-button-deactivate no-active">
+                    <div>Syncing off</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 `;
 
 export const twitterColorStyle = (color: string, hoverBG: string) => {
