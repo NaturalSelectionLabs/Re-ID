@@ -10,8 +10,7 @@
 [![test-build](https://img.shields.io/github/workflow/status/NaturalSelectionLabs/Re-ID/Build%20test%20pack?label=test%20build&style=for-the-badge)](https://github.com/NaturalSelectionLabs/Re-ID/actions/workflows/build-test.yml)
 [![release-build](https://img.shields.io/github/workflow/status/NaturalSelectionLabs/Re-ID/Build%20release%20pack?label=release%20build&style=for-the-badge)](https://github.com/NaturalSelectionLabs/Re-ID/actions/workflows/build-release.yml)
 [![release](https://img.shields.io/github/v/release/NaturalSelectionLabs/Re-ID?color=%235d66f5&style=for-the-badge)](https://github.com/NaturalSelectionLabs/Re-ID/releases)
-
-<!-- [![chrome web store](https://img.shields.io/chrome-web-store/v/hcioafpcjhamfeiegnnahpjnmnlilkil?color=%23f55d66&style=for-the-badge)]() -->
+[![chrome web store](https://img.shields.io/chrome-web-store/v/hcioafpcjhamfeiegnnahpjnmnlilkil?color=%23f55d66&style=for-the-badge)](https://chrome.google.com/webstore/detail/re-id/hcioafpcjhamfeiegnnahpjnmnlilkil)
 
 </span>
 
