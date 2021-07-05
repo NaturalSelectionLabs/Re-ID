@@ -9,6 +9,7 @@ export const TwitterButtonSync = `
     border-width: 1px;
     border-radius: 50%;
     transition-duration: 0.2s;
+    font-family: sans-serif, 'SansSerif';
 }
 
 #reid-sync-switch:hover {
