@@ -41,6 +41,7 @@ export default {
     clear: () => {
         return new Promise<null>((resolve) => {
             rss3 = null;
+            chrome.storage.sync.remove('invited');
             chrome.storage.sync.remove('privateKey', () => {
                 resolve(null);
             });
