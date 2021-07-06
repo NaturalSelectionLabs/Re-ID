@@ -5,11 +5,16 @@
             <div class="flex flex-col gap-2.5">
                 <img class="avatar" :src="avatarUrl" />
                 <div class="h-10 w-35 flex flex-col gap-2.5">
-                    <p class="font-xs font-semibold">{{ userID }}</p>
+                    <p class="font-xs font-semibold">{{ username }}</p>
                     <key-container :keyText="address" :isPrivate="false" viewType="popup" :isCollapse="true" />
                 </div>
             </div>
+            <div class="text-right font-normal text-xs" v-show="isInviteFinished">
+                <span class="text-success" v-if="isInviteSuccessful"> Invited successfully </span>
+                <span class="text-danger" v-else> Failed to invite.. Maybe already invited or request error? </span>
+            </div>
             <Input
+                :class="isInviteFinished ? '' : 'mt-9'"
                 inputType="text"
                 placeholderText="Invitee's Address"
                 viewType="popup"
@@ -41,6 +46,8 @@ export default class Invite extends Vue {
     bio: any;
     address: string = ''; // public address
     invitee: string = '';
+    isInviteFinished = false;
+    isInviteSuccessful = true;
     rss3?: IRSS3 | null;
     async mounted() {
         this.rss3 = await RSS3.get();
@@ -58,8 +65,8 @@ export default class Invite extends Vue {
 
     async sendInvitation() {
         if (this.rss3) {
-            const inviteSuccess = await reidInvite.new(this.rss3.persona.id, this.invitee);
-            console.log(inviteSuccess);
+            this.isInviteSuccessful = await reidInvite.new(this.rss3.persona.id, this.invitee);
+            this.isInviteFinished = true;
         }
     }
 }
