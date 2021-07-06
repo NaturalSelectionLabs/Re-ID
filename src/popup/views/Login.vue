@@ -3,15 +3,18 @@
         <div class="row-start-2 row-end-3 flex flex-col justify-start items-left gap-y-5">
             <p><logo width="55" height="55" class="inline" /></p>
             <p><logo-title height="30" width="100" class="inline" /></p>
+            <div class="text-right text-danger font-normal text-xs" v-show="!isKeyValid">&#9432; Wrong key length</div>
             <Input
+                :class="isKeyValid ? 'mt-9' : ''"
                 inputType="password"
                 placeholderText="Private Key"
                 viewType="popup"
                 minlength="1"
                 v-model="privateKey"
+                @input="isKeyValid = true"
             />
-            <Button buttonStyle="primary" buttonSize="lg" @click="next()">Continue</Button>
-            <Button buttonStyle="secondary" buttonSize="lg" @click="$router.push('/onboarding')">Go back</Button>
+            <Button :buttonStyle="isKeyValid ? 'primary' : 'disabled'" buttonSize="lg" @click="next()">Continue</Button>
+            <Button buttonStyle="secondary" buttonSize="lg" @click="$router.back()">Go back</Button>
         </div>
     </popup-container>
 </template>
@@ -31,13 +34,21 @@ import reidInvite from '@/common/invite';
 })
 export default class Login extends Vue {
     privateKey: string = '';
+    isKeyValid: boolean = true;
+
+    verifyKeyLength(): Boolean {
+        this.isKeyValid = this.privateKey.length === 64;
+        return this.isKeyValid;
+    }
 
     async next() {
-        const rss3 = await RSS3.set(this.privateKey);
-        if (rss3 && (await reidInvite.check(rss3.persona.id))) {
-            this.$router.push('/home');
-        } else {
-            this.$router.push('/pending');
+        if (this.verifyKeyLength()) {
+            const rss3 = await RSS3.set(this.privateKey);
+            if (rss3 && (await reidInvite.check(rss3.persona.id))) {
+                await this.$router.push('/home');
+            } else {
+                await this.$router.push('/pending');
+            }
         }
     }
 }
