@@ -11,11 +11,13 @@
             "32": "images/icon32.png"
         }
     },
-    "description": "This is Re: ID",
+    "description": "The first step to own your own data.",
     "icons": {
-        "16": "images/icon16.png",
-        "24": "images/icon24.png",
-        "32": "images/icon32.png"
+        "16": "images/icon16a.png",
+        "24": "images/icon24a.png",
+        "32": "images/icon32a.png",
+        "48": "images/icon48a.png",
+        "128": "images/icon128a.png"
     },
 
     "author": "NaturalSelectionLabs",
