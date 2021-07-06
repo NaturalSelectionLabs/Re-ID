@@ -10,8 +10,7 @@
                 </div>
             </div>
             <div class="text-right font-normal text-xs" v-show="isInviteFinished">
-                <span class="text-success" v-if="isInviteSuccessful"> Invited successfully </span>
-                <span class="text-danger" v-else> Failed to invite.. Maybe already invited or request error? </span>
+                <span :class="isInviteSuccessful ? 'text-success' : 'text-danger'">{{ inviteMsg }}</span>
             </div>
             <Input
                 :class="isInviteFinished ? '' : 'mt-9'"
@@ -21,6 +20,7 @@
                 minlength="1"
                 maxLength="128"
                 v-model="invitee"
+                @input="isInviteFinished = false"
             />
             <Button buttonStyle="primary" buttonSize="lg" @click="sendInvitation">Send invitation</Button>
         </div>
@@ -48,6 +48,7 @@ export default class Invite extends Vue {
     invitee: string = '';
     isInviteFinished = false;
     isInviteSuccessful = true;
+    inviteMsg = '';
     rss3?: IRSS3 | null;
     async mounted() {
         this.rss3 = await RSS3.get();
@@ -64,8 +65,13 @@ export default class Invite extends Vue {
     }
 
     async sendInvitation() {
-        if (this.rss3) {
+        if (this.invitee.length !== 42) {
+            this.isInviteSuccessful = false;
+            this.inviteMsg = 'Invalid invitee address';
+            this.isInviteFinished = true;
+        } else if (this.rss3) {
             this.isInviteSuccessful = await reidInvite.new(this.rss3.persona.id, this.invitee);
+            this.inviteMsg = reidInvite.msg();
             this.isInviteFinished = true;
         }
     }

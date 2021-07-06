@@ -3,8 +3,7 @@
         <h2>You can invite others to Re: ID using their public keys.</h2>
         <div class="address">
             <div class="text-right font-medium text-2xl mb-2" v-show="isInviteFinished">
-                <span class="text-success" v-if="isInviteSuccessful"> Invited successfully </span>
-                <span class="text-danger" v-else> Failed to invite.. Maybe already invited or request error? </span>
+                <span :class="isInviteSuccessful ? 'text-success' : 'text-danger'">{{ inviteMsg }}</span>
             </div>
             <Input
                 :class="isInviteFinished ? '' : 'mt-10'"
@@ -12,6 +11,7 @@
                 view-type="options"
                 input-type="text"
                 v-model="invitee"
+                @input="isInviteFinished = false"
             />
         </div>
         <div class="btn-send">
@@ -37,6 +37,7 @@ export default class TabsInvite extends Vue {
     invitee: string = '';
     isInviteFinished = false;
     isInviteSuccessful = true;
+    inviteMsg = '';
     RSS3?: IRSS3;
 
     async mounted() {
@@ -51,8 +52,13 @@ export default class TabsInvite extends Vue {
     }
 
     async sendInvitation() {
-        if (this.RSS3) {
+        if (this.invitee.length !== 42) {
+            this.isInviteSuccessful = false;
+            this.inviteMsg = 'Invalid invitee address';
+            this.isInviteFinished = true;
+        } else if (this.RSS3) {
             this.isInviteSuccessful = await reidInvite.new(this.RSS3.persona.id, this.invitee);
+            this.inviteMsg = reidInvite.msg();
             this.isInviteFinished = true;
         }
     }

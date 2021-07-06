@@ -3,6 +3,8 @@ import axios from 'axios';
 const inviteEndpoint = 'https://re-id-invite-database-q335m.ondigitalocean.app';
 // const inviteEndpoint = 'http://localhost:8080';
 
+let msg = '';
+
 export default {
     check: async (addr: string): Promise<boolean> => {
         return new Promise<boolean>((resolve) => {
@@ -16,6 +18,7 @@ export default {
                             invited: true,
                         });
                     }
+                    msg = res.data.message;
                     resolve(res.data.ok);
                 }
             });
@@ -27,6 +30,11 @@ export default {
             from: inviter,
             address: invitee,
         });
+        msg = res.data.message;
         return res.data.ok;
+    },
+
+    msg: (): string => {
+        return msg;
     },
 };
