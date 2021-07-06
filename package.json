@@ -36,7 +36,7 @@
         "rss3": "0.3.11",
         "stream-browserify": "3.0.0",
         "typescript": "4.3.5",
-        "vue": "3.1.2",
+        "vue": "3.1.4",
         "vue-class-component": "8.0.0-rc.1",
         "vue-moment": "4.1.0"
     },
@@ -45,7 +45,7 @@
         "@babel/preset-env": "7.14.7",
         "@types/chrome": "0.0.145",
         "@types/lodash": "4.14.170",
-        "@vue/compiler-sfc": "3.1.2",
+        "@vue/compiler-sfc": "3.1.4",
         "autoprefixer": "10.2.6",
         "babel-loader": "8.2.2",
         "copy-webpack-plugin": "9.0.1",
