@@ -4,7 +4,7 @@ import ipfs from '@/common/ipfs';
 import RSS3 from '@/common/rss3';
 
 const syncPost = async () => {
-    const summary = (<HTMLElement>document.querySelector('.public-DraftStyleDefault-block'))?.innerText;
+    const summary = (<HTMLElement>document.querySelector('[data-testid=tweetTextarea_0]'))?.innerText;
 
     const attachments = document.querySelectorAll(
         '[data-testid="attachments"] img, [data-testid="attachments"] source',
