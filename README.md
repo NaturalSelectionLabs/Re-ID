@@ -12,6 +12,8 @@
 [![release](https://img.shields.io/github/v/release/NaturalSelectionLabs/Re-ID?color=%235d66f5&style=for-the-badge)](https://github.com/NaturalSelectionLabs/Re-ID/releases)
 [![chrome web store](https://img.shields.io/chrome-web-store/v/hcioafpcjhamfeiegnnahpjnmnlilkil?color=%23f55d66&style=for-the-badge)](https://chrome.google.com/webstore/detail/re-id/hcioafpcjhamfeiegnnahpjnmnlilkil)
 
+[![available in chrome web store](https://storage.googleapis.com/chrome-gcs-uploader.appspot.com/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/UV4C4ybeBTsZt43U4xis.png)](https://chrome.google.com/webstore/detail/re-id/hcioafpcjhamfeiegnnahpjnmnlilkil)
+
 </span>
 
 ---
@@ -23,6 +25,12 @@ Automatically sync your posts on social medias to a crypto based [RSS3](https://
 With Re:ID, the content create on social medias platforms will be no longer bonded with the platform itself, who lock up your data as their own treasure.
 
 You will have your own copy which can be carried to any RSS3 compatible applications.
+
+## 🎁 Installation
+
+The latest stable version can be grabbed from [Release Page](https://github.com/NaturalSelectionLabs/Re-ID/releases) with **re-id.zip** file attached.
+
+You can also migrate to [Chrome Web Store](https://chrome.google.com/webstore/detail/re-id/hcioafpcjhamfeiegnnahpjnmnlilkil) for the published version. It might have some latency than the Release version because google need to review it before publish.
 
 ## ⚙ Development
 
