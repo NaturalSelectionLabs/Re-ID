@@ -25,11 +25,16 @@ const syncPost = async () => {
     if (await syncControl.get()) {
         const rss3 = await RSS3.get();
         if (rss3) {
-            await rss3.item.post({
+            const twitItem = {
                 summary,
                 tags: ['Re: ID', 'Twitter'],
                 contents,
+            };
+            const tagsInTwit = [...summary?.matchAll(/#(\S+)/g)];
+            tagsInTwit.forEach((tagMatch) => {
+                twitItem.tags.push(tagMatch[1]);
             });
+            await rss3.item.post(twitItem);
             await rss3.persona.sync();
         }
     }
