@@ -1,6 +1,6 @@
 <template>
     <div
-        class="itemContainer"
+        class="itemContainer whitespace-pre-line"
         :class="{
             'item-popup': viewType === 'popup',
             'item-options': viewType === 'options',
@@ -16,7 +16,9 @@
                     :src="each.address[0]"
                 />
                 <p>
-                    <a v-if="each.mime_type.startsWith('text')" :href="each.address[0]">{{ each.address[0] }}</a>
+                    <a v-if="each.mime_type.startsWith('text')" :href="each.address[0]" class="break-all">{{
+                        each.address[0]
+                    }}</a>
                 </p>
             </div>
             <!-- TODO -->
