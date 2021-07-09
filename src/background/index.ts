@@ -1,4 +1,4 @@
-const supportedHost = ['twitter.com'];
+const supportedHost = ['twitter.com', 'weibo.com'];
 
 function setIcon(url: string) {
     const host = new URL(url).host;
