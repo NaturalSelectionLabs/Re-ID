@@ -44,7 +44,7 @@ export default class Login extends Vue {
     async next() {
         if (this.verifyKeyLength()) {
             const rss3 = await RSS3.set(this.privateKey);
-            if (rss3 && (await reidInvite.check(rss3.persona.id))) {
+            if (rss3 && (await reidInvite.invite.check(rss3.persona.id))) {
                 await this.$router.push('/home');
             } else {
                 await this.$router.push('/pending');

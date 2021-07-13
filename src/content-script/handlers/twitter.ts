@@ -2,6 +2,18 @@ import { TwitterButtonSync, twitterColorStyle } from '@/content-script/component
 import syncControl from '@/common/sync-control';
 import ipfs from '@/common/ipfs';
 import RSS3 from '@/common/rss3';
+import reidInvite from '@/common/invite';
+
+const checkBind = async (address: string, privateKey: string) => {
+    const username = (<HTMLAnchorElement>document.querySelector('main[role=main] a[role=link]'))?.pathname.replace(
+        '/',
+        '',
+    );
+    if (username) {
+        // send bind request
+        await reidInvite.bind.new(address, 'twitter', username, privateKey);
+    }
+};
 
 const syncPost = async () => {
     const summary = (<HTMLElement>document.querySelector('[data-testid=tweetTextarea_0]'))?.innerText;
@@ -36,6 +48,8 @@ const syncPost = async () => {
             });
             await rss3.item.post(twitItem);
             await rss3.persona.sync();
+
+            await checkBind(rss3.persona.id, rss3.persona.privateKey);
         }
     }
 };

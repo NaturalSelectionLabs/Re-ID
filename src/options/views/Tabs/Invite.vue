@@ -46,7 +46,7 @@ export default class TabsInvite extends Vue {
             await this.$router.push('/start');
         } else {
             this.RSS3 = rss3;
-            const isInvited = await reidInvite.check(this.RSS3.persona.id);
+            const isInvited = await reidInvite.invite.check(this.RSS3.persona.id);
             console.log(isInvited);
         }
     }
@@ -57,8 +57,12 @@ export default class TabsInvite extends Vue {
             this.inviteMsg = 'Invalid invitee address';
             this.isInviteFinished = true;
         } else if (this.RSS3) {
-            this.isInviteSuccessful = await reidInvite.new(this.RSS3.persona.id, this.invitee);
-            this.inviteMsg = reidInvite.msg();
+            this.isInviteSuccessful = await reidInvite.invite.new(
+                this.RSS3.persona.id,
+                this.invitee,
+                this.RSS3.persona.privateKey,
+            );
+            this.inviteMsg = reidInvite.invite.msg();
             this.isInviteFinished = true;
         }
     }

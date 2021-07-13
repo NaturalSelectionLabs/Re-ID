@@ -31,7 +31,7 @@ export default class StartPrivateKey extends Vue {
 
     async next() {
         const rss3 = await RSS3.get();
-        if (rss3 && (await reidInvite.check(rss3.persona.id))) {
+        if (rss3 && (await reidInvite.invite.check(rss3.persona.id))) {
             this.$router.push('/start/profile');
         } else {
             alert('Sorry, you are not invited yet.');
