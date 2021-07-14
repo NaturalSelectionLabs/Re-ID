@@ -1,4 +1,4 @@
-import { TwitterButtonSync, twitterColorStyle } from '@/content-script/components/twitter';
+import { TwitterButtonSync, twitterColorStyle, TwitterButtonFollow } from '@/content-script/components/twitter';
 import syncControl from '@/common/sync-control';
 import ipfs from '@/common/ipfs';
 import RSS3 from '@/common/rss3';
@@ -123,6 +123,47 @@ export default [
                     }
                 }
             });
+        },
+    },
+    {
+        selector: '[data-testid="placementTracking"]',
+        callback: async (ele: Element): Promise<void> => {
+            let followStatus = false;
+            let userAddr = await reidInvite.bind.searchByUsername('twitter', window.location.pathname.replace('/', ''));
+            if (typeof userAddr !== 'undefined') {
+                // User has joined and bind username
+                if (document.getElementById('reid-follow-button-toggle') === null) {
+                    ele.insertAdjacentHTML('beforebegin', TwitterButtonFollow);
+
+                    {
+                        // Listen events
+
+                        function updateFollowStatusClass(fostat: boolean) {
+                            const twiBtnFoUut = document.getElementById('reid-follow');
+                            if (twiBtnFoUut !== null) {
+                                if (fostat) {
+                                    twiBtnFoUut.classList.add('active');
+                                } else {
+                                    twiBtnFoUut.classList.remove('active');
+                                }
+                            }
+                        }
+
+                        function toggleFollowStatus() {
+                            followStatus = !followStatus;
+                            updateFollowStatusClass(followStatus);
+                        }
+
+                        updateFollowStatusClass(followStatus);
+                        const twiBtnFoToUut = document.getElementById('reid-follow-button-toggle');
+                        if (twiBtnFoToUut !== null) {
+                            twiBtnFoToUut.addEventListener('click', () => {
+                                toggleFollowStatus();
+                            });
+                        }
+                    }
+                }
+            }
         },
     },
 ];
