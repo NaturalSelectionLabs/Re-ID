@@ -1,8 +1,8 @@
 import axios from 'axios';
 const Accounts = require('web3-eth-accounts');
 
-// const inviteEndpoint = 'https://re-id-invite-database-q335m.ondigitalocean.app';
-const inviteEndpoint = 'http://localhost:8080';
+const inviteEndpoint = 'https://re-id-invite-database-q335m.ondigitalocean.app';
+// const inviteEndpoint = 'http://localhost:8080';
 
 let msg = '';
 

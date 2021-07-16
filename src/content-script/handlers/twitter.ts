@@ -129,9 +129,27 @@ export default [
         selector: '[data-testid="placementTracking"]',
         callback: async (ele: Element): Promise<void> => {
             let followStatus = false;
+
+            const rss3 = await RSS3.get();
+
             let userAddr = await reidInvite.bind.searchByUsername('twitter', window.location.pathname.replace('/', ''));
-            if (typeof userAddr !== 'undefined') {
+            if (rss3 && typeof userAddr !== 'undefined') {
                 // User has joined and bind username
+
+                let followList = await rss3.links.get(rss3.persona.id, 'following');
+                console.log(followList);
+
+                if (typeof followList === 'undefined') {
+                    followList = await rss3.links.post({
+                        type: 'following',
+                    });
+                }
+                // todo: 这里不知道返回回来的是不是数组，所以只能 ts-ignore 一下（有什么合适的处理方案喵？）
+                // @ts-ignore
+                if (followList?.list?.includes(userAddr)) {
+                    followStatus = true;
+                }
+
                 if (document.getElementById('reid-follow-button-toggle') === null) {
                     ele.insertAdjacentHTML('beforebegin', TwitterButtonFollow);
 
@@ -149,18 +167,30 @@ export default [
                             }
                         }
 
-                        function toggleFollowStatus() {
+                        async function toggleFollowStatus() {
                             followStatus = !followStatus;
+
+                            if (followStatus) {
+                                await rss3?.link.post('following', userAddr);
+                            } else {
+                                await rss3?.link.delete('following', userAddr);
+                            }
+                            console.log(followList);
+
+                            await rss3?.persona.sync();
+
                             updateFollowStatusClass(followStatus);
                         }
 
-                        updateFollowStatusClass(followStatus);
                         const twiBtnFoToUut = document.getElementById('reid-follow-button-toggle');
                         if (twiBtnFoToUut !== null) {
                             twiBtnFoToUut.addEventListener('click', () => {
                                 toggleFollowStatus();
                             });
                         }
+                        setTimeout(() => {
+                            updateFollowStatusClass(followStatus);
+                        }, 0);
                     }
                 }
             }
