@@ -24,6 +24,12 @@
                 />
             </span>
         </div>
+        <div class="follows">
+            <span>
+                {{ $props.followingCount }}
+                <label> Following </label>
+            </span>
+        </div>
     </div>
 </template>
 
@@ -41,6 +47,7 @@ import Tooltip from '@/components/Tooltip.vue';
         avatar: String,
         username: String,
         address: String,
+        followingCount: Number,
     },
 })
 export default class Profile extends Vue {
@@ -76,6 +83,9 @@ export default class Profile extends Vue {
             > * {
                 @apply inline-block;
             }
+        }
+        .follows > * {
+            @apply inline-block text-sm font-normal mr-4;
         }
     }
 }
