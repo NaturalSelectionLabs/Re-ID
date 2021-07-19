@@ -129,8 +129,7 @@ export default class Home extends Vue {
             this.itemsNext = list1.items_next;
             this.address = rss3.persona.id;
 
-            // @ts-ignore
-            const followingList = (await rss3.links.get('following'))?.list;
+            const followingList = (await rss3.links.get(rss3.persona.id, 'following'))?.list;
             this.followingCount = followingList?.length || 0;
 
             this.currentState = await syncControl.get();

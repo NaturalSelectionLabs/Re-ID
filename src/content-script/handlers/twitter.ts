@@ -144,8 +144,6 @@ export default [
                         type: 'following',
                     });
                 }
-                // todo: 这里不知道返回回来的是不是数组，所以只能 ts-ignore 一下（有什么合适的处理方案喵？）
-                // @ts-ignore
                 if (followList?.list?.includes(userAddr)) {
                     followStatus = true;
                 }
