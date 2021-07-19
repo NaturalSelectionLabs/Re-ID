@@ -26,6 +26,10 @@
         </div>
         <div class="follows">
             <span>
+                <b>{{ $props.followersCount }}</b>
+                <label> Followers </label>
+            </span>
+            <span>
                 <b>{{ $props.followingCount }}</b>
                 <label> Following </label>
             </span>
@@ -47,6 +51,7 @@ import Tooltip from '@/components/Tooltip.vue';
         avatar: String,
         username: String,
         address: String,
+        followersCount: Number,
         followingCount: Number,
     },
 })

@@ -1,6 +1,12 @@
 <template>
     <div class="sidebar-left">
-        <Profile :avatar="avatar" :username="username" :address="address" :following-count="followingCount" />
+        <Profile
+            :avatar="avatar"
+            :username="username"
+            :address="address"
+            :followers-count="followersCount"
+            :following-count="followingCount"
+        />
         <NavMenu />
         <Footer />
     </div>
@@ -24,6 +30,7 @@ export default class SidebarLeft extends Vue {
     avatar: String = 'https://gateway.pinata.cloud/ipfs/QmewKetg1XR4wX68w52FMzGiA2vK77LgqK7j86Lh5Lzpsp';
     username: String = '';
     address: String = '';
+    followersCount: Number = -1;
     followingCount: Number = -1;
 
     async mounted() {
@@ -44,6 +51,8 @@ export default class SidebarLeft extends Vue {
             }
         }
         if (rss3) {
+            const followersList = await rss3.backlinks.get(rss3.persona.id, 'following');
+            this.followersCount = followersList?.length || 0;
             const followingList = (await rss3.links.get(rss3.persona.id, 'following'))?.list;
             this.followingCount = followingList?.length || 0;
         }

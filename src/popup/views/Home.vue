@@ -59,6 +59,10 @@
                 </div>
                 <div class="follows">
                     <span>
+                        <b>{{ followersCount }}</b>
+                        <label> Followers </label>
+                    </span>
+                    <span>
                         <b>{{ followingCount }}</b>
                         <label> Following </label>
                     </span>
@@ -111,6 +115,7 @@ export default class Home extends Vue {
     username: String = '';
     bio: String = '';
     address: string = ''; // public address
+    followersCount: Number = -1;
     followingCount: Number = -1;
     items: RSS3Item[] = [];
     itemsNext: string | undefined;
@@ -128,6 +133,9 @@ export default class Home extends Vue {
             this.items = list1.items;
             this.itemsNext = list1.items_next;
             this.address = rss3.persona.id;
+
+            const followersList = await rss3.backlinks.get(rss3.persona.id, 'following');
+            this.followersCount = followersList?.length || 0;
 
             const followingList = (await rss3.links.get(rss3.persona.id, 'following'))?.list;
             this.followingCount = followingList?.length || 0;
