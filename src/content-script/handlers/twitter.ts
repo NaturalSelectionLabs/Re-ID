@@ -1,7 +1,19 @@
-import { TwitterButtonSync, twitterColorStyle } from '@/content-script/components/twitter';
+import { TwitterButtonSync, twitterColorStyle, TwitterButtonFollow } from '@/content-script/components/twitter';
 import syncControl from '@/common/sync-control';
 import ipfs from '@/common/ipfs';
 import RSS3 from '@/common/rss3';
+import reidInvite from '@/common/invite';
+
+const checkBind = async (address: string, privateKey: string) => {
+    const username = (<HTMLAnchorElement>document.querySelector('main[role=main] a[role=link]'))?.pathname.replace(
+        '/',
+        '',
+    );
+    if (username) {
+        // send bind request
+        await reidInvite.bind.new(address, 'twitter', username, privateKey);
+    }
+};
 
 const syncPost = async () => {
     const summary = (<HTMLElement>document.querySelector('[data-testid=tweetTextarea_0]'))?.innerText;
@@ -36,6 +48,8 @@ const syncPost = async () => {
             });
             await rss3.item.post(twitItem);
             await rss3.persona.sync();
+
+            await checkBind(rss3.persona.id, rss3.persona.privateKey);
         }
     }
 };
@@ -109,6 +123,75 @@ export default [
                     }
                 }
             });
+        },
+    },
+    {
+        selector: '[data-testid="placementTracking"]',
+        callback: async (ele: Element): Promise<void> => {
+            let followStatus = false;
+
+            const rss3 = await RSS3.get();
+
+            let userAddr = await reidInvite.bind.searchByUsername('twitter', window.location.pathname.replace('/', ''));
+            if (rss3 && typeof userAddr !== 'undefined') {
+                // User has joined and bind username
+
+                let followList = await rss3.links.get(rss3.persona.id, 'following');
+                console.log(followList);
+
+                if (typeof followList === 'undefined') {
+                    followList = await rss3.links.post({
+                        type: 'following',
+                    });
+                }
+                if (followList?.list?.includes(userAddr)) {
+                    followStatus = true;
+                }
+
+                if (document.getElementById('reid-follow-button-toggle') === null) {
+                    ele.insertAdjacentHTML('beforebegin', TwitterButtonFollow);
+
+                    {
+                        // Listen events
+
+                        function updateFollowStatusClass(fostat: boolean) {
+                            const twiBtnFoUut = document.getElementById('reid-follow');
+                            if (twiBtnFoUut !== null) {
+                                if (fostat) {
+                                    twiBtnFoUut.classList.add('active');
+                                } else {
+                                    twiBtnFoUut.classList.remove('active');
+                                }
+                            }
+                        }
+
+                        async function toggleFollowStatus() {
+                            followStatus = !followStatus;
+
+                            if (followStatus) {
+                                await rss3?.link.post('following', userAddr);
+                            } else {
+                                await rss3?.link.delete('following', userAddr);
+                            }
+                            console.log(followList);
+
+                            await rss3?.persona.sync();
+
+                            updateFollowStatusClass(followStatus);
+                        }
+
+                        const twiBtnFoToUut = document.getElementById('reid-follow-button-toggle');
+                        if (twiBtnFoToUut !== null) {
+                            twiBtnFoToUut.addEventListener('click', () => {
+                                toggleFollowStatus();
+                            });
+                        }
+                        setTimeout(() => {
+                            updateFollowStatusClass(followStatus);
+                        }, 0);
+                    }
+                }
+            }
         },
     },
 ];

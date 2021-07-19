@@ -26,6 +26,16 @@ module.exports = (env, argv) => ({
         alias: {
             '@': __dirname + '/src',
         },
+        fallback: {
+            crypto: require.resolve('crypto-browserify'),
+            stream: require.resolve('stream-browserify'),
+            buffer: require.resolve('buffer/'),
+            assert: require.resolve('assert/'),
+            https: require.resolve('https-browserify'),
+            http: require.resolve('stream-http'),
+            os: require.resolve('os-browserify/browser'),
+            url: false,
+        },
     },
 
     module: {
@@ -138,6 +148,10 @@ module.exports = (env, argv) => ({
             VERSION: JSON.stringify(require('./public/manifest.json').version) + '',
             __VUE_OPTIONS_API__: true,
             __VUE_PROD_DEVTOOLS__: false,
+        }),
+        new webpack.ProvidePlugin({
+            process: 'process/browser',
+            Buffer: ['buffer', 'Buffer'],
         }),
     ],
     optimization: {

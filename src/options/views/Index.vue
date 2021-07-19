@@ -16,7 +16,7 @@ export default class Entry extends Vue {
         if (!rss3) {
             this.$router.push('/start');
         } else {
-            if (await reidInvite.check(rss3.persona.id)) {
+            if (await reidInvite.invite.check(rss3.persona.id)) {
                 this.$router.push('/home');
             } else {
                 this.$router.push('/start/address');

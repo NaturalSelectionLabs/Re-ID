@@ -5,7 +5,7 @@ async function allow() {
     return new Promise<boolean>(async (resolve) => {
         const rss3 = await RSS3.get();
         if (rss3) {
-            if (await reidInvite.check(rss3.persona.id)) {
+            if (await reidInvite.invite.check(rss3.persona.id)) {
                 resolve(true);
             } else {
                 resolve(false);
