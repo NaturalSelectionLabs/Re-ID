@@ -57,6 +57,12 @@
                 <div class="break-words font-xs font-normal text-gray-text text-opacity-60">
                     {{ bio }}
                 </div>
+                <div class="follows">
+                    <span>
+                        <b>{{ followingCount }}</b>
+                        <label> Following </label>
+                    </span>
+                </div>
                 <div class="buttons w-55 h-7 grid grid-cols-2 gap-1">
                     <Button buttonStyle="primary" buttonSize="md" @click="$router.push('/Invite')">Invite</Button>
                     <Button buttonStyle="primary" buttonSize="md" @click="openOptionsPage">Expand</Button>
@@ -105,6 +111,7 @@ export default class Home extends Vue {
     username: String = '';
     bio: String = '';
     address: string = ''; // public address
+    followingCount: Number = -1;
     items: RSS3Item[] = [];
     itemsNext: string | undefined;
     showingMenu = false;
@@ -121,6 +128,10 @@ export default class Home extends Vue {
             this.items = list1.items;
             this.itemsNext = list1.items_next;
             this.address = rss3.persona.id;
+
+            // @ts-ignore
+            const followingList = (await rss3.links.get('following'))?.list;
+            this.followingCount = followingList?.length || 0;
 
             this.currentState = await syncControl.get();
         }
@@ -180,6 +191,10 @@ export default class Home extends Vue {
 
     .avatar {
         @apply h-10 w-10 rounded object-cover;
+    }
+
+    .follows > * {
+        @apply inline-block text-xs font-normal mr-4;
     }
 }
 </style>

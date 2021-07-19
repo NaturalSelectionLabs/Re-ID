@@ -26,7 +26,7 @@
         </div>
         <div class="follows">
             <span>
-                {{ $props.followingCount }}
+                <b>{{ $props.followingCount }}</b>
                 <label> Following </label>
             </span>
         </div>
