@@ -28,14 +28,14 @@ export default class TabsBase extends Vue {}
 <style lang="postcss" scoped>
 @layer components {
     .body {
-        @apply relative w-180 mx-80 px-2 top-18 box-content;
+        @apply relative w-180 mx-80 px-2 top-18 box-content pt-24;
 
         > * {
             @apply relative;
         }
 
         .footer {
-            @apply py-18;
+            @apply fixed bottom-18;
         }
     }
 }

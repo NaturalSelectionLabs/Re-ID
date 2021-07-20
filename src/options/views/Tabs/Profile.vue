@@ -88,10 +88,8 @@ export default class TabsProfile extends Vue {
 <style lang="postcss" scoped>
 @layer components {
     .profile {
-        @apply mt-24;
-
         > div {
-            @apply mt-8;
+            @apply mb-8;
         }
     }
 }

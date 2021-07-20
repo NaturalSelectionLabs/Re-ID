@@ -72,7 +72,7 @@ export default class TabsInvite extends Vue {
 <style lang="postcss" scoped>
 @layer components {
     .invite {
-        @apply mt-40;
+        @apply mt-16;
 
         > h2 {
             @apply font-semibold text-2xl leading-6;

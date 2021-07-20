@@ -19,7 +19,7 @@ export default class TabsAdvancedView extends Vue {
 <style lang="postcss" scoped>
 @layer components {
     textarea {
-        @apply w-180 h-160;
+        @apply w-180 h-120;
     }
 }
 </style>

@@ -128,6 +128,7 @@ module.exports = {
                 92: '23rem', // 368px, options.html tips height
                 101: '25.25rem', //404px
                 105: '26.25rem', //420px, popup.html height
+                120: '30rem', //480px, options.html advanced viewbox height
                 160: '40rem', //640px, options.html advanced profile editor height
             },
             transitionTimeFunction: {
