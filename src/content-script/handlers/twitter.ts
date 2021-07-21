@@ -5,13 +5,16 @@ import RSS3 from '@/common/rss3';
 import reidInvite from '@/common/invite';
 
 async function checkBind(address: string, privateKey: string) {
-    const username = (<HTMLAnchorElement>document.querySelector('main[role=main] a[role=link]'))?.pathname.replace(
-        '/',
-        '',
-    );
-    if (username) {
-        // send bind request
-        await reidInvite.bind.new(address, 'twitter', username, privateKey);
+    if (window.location.pathname === '/home') {
+        // Only check in homepage
+        const username = (<HTMLAnchorElement>document.querySelector('main[role=main] a[role=link]'))?.pathname.replace(
+            '/',
+            '',
+        );
+        if (username) {
+            // send bind request
+            await reidInvite.bind.new(address, 'twitter', username, privateKey);
+        }
     }
 }
 
