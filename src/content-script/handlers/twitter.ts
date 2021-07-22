@@ -1,4 +1,9 @@
-import { TwitterButtonSync, twitterColorStyle, TwitterButtonFollow } from '@/content-script/components/twitter';
+import {
+    TwitterButtonSync,
+    twitterColorStyle,
+    TwitterButtonFollow,
+    ReIDLogoColor,
+} from '@/content-script/components/twitter';
 import syncControl from '@/common/sync-control';
 import ipfs from '@/common/ipfs';
 import RSS3 from '@/common/rss3';
@@ -202,6 +207,26 @@ async function mountRSS3FollowButton(ele: Element) {
     }
 }
 
+async function identifyReIDUsers() {
+    // Identify Re: ID user in home
+    const allTweets = document.querySelectorAll('[data-testid=tweet]');
+
+    for (const tweet of allTweets) {
+        const userNameFiled = tweet.querySelectorAll('div > div > div > div > div > div > a[role=link]')[1];
+        const userDisplayNameElement = userNameFiled.querySelector('div[dir=auto] > span');
+        const userName = userNameFiled.querySelector('div[dir=ltr] > span')?.innerHTML;
+        if (userDisplayNameElement !== null && typeof userName !== 'undefined') {
+            const rss3Addr = await getRSS3BindAddress(userName.replace('@', ''));
+            if (typeof rss3Addr !== 'undefined') {
+                userDisplayNameElement.insertAdjacentHTML(
+                    'beforeend',
+                    `<span style='display: inline-block; width: 1.2rem;'>${ReIDLogoColor}</span>`,
+                );
+            }
+        }
+    }
+}
+
 export default [
     {
         // Sync control button and expand box
@@ -222,5 +247,10 @@ export default [
         // Mount RSS3 on button
         selector: '[data-testid="placementTracking"]',
         callback: mountRSS3FollowButton,
+    },
+    {
+        // Mount icon on Re: ID users' name
+        selector: '[id=accessible-list-0]',
+        callback: identifyReIDUsers,
     },
 ];
