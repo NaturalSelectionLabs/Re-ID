@@ -266,7 +266,7 @@ export default [
     },
     {
         // Mount icon on Re: ID users' name
-        selector: '[id=accessible-list-0]',
+        selector: '[id^=accessible-list-]',
         callback: identifyReIDUsers,
     },
 ];
