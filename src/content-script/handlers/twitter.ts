@@ -1,9 +1,4 @@
-import {
-    TwitterButtonSync,
-    twitterColorStyle,
-    TwitterButtonFollow,
-    ReIDLogoColor,
-} from '@/content-script/components/twitter';
+import { TwitterButtonSync, TwitterButtonFollow, ReIDLogoColor } from '@/content-script/components/twitter';
 import syncControl from '@/common/sync-control';
 import ipfs from '@/common/ipfs';
 import RSS3 from '@/common/rss3';
@@ -106,10 +101,17 @@ async function mountControlButton(ele: Element) {
     }
 }
 
+function setTwitterColor(baseColor: string) {
+    if (document.documentElement.style.getPropertyValue('--twitter-theme-color') !== baseColor) {
+        document.documentElement.style.setProperty('--twitter-theme-color', baseColor);
+        const hoverBG = baseColor.replace('rgb(', 'rgba(').replace(')', ', 0.1)');
+        document.documentElement.style.setProperty('--twitter-theme-hover-background', hoverBG);
+    }
+}
+
 async function syncPostWhenTweet(ele: Element) {
     const baseColor = window.getComputedStyle(ele, '').backgroundColor;
-    const hoverBG = baseColor.replace('rgb(', 'rgba(').replace(')', ', 0.1)');
-    document.body.insertAdjacentHTML('beforeend', twitterColorStyle(baseColor, hoverBG));
+    setTwitterColor(baseColor);
 
     ele.removeEventListener('click', syncPost); // if any, prevent multiple trigger
     ele.addEventListener('click', syncPost);
@@ -160,6 +162,12 @@ async function mountRSS3FollowButton(ele: Element) {
         }
 
         if (document.getElementById('reid-follow-button-toggle') === null) {
+            const tweetButton = document.querySelector('[data-testid=SideNav_NewTweet_Button]');
+            if (tweetButton !== null) {
+                const baseColor = window.getComputedStyle(tweetButton, '').backgroundColor;
+                setTwitterColor(baseColor);
+            }
+
             ele.insertAdjacentHTML('beforebegin', TwitterButtonFollow);
 
             {

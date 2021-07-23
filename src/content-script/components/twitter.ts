@@ -143,17 +143,6 @@ export const TwitterButtonSync = `
 </div>
 `;
 
-export const twitterColorStyle = (color: string, hoverBG: string) => {
-    return `
-<style>
-    :root {
-        --twitter-theme-color: ${color};
-        --twitter-theme-hover-background: ${hoverBG};
-    }
-</style>
-`;
-};
-
 export const TwitterButtonFollow = `
 <div id="reid-follow">
     <div id="reid-follow-button-toggle" class="button">
@@ -167,7 +156,7 @@ export const TwitterButtonFollow = `
 </div>
 <style>
 #reid-follow {
-    border: 1px solid #1da1f2;
+    border: 1px solid var(--twitter-theme-color);
     border-radius: 50%;
     transition-duration: 0.2s;
     margin-right: 8px;
@@ -191,11 +180,11 @@ export const TwitterButtonFollow = `
 #reid-follow > div.button svg {
     width: 1.5em;
     height: 1.5em;
-    fill: rgba(29, 161, 242, 1);
+    fill: var(--twitter-theme-color);
 }
 #reid-follow.active {
     border-color: transparent;
-    background-color: #1da1f2;
+    background-color: var(--twitter-theme-color);
 }
 #reid-follow.active > div svg {
     fill: #fff;
