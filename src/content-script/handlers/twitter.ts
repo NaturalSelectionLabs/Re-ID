@@ -218,7 +218,7 @@ async function mountRSS3FollowButton(ele: Element) {
             .querySelectorAll('main[role=main] div[data-testid=primaryColumn] div[dir=auto]')[7]
             ?.insertAdjacentHTML(
                 'beforeend',
-                `<span style='display: inline-block; width: 1.2em;'>${ReIDLogoColor}</span>`,
+                `<span style='display: inline-flex; width: 1.2em;'>${ReIDLogoColor}</span>`,
             );
     }
 }
@@ -236,7 +236,7 @@ async function identifyReIDUsers() {
             if (typeof rss3Addr !== 'undefined') {
                 userDisplayNameElement.insertAdjacentHTML(
                     'beforeend',
-                    `<span style='display: inline-block; width: 1.2em;'>${ReIDLogoColor}</span>`,
+                    `<span style='display: inline-flex; width: 1.2em;'>${ReIDLogoColor}</span>`,
                 );
             }
         }
