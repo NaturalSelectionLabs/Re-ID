@@ -3,6 +3,7 @@ import syncControl from '@/common/sync-control';
 import ipfs from '@/common/ipfs';
 import RSS3 from '@/common/rss3';
 import reidInvite from '@/common/invite';
+import { debounce } from 'lodash';
 
 async function checkBind(address: string, privateKey: string) {
     if (window.location.pathname === '/home') {
@@ -224,23 +225,32 @@ async function mountRSS3FollowButton(ele: Element) {
 }
 
 async function identifyReIDUsers() {
+    console.log('trigger identifyReIDUsers');
     // Identify Re: ID user in home
     const allTweets = document.querySelectorAll('[data-testid=tweet]');
 
     for (const tweet of allTweets) {
         const userNameFiled = tweet.querySelectorAll('div > div > div > div > div > div > a[role=link]')[1];
         const userDisplayNameElement = userNameFiled.querySelector('div[dir=auto] > span');
-        const userName = userNameFiled.querySelector('div[dir=ltr] > span')?.innerHTML;
-        if (userDisplayNameElement !== null && typeof userName !== 'undefined') {
-            const rss3Addr = await getRSS3BindAddress(userName.replace('@', ''));
-            if (typeof rss3Addr !== 'undefined') {
-                userDisplayNameElement.insertAdjacentHTML(
-                    'beforeend',
-                    `<span style='display: inline-flex; width: 1.2em;'>${ReIDLogoColor}</span>`,
-                );
+        if (userDisplayNameElement !== null && userDisplayNameElement.querySelector('.reid-logo') === null) {
+            const userName = userNameFiled.querySelector('div[dir=ltr] > span')?.innerHTML;
+            if (typeof userName !== 'undefined') {
+                const rss3Addr = await getRSS3BindAddress(userName.replace('@', ''));
+                if (typeof rss3Addr !== 'undefined') {
+                    userDisplayNameElement.insertAdjacentHTML(
+                        'beforeend',
+                        `<span class='reid-logo' style='display: inline-flex; width: 1.2em;'>${ReIDLogoColor}</span>`,
+                    );
+                }
             }
         }
     }
+}
+
+async function setIdentifyReIDUsersEvents() {
+    window.removeEventListener('scroll', debounce(identifyReIDUsers, 100));
+    window.addEventListener('scroll', debounce(identifyReIDUsers, 100));
+    await identifyReIDUsers();
 }
 
 export default [
@@ -267,6 +277,6 @@ export default [
     {
         // Mount icon on Re: ID users' name
         selector: '[id^=accessible-list-]',
-        callback: identifyReIDUsers,
+        callback: setIdentifyReIDUsersEvents,
     },
 ];
