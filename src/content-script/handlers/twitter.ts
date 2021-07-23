@@ -213,14 +213,6 @@ async function mountRSS3FollowButton(ele: Element) {
                 }, 0);
             }
         }
-
-        // Mount Re: ID logo after username
-        document
-            .querySelectorAll('main[role=main] div[data-testid=primaryColumn] div[dir=auto]')[7]
-            ?.insertAdjacentHTML(
-                'beforeend',
-                `<span style='display: inline-flex; width: 1.2em;'>${ReIDLogoColor}</span>`,
-            );
     }
 }
 
