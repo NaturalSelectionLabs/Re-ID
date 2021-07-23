@@ -225,7 +225,6 @@ async function mountRSS3FollowButton(ele: Element) {
 }
 
 async function identifyReIDUsers() {
-    console.log('trigger identifyReIDUsers');
     // Identify Re: ID user in home
     const allTweets = document.querySelectorAll('[data-testid=tweet]');
 
@@ -247,9 +246,13 @@ async function identifyReIDUsers() {
     }
 }
 
+let initScrollTriggerReIdentify = true;
+
 async function setIdentifyReIDUsersEvents() {
-    window.removeEventListener('scroll', debounce(identifyReIDUsers, 100));
-    window.addEventListener('scroll', debounce(identifyReIDUsers, 100));
+    if (initScrollTriggerReIdentify) {
+        window.addEventListener('scroll', debounce(identifyReIDUsers, 100));
+        initScrollTriggerReIdentify = false;
+    }
     await identifyReIDUsers();
 }
 
