@@ -6,6 +6,10 @@ const ReIDLogoWhite = `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 16.3"><path class="a" d="M2.16,13a1,1,0,0,0-1,1s0,.08,0,.11H1a1.07,1.07,0,0,0,.09,2.14H3.25V14.09A1,1,0,0,0,2.16,13Z" transform="translate(0)"/><path class="a" d="M18.83,0h-5.2A7.88,7.88,0,0,0,5.75,7.88c0,1.17,0,2.35,0,3.53,0,.82,0,1.64,0,2.46l-2.21,2.4,7.41,0h7.82a5.2,5.2,0,0,0,4.9-3.44.69.69,0,0,0,0-.1l.06-.19,0-.12c0-.06,0-.12.05-.18h0V12.2a5.53,5.53,0,0,0,.12-.91V5.17A5.18,5.18,0,0,0,18.83,0Zm2.11,12.3a.61.61,0,1,1-1.22,0V9.54a.61.61,0,0,1,.61-.62.59.59,0,0,1,.23,0,.48.48,0,0,1,.2.14.62.62,0,0,1,.18.44Z"/></svg>
 `;
 
+export const ReIDLogoColor = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 700"><g data-name="Layer 3"><path d="M796.8,172.9H580.4c-181,0-327.6,146.7-327.6,327.6h0l.4,146.9.3,102.3-91.7,99.8q154.05.75,308.1,1.4H795c94,0,174-59.8,204.2-143.4.5-1.3.9-2.7,1.4-4,.9-2.6,1.7-5.2,2.5-7.8.5-1.6,1-3.3,1.4-4.9.7-2.6,1.4-5.2,2-7.8v-.1a18.43,18.43,0,0,0,.5-2.5,220.67,220.67,0,0,0,4.8-38c0-.9.1-1.9.1-2.8,0-1.8.1-3.5.1-5.3V388.2C1012,269.3,915.6,172.9,796.8,172.9ZM873.4,572c0-14.4,11.4-26.1,25.5-26.1a24.87,24.87,0,0,1,18,7.6,26.52,26.52,0,0,1,7.5,18.5V686.6a25.72,25.72,0,0,1-25.5,26c-14.1,0-25.5-11.7-25.5-26Z" transform="translate(-12.03 -172.9)" fill="#5c65f4" /><path d="M148.9,757.9v91.7H57.3c-58.1,0-61.4-87.4-3.4-90.3,1.5-.1,3.1-.1,4.6-.1,0-1.6.1-3.1.1-4.7C61.5,696.5,148.9,699.8,148.9,757.9Z" transform="translate(-12.03 -172.9)" fill="#f55d66" /></g></svg>
+`;
+
 export const TwitterButtonSync = `
 
 <style>
@@ -139,17 +143,6 @@ export const TwitterButtonSync = `
 </div>
 `;
 
-export const twitterColorStyle = (color: string, hoverBG: string) => {
-    return `
-<style>
-    :root {
-        --twitter-theme-color: ${color};
-        --twitter-theme-hover-background: ${hoverBG};
-    }
-</style>
-`;
-};
-
 export const TwitterButtonFollow = `
 <div id="reid-follow">
     <div id="reid-follow-button-toggle" class="button">
@@ -163,7 +156,7 @@ export const TwitterButtonFollow = `
 </div>
 <style>
 #reid-follow {
-    border: 1px solid #1da1f2;
+    border: 1px solid var(--twitter-theme-color);
     border-radius: 50%;
     transition-duration: 0.2s;
     margin-right: 8px;
@@ -187,11 +180,11 @@ export const TwitterButtonFollow = `
 #reid-follow > div.button svg {
     width: 1.5em;
     height: 1.5em;
-    fill: rgba(29, 161, 242, 1);
+    fill: var(--twitter-theme-color);
 }
 #reid-follow.active {
     border-color: transparent;
-    background-color: #1da1f2;
+    background-color: var(--twitter-theme-color);
 }
 #reid-follow.active > div svg {
     fill: #fff;

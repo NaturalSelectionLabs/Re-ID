@@ -3,7 +3,7 @@ document.addEventListener('click', () => {
     setTimeout(() => {
         // Location changed
         window.dispatchEvent(new Event('locationchange'));
-    }, 0);
+    }, 100);
 });
 
 // Learn more about this hack from https://stackoverflow.com/a/52809105/1986338
