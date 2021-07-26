@@ -142,16 +142,43 @@ async function getRSS3BindAddress(username: string): Promise<string | undefined>
 }
 
 async function mountRSS3FollowButton(ele: Element) {
-    let followStatus = false;
+    function updateFollowButtonStatus(fostat: boolean) {
+        const twiBtnFoUut = document.getElementById('reid-follow');
+        if (twiBtnFoUut !== null) {
+            if (fostat) {
+                twiBtnFoUut.classList.add('active');
+            } else {
+                twiBtnFoUut.classList.remove('active');
+            }
+        }
+    }
+
+    async function updateFollowStatus(status: boolean) {
+        if (typeof userAddr !== 'undefined') {
+            if (status) {
+                await rss3?.link.post('following', userAddr);
+            } else {
+                await rss3?.link.delete('following', userAddr);
+            }
+        }
+
+        updateFollowButtonStatus(status);
+
+        await rss3?.persona.sync();
+    }
+
+    const followToggleButton = ele.querySelector('[data-testid$=follow]');
+    let followOnTwitterStatus = followToggleButton?.getAttribute('data-testid')?.includes('-unfollow') || false;
 
     const rss3 = await RSS3.get();
 
     let userAddr = await getRSS3BindAddress(window.location.pathname.replace('/', ''));
     if (rss3 && typeof userAddr !== 'undefined') {
+        let followOnRSS3Status = false;
+
         // User has joined and bind username
 
         let followList = await rss3.links.get(rss3.persona.id, 'following');
-        console.log(followList);
 
         if (typeof followList === 'undefined') {
             followList = await rss3.links.post({
@@ -159,7 +186,7 @@ async function mountRSS3FollowButton(ele: Element) {
             });
         }
         if (followList?.list?.includes(userAddr)) {
-            followStatus = true;
+            followOnRSS3Status = true;
         }
 
         if (document.getElementById('reid-follow-button-toggle') === null) {
@@ -171,46 +198,28 @@ async function mountRSS3FollowButton(ele: Element) {
 
             ele.insertAdjacentHTML('beforebegin', TwitterButtonFollow);
 
-            {
-                // Listen events
+            // Listen events
 
-                function updateFollowStatusClass(fostat: boolean) {
-                    const twiBtnFoUut = document.getElementById('reid-follow');
-                    if (twiBtnFoUut !== null) {
-                        if (fostat) {
-                            twiBtnFoUut.classList.add('active');
-                        } else {
-                            twiBtnFoUut.classList.remove('active');
-                        }
-                    }
-                }
+            const twiBtnFoToUut = document.getElementById('reid-follow-button-toggle');
+            twiBtnFoToUut?.addEventListener('click', async () => {
+                followOnRSS3Status = !followOnRSS3Status;
+                await updateFollowStatus(followOnRSS3Status);
+            });
 
-                async function toggleFollowStatus() {
-                    followStatus = !followStatus;
+            // Sync follow / unfollow
+            followToggleButton?.addEventListener('click', async () => {
+                followOnTwitterStatus = !followOnTwitterStatus;
+                followOnRSS3Status = !followOnRSS3Status;
+                await updateFollowStatus(followOnRSS3Status);
+            });
 
-                    if (typeof userAddr !== 'undefined') {
-                        if (followStatus) {
-                            await rss3?.link.post('following', userAddr);
-                        } else {
-                            await rss3?.link.delete('following', userAddr);
-                        }
-                    }
-
-                    updateFollowStatusClass(followStatus);
-
-                    await rss3?.persona.sync();
-                }
-
-                const twiBtnFoToUut = document.getElementById('reid-follow-button-toggle');
-                if (twiBtnFoToUut !== null) {
-                    twiBtnFoToUut.addEventListener('click', () => {
-                        toggleFollowStatus();
-                    });
-                }
-                setTimeout(() => {
-                    updateFollowStatusClass(followStatus);
-                }, 0);
+            if (followOnTwitterStatus !== followOnRSS3Status) {
+                // Sync follow on RSS3
+                followOnRSS3Status = followOnTwitterStatus;
+                await updateFollowStatus(followOnRSS3Status);
             }
+
+            updateFollowButtonStatus(followOnRSS3Status);
         }
     }
 }
