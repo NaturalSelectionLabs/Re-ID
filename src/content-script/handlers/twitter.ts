@@ -195,11 +195,10 @@ async function mountRSS3FollowButton(ele: Element) {
                             await rss3?.link.delete('following', userAddr);
                         }
                     }
-                    console.log(followList);
-
-                    await rss3?.persona.sync();
 
                     updateFollowStatusClass(followStatus);
+
+                    await rss3?.persona.sync();
                 }
 
                 const twiBtnFoToUut = document.getElementById('reid-follow-button-toggle');
