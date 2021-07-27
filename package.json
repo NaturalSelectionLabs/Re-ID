@@ -43,7 +43,7 @@
     },
     "devDependencies": {
         "@babel/core": "7.14.8",
-        "@babel/preset-env": "7.14.7",
+        "@babel/preset-env": "7.14.8",
         "@types/chrome": "0.0.148",
         "@types/lodash": "4.14.171",
         "@vue/compiler-sfc": "3.1.5",
