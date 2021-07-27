@@ -1,15 +1,20 @@
 <template>
-    <div class="user-container" :class="$props.viewType">
+    <a
+        class="user-container"
+        :class="$props.viewType"
+        target="_blank"
+        :href="'https://rss3scan.io/address/' + $props.user.address"
+    >
         <div class="user">
             <img class="avatar" :src="$props.user.avatar" />
             <span class="username">{{ $props.user.name }}</span>
         </div>
         <div class="address">
-            <a target="_blank" :href="'https://rss3scan.io/address/' + $props.user.address">
+            <span>
                 {{ $props.user.address }}
-            </a>
+            </span>
         </div>
-    </div>
+    </a>
 </template>
 
 <script lang="ts">
@@ -31,7 +36,8 @@ export default class SingleUser extends Vue {}
 <style scoped lang="postcss">
 @layer components {
     .user-container {
-        @apply py-4;
+        @apply p-4 duration-200
+        hover:bg-gray-bg;
 
         > * {
             @apply inline-block;
@@ -43,19 +49,31 @@ export default class SingleUser extends Vue {}
 
         > .user {
             > span.username {
-                @apply ml-4;
+                @apply ml-4 font-semibold;
             }
         }
 
         > .address {
-            @apply absolute right-0;
+            @apply absolute right-4 text-gray-700;
+
+            &::after {
+                @apply ml-1 text-primary;
+                content: '\279C';
+            }
         }
 
         &.popup {
             @apply text-xs;
 
             img.avatar {
-                @apply w-14 h-14 rounded;
+                @apply w-10 h-10 rounded;
+            }
+
+            > .address {
+                @apply text-xs;
+                > span {
+                    @apply h-10;
+                }
             }
         }
 
@@ -63,7 +81,14 @@ export default class SingleUser extends Vue {}
             @apply text-lg;
 
             img.avatar {
-                @apply w-10 h-10 rounded;
+                @apply w-14 h-14 rounded;
+            }
+
+            > .address {
+                @apply text-xs;
+                > span {
+                    @apply h-14;
+                }
             }
         }
     }
