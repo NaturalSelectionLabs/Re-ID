@@ -11,7 +11,7 @@ import { Options, Vue } from 'vue-class-component';
 import ItemList from '@/components/ItemList.vue';
 import SingleItem from '@/components/SingleItem.vue';
 import RSS3 from '@/common/rss3';
-import { RSS3Item, RSS3Items } from 'rss3/types/rss3';
+import { RSS3Item } from 'rss3/types/rss3';
 
 @Options({
     components: {

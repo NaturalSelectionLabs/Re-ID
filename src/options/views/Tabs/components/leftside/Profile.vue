@@ -25,14 +25,14 @@
             </span>
         </div>
         <div class="follows">
-            <span>
+            <router-link to="/followers">
                 <b>{{ $props.followersCount }}</b>
-                <label> Followers </label>
-            </span>
-            <span>
+                <span> Followers </span>
+            </router-link>
+            <router-link to="/following">
                 <b>{{ $props.followingCount }}</b>
-                <label> Following </label>
-            </span>
+                <span> Following </span>
+            </router-link>
         </div>
     </div>
 </template>
@@ -91,6 +91,10 @@ export default class Profile extends Vue {
         }
         .follows > * {
             @apply inline-block text-sm font-normal mr-4;
+
+            &.router-link-active {
+                @apply text-primary;
+            }
         }
     }
 }

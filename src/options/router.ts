@@ -21,6 +21,8 @@ import TabsAdvancedDelete from './views/Tabs/Advanced/Delete.vue';
 import TabsProfile from './views/Tabs/Profile.vue';
 import TabsInvite from './views/Tabs/Invite.vue';
 import TabsSettings from './views/Tabs/Settings.vue';
+import TabsFollowers from './views/Tabs/FollowUsers/Followers.vue';
+import TabsFollowing from './views/Tabs/FollowUsers/Following.vue';
 
 const routes = [
     {
@@ -104,6 +106,14 @@ const routes = [
             {
                 path: 'settings',
                 component: TabsSettings,
+            },
+            {
+                path: 'followers',
+                component: TabsFollowers,
+            },
+            {
+                path: 'following',
+                component: TabsFollowing,
             },
         ],
     },
