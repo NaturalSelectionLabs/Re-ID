@@ -11,7 +11,13 @@
         </div>
         <div class="address">
             <span>
-                {{ $props.user.address }}
+                {{
+                    $props.viewType === 'popup'
+                        ? `${$props.user.address.substring(0, 3)}***${$props.user.address.substring(
+                              $props.user.address.length - 3,
+                          )}`
+                        : $props.user.address
+                }}
             </span>
         </div>
     </a>
@@ -36,8 +42,11 @@ export default class SingleUser extends Vue {}
 <style scoped lang="postcss">
 @layer components {
     .user-container {
-        @apply p-4 duration-200
-        hover:bg-gray-bg;
+        @apply p-4 duration-200 relative;
+
+        &:hover {
+            @apply bg-gray-bg;
+        }
 
         > * {
             @apply inline-block;
@@ -57,7 +66,7 @@ export default class SingleUser extends Vue {}
             @apply absolute right-4 text-gray-700;
 
             &::after {
-                @apply ml-1 text-primary;
+                @apply ml-1 text-primary fill-current;
                 content: '\279C';
             }
         }

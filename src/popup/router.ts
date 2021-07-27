@@ -12,6 +12,9 @@ import Invite from './views/Invite.vue';
 import Profile from './views/Profile.vue';
 import Account from './views/Account.vue';
 
+import Followers from '@/popup/views/FollowUsers/Followers.vue';
+import Following from '@/popup/views/FollowUsers/Following.vue';
+
 const routes = [
     {
         path: '/',
@@ -46,6 +49,15 @@ const routes = [
     {
         path: '/account',
         component: Account,
+    },
+
+    {
+        path: '/followers',
+        component: Followers,
+    },
+    {
+        path: '/following',
+        component: Following,
     },
 ];
 

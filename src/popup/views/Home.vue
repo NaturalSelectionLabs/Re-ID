@@ -58,14 +58,14 @@
                     {{ bio }}
                 </div>
                 <div class="follows">
-                    <span>
+                    <router-link to="/followers">
                         <b>{{ followersCount }}</b>
-                        <label> Followers </label>
-                    </span>
-                    <span>
+                        <span> Followers </span>
+                    </router-link>
+                    <router-link to="/following">
                         <b>{{ followingCount }}</b>
-                        <label> Following </label>
-                    </span>
+                        <span> Following </span>
+                    </router-link>
                 </div>
                 <div class="buttons w-55 h-7 grid grid-cols-2 gap-1">
                     <Button buttonStyle="primary" buttonSize="md" @click="$router.push('/Invite')">Invite</Button>
