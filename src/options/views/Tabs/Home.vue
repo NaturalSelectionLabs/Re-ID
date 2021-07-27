@@ -26,7 +26,7 @@ export default class TabsHome extends Vue {
     async mounted() {
         const rss3 = await RSS3.get();
         if (!rss3) {
-            this.$router.push('/start');
+            await this.$router.push('/start');
         } else {
             const list1 = await rss3.items.get();
             this.rss3items = list1.items;

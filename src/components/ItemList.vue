@@ -18,7 +18,7 @@ import { Vue, Options } from 'vue-class-component';
         viewType: String,
     },
 })
-export default class CollapseMenu extends Vue {}
+export default class ItemList extends Vue {}
 </script>
 
 <style lang="postcss">
