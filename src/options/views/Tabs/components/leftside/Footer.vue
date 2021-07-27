@@ -19,7 +19,7 @@ export default class Footer extends Vue {
 <style lang="postcss" scoped>
 @layer components {
     .footer {
-        @apply fixed bottom-18 pointer-events-none;
+        @apply fixed bottom-12 pointer-events-none;
     }
 }
 </style>

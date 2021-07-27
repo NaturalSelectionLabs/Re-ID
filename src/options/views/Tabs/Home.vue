@@ -36,10 +36,4 @@ export default class TabsHome extends Vue {
 }
 </script>
 
-<style lang="postcss" scoped>
-@layer components {
-    .home {
-        @apply mt-8;
-    }
-}
-</style>
+<style lang="postcss" scoped></style>
