@@ -1,10 +1,5 @@
 <template>
-    <a
-        class="user-container"
-        :class="$props.viewType"
-        target="_blank"
-        :href="'https://rss3scan.io/address/' + $props.user.address"
-    >
+    <div class="user-container" :class="$props.viewType">
         <div class="user">
             <img class="avatar" :src="$props.user.avatar" />
             <span class="username">{{ $props.user.name }}</span>
@@ -20,7 +15,7 @@
                 }}
             </span>
         </div>
-    </a>
+    </div>
 </template>
 
 <script lang="ts">
@@ -42,7 +37,7 @@ export default class SingleUser extends Vue {}
 <style scoped lang="postcss">
 @layer components {
     .user-container {
-        @apply p-4 duration-200 relative;
+        @apply p-4 duration-200 relative cursor-pointer;
 
         &:hover {
             @apply bg-gray-bg;

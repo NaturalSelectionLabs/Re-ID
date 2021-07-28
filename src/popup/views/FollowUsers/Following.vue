@@ -3,7 +3,13 @@
         <BackButton view-type="popup" />
         <div class="follow">
             <UserList>
-                <SingleUser v-for="(user, idx) in followersShowList" view-type="popup" :user="user" :key="idx" />
+                <SingleUser
+                    v-for="(user, idx) in followersShowList"
+                    view-type="popup"
+                    :user="user"
+                    :key="idx"
+                    @click="viewUser(user.address)"
+                />
             </UserList>
         </div>
     </PopupContainer>
@@ -45,6 +51,10 @@ export default class Followers extends Vue {
                 });
             }
         }
+    }
+
+    viewUser(addr: string) {
+        window.open('https://rss3scan.io/address/' + addr, '_blank');
     }
 }
 </script>
