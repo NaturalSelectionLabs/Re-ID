@@ -4,7 +4,7 @@
             <Avatar ref="avatar" size="lg" :url="avatarUrl" />
         </div>
         <div class="username">
-            <Input view-type="options" input-type="text" placeholderText="Name" v-model="username" />
+            <Input view-type="options" input-type="text" placeholderText="Name" v-model="name" />
         </div>
         <div class="bio">
             <Input view-type="options" input-type="text-area" placeholderText="Bio" v-model="bio" />
@@ -23,9 +23,9 @@ import { Options, Vue } from 'vue-class-component';
 import Input from '@/components/Input.vue';
 import Button from '@/components/Button.vue';
 import RSS3, { IRSS3 } from '@/common/rss3';
-import { ThirdPartyAddress } from 'rss3/types/rss3';
 import IconAdd from '@/components/icons/IconAdd.vue';
 import Avatar from '@/components/Avatar.vue';
+import MultiAccounts from '@/common/multi-accounts';
 
 @Options({
     components: {
@@ -37,7 +37,7 @@ import Avatar from '@/components/Avatar.vue';
 })
 export default class TabsProfile extends Vue {
     avatarUrl: string = 'https://gateway.pinata.cloud/ipfs/QmewKetg1XR4wX68w52FMzGiA2vK77LgqK7j86Lh5Lzpsp';
-    username: string = '';
+    name: string = '';
     bio: string = '';
     rss3?: IRSS3;
     saveButtonText = 'Save';
@@ -56,7 +56,7 @@ export default class TabsProfile extends Vue {
         const profile = await this.rss3?.profile.get();
         this.avatarUrl = profile?.avatar?.[0] || this.avatarUrl;
         console.log(profile);
-        this.username = profile?.name || '';
+        this.name = profile?.name || '';
         this.bio = profile?.bio || '';
     }
 
@@ -64,13 +64,13 @@ export default class TabsProfile extends Vue {
         if (this.rss3) {
             this.saveButtonText = 'Saving...';
             const avatarUrl = await (<any>this.$refs.avatar).upload();
-            console.log(this.username, this.bio);
+            console.log(this.name, this.bio);
             const profile: {
                 name: string;
                 bio: string;
                 avatar?: string[];
             } = {
-                name: this.username,
+                name: this.name,
                 bio: this.bio,
             };
             if (avatarUrl) {
@@ -79,6 +79,12 @@ export default class TabsProfile extends Vue {
             await this.rss3.profile.patch(profile);
             await this.rss3.persona.sync();
             this.saveButtonText = 'Save';
+            await MultiAccounts.set({
+                avatar: avatarUrl || this.avatarUrl,
+                name: this.name,
+                address: this.rss3.persona.id,
+                privateKey: this.rss3.persona.privateKey,
+            });
             document.dispatchEvent(new Event('profileUpdate'));
         }
     }

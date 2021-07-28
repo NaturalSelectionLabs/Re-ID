@@ -1,6 +1,6 @@
 <template>
     <div class="follow">
-        <UserList>
+        <UserList view-type="options">
             <SingleUser
                 v-for="(user, idx) in followersShowList"
                 view-type="options"

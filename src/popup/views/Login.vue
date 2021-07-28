@@ -28,6 +28,7 @@ import Button from '@/components/Button.vue';
 import Input from '@/components/Input.vue';
 import RSS3 from '@/common/rss3';
 import reidInvite from '@/common/invite';
+import MultiAccounts from '@/common/multi-accounts';
 
 @Options({
     components: { PopupContainer, Logo, LogoTitle, Button, Input },
@@ -44,7 +45,18 @@ export default class Login extends Vue {
     async next() {
         if (this.verifyKeyLength()) {
             const rss3 = await RSS3.set(this.privateKey);
-            if (rss3 && (await reidInvite.invite.check(rss3.persona.id))) {
+            const profile = await rss3.profile.get();
+
+            await MultiAccounts.set({
+                avatar:
+                    profile?.avatar?.[0] ||
+                    'https://gateway.pinata.cloud/ipfs/QmewKetg1XR4wX68w52FMzGiA2vK77LgqK7j86Lh5Lzpsp',
+                name: profile?.name || '',
+                address: rss3.persona.id,
+                privateKey: rss3.persona.privateKey,
+            });
+
+            if (await reidInvite.invite.check(rss3.persona.id)) {
                 await this.$router.push('/home');
             } else {
                 await this.$router.push('/pending');

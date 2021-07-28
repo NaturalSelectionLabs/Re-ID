@@ -6,6 +6,7 @@ import StartIndex from './views/Start/Index.vue';
 import Start from './views/Start/Base.vue';
 import StartNew from './views/Start/New.vue';
 import StartLogin from './views/Start/Login.vue';
+import StartLoginBack from './views/Start/LoginBack.vue';
 import StartPrivateKey from './views/Start/PrivateKey.vue';
 import StartSavePrivateKey from './views/Start/SavePrivateKey.vue';
 import StartAddress from './views/Start/Address.vue';
@@ -41,6 +42,10 @@ const routes = [
             {
                 path: 'new',
                 component: StartNew,
+            },
+            {
+                path: 'login-back',
+                component: StartLoginBack,
             },
             {
                 path: 'login',

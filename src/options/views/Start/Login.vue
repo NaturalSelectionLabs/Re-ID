@@ -20,6 +20,7 @@ import { Options, Vue } from 'vue-class-component';
 import Button from '@/components/Button.vue';
 import Input from '@/components/Input.vue';
 import RSS3 from '@/common/rss3';
+import MultiAccounts from '@/common/multi-accounts';
 
 @Options({
     components: {
@@ -36,10 +37,21 @@ export default class StartLogin extends Vue {
         return this.isKeyValid;
     }
 
-    login() {
+    async login() {
         if (this.verifyKeyLength()) {
-            RSS3.set(this.privateKey);
-            this.$router.push('/');
+            const rss3 = await RSS3.set(this.privateKey);
+            const profile = await rss3.profile.get();
+
+            await MultiAccounts.set({
+                avatar:
+                    profile?.avatar?.[0] ||
+                    'https://gateway.pinata.cloud/ipfs/QmewKetg1XR4wX68w52FMzGiA2vK77LgqK7j86Lh5Lzpsp',
+                name: profile?.name || '',
+                address: rss3.persona.id,
+                privateKey: rss3.persona.privateKey,
+            });
+
+            await this.$router.push('/');
         }
     }
 }

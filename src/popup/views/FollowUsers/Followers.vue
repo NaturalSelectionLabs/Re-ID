@@ -2,7 +2,7 @@
     <PopupContainer>
         <BackButton view-type="popup" />
         <div class="follow">
-            <UserList>
+            <UserList view-type="popup">
                 <SingleUser
                     v-for="(user, idx) in followersShowList"
                     view-type="popup"

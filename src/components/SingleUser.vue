@@ -37,7 +37,7 @@ export default class SingleUser extends Vue {}
 <style scoped lang="postcss">
 @layer components {
     .user-container {
-        @apply p-4 duration-200 relative cursor-pointer;
+        @apply duration-200 relative cursor-pointer;
 
         &:hover {
             @apply bg-gray-bg;
@@ -53,7 +53,7 @@ export default class SingleUser extends Vue {}
 
         > .user {
             > span.username {
-                @apply ml-4 font-semibold;
+                @apply font-semibold;
             }
         }
 
@@ -67,10 +67,16 @@ export default class SingleUser extends Vue {}
         }
 
         &.popup {
-            @apply text-xs;
+            @apply p-2 text-xs;
 
             img.avatar {
                 @apply w-10 h-10 rounded;
+            }
+
+            > .user {
+                > span.username {
+                    @apply ml-2;
+                }
             }
 
             > .address {
@@ -82,10 +88,16 @@ export default class SingleUser extends Vue {}
         }
 
         &.options {
-            @apply text-lg;
+            @apply p-4 text-lg;
 
             img.avatar {
                 @apply w-14 h-14 rounded;
+            }
+
+            > .user {
+                > span.username {
+                    @apply ml-4;
+                }
             }
 
             > .address {

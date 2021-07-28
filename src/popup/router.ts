@@ -6,6 +6,7 @@ import Onboarding from './views/Onboarding.vue';
 import Pending from './views/Pending.vue';
 
 import Login from './views/Login.vue';
+import LoginBack from './views/LoginBack.vue';
 
 import Home from './views/Home.vue';
 import Invite from './views/Invite.vue';
@@ -32,6 +33,10 @@ const routes = [
     {
         path: '/login',
         component: Login,
+    },
+    {
+        path: '/login-back',
+        component: LoginBack,
     },
 
     {
