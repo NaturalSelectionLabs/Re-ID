@@ -64,7 +64,7 @@ export default class TabsSettings extends Vue {
 <style lang="postcss" scoped>
 @layer components {
     .settings {
-        @apply mt-40;
+        @apply mt-16;
 
         > * {
             @apply mt-8;

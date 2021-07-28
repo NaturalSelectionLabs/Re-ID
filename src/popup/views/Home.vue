@@ -58,14 +58,14 @@
                     {{ bio }}
                 </div>
                 <div class="follows">
-                    <span>
+                    <router-link to="/followers">
                         <b>{{ followersCount }}</b>
-                        <label> Followers </label>
-                    </span>
-                    <span>
+                        <span class="label"> Followers </span>
+                    </router-link>
+                    <router-link to="/following">
                         <b>{{ followingCount }}</b>
-                        <label> Following </label>
-                    </span>
+                        <span class="label"> Following </span>
+                    </router-link>
                 </div>
                 <div class="buttons w-55 h-7 grid grid-cols-2 gap-1">
                     <Button buttonStyle="primary" buttonSize="md" @click="$router.push('/Invite')">Invite</Button>
@@ -201,7 +201,11 @@ export default class Home extends Vue {
     }
 
     .follows > * {
-        @apply inline-block text-xs font-normal mr-4;
+        @apply inline-block text-xs font-normal mr-8;
+
+        .label {
+            @apply ml-1.5;
+        }
     }
 }
 </style>

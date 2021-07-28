@@ -52,8 +52,6 @@ export default class TabsAdvancedBase extends Vue {
 <style lang="postcss" scoped>
 @layer components {
     .advanced {
-        @apply mt-24;
-
         > h1 {
             @apply font-semibold text-2xl leading-5;
         }
@@ -86,7 +84,7 @@ export default class TabsAdvancedBase extends Vue {
             }
 
             > .textarea {
-                @apply w-180 h-160 bg-gray-light my-4;
+                @apply w-180 bg-gray-light my-4;
             }
         }
     }

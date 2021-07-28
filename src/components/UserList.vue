@@ -1,9 +1,9 @@
 <template>
     <div
-        class="itemList"
+        class="user-list"
         :class="{
-            'itemList-popup': viewType === 'popup',
-            'itemList-options': viewType === 'options',
+            popup: $props.viewType === 'popup',
+            options: $props.viewType === 'options',
         }"
     >
         <slot />
@@ -18,20 +18,21 @@ import { Vue, Options } from 'vue-class-component';
         viewType: String,
     },
 })
-export default class ItemList extends Vue {}
+export default class UserList extends Vue {}
 </script>
 
 <style lang="postcss">
 @layer components {
-    .itemList {
+    .user-list {
         @apply flex flex-col divide-y divide-black divide-opacity-10 overflow-y-scroll;
-    }
-    .itemList-popup {
-        @apply w-55 h-60;
-    }
 
-    .itemList-options {
-        @apply w-180 h-160;
+        &.popup {
+            @apply w-55 h-60;
+        }
+
+        &.options {
+            @apply w-180 h-160;
+        }
     }
 }
 </style>
