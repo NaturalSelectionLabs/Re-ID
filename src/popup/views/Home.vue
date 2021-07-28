@@ -60,11 +60,11 @@
                 <div class="follows">
                     <router-link to="/followers">
                         <b>{{ followersCount }}</b>
-                        <span> Followers </span>
+                        <span class="label"> Followers </span>
                     </router-link>
                     <router-link to="/following">
                         <b>{{ followingCount }}</b>
-                        <span> Following </span>
+                        <span class="label"> Following </span>
                     </router-link>
                 </div>
                 <div class="buttons w-55 h-7 grid grid-cols-2 gap-1">
@@ -201,7 +201,11 @@ export default class Home extends Vue {
     }
 
     .follows > * {
-        @apply inline-block text-xs font-normal mr-4;
+        @apply inline-block text-xs font-normal mr-8;
+
+        .label {
+            @apply ml-1.5;
+        }
     }
 }
 </style>
