@@ -149,6 +149,9 @@ module.exports = {
                 profile: '40px 140px 32px',
                 context: '1/3 2/3',
             },
+            zIndex: {
+                '-10': '-10',
+            },
         },
     },
     variants: {
