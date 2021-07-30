@@ -1,7 +1,13 @@
 <template>
     <div class="home">
         <ItemList view-type="options">
-            <SingleItem v-for="(item, idx) in rss3items" view-type="options" :rss3-item="item" :key="idx" />
+            <SingleItem
+                v-for="(item, idx) in rss3items"
+                view-type="options"
+                :rss3-item="item"
+                :key="idx"
+                @confirm-delete="deleteItem(item.id, idx)"
+            />
         </ItemList>
     </div>
 </template>
@@ -32,6 +38,12 @@ export default class TabsHome extends Vue {
             this.rss3items = list1.items;
             this.rss3itemsNext = list1.items_next;
         }
+    }
+
+    async deleteItem(itemId: string, idx: number) {
+        const rss3 = await RSS3.get();
+        // todo: delete
+        this.rss3items.splice(idx, 1);
     }
 }
 </script>

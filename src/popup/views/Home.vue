@@ -73,7 +73,13 @@
                 </div>
             </div>
             <item-list viewType="popup">
-                <single-item v-for="(item, idx) in items" :key="idx" viewType="popup" :rss3Item="item" />
+                <single-item
+                    v-for="(item, idx) in items"
+                    :key="idx"
+                    viewType="popup"
+                    :rss3Item="item"
+                    @confirm-delete="deleteItem(item.id, idx)"
+                />
             </item-list>
         </div>
     </popup-container>
@@ -172,6 +178,12 @@ export default class Home extends Vue {
 
     openOptionsPage() {
         chrome.runtime.openOptionsPage();
+    }
+
+    async deleteItem(itemId: string, idx: number) {
+        const rss3 = await RSS3.get();
+        // todo: delete
+        this.items.splice(idx, 1);
     }
 }
 </script>
