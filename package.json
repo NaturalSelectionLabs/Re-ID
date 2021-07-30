@@ -1,6 +1,6 @@
 {
     "name": "re-id",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "description": "The first step to own your own data.",
     "main": "index.js",
     "scripts": {
