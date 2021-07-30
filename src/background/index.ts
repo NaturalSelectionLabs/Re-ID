@@ -2,7 +2,7 @@ const supportedHost = ['twitter.com'];
 
 function setIcon(url: string) {
     const host = new URL(url);
-    if (host.protocol === 'chrome-extension:' || supportedHost.includes(host.host)) {
+    if (host.host === chrome.runtime.id || supportedHost.includes(host.host)) {
         chrome.action.setIcon({
             path: {
                 '16': 'images/icon16a.png',
