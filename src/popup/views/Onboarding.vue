@@ -4,9 +4,7 @@
             <p><logo width="55" height="55" class="inline" /></p>
             <p><logo-title height="30" width="100" class="inline" /></p>
             <Button buttonStyle="primary" buttonSize="lg" @click="openOptionsPage">I'm new here</Button>
-            <Button buttonStyle="secondary" buttonSize="lg" @click="$router.push('/login')"
-                >I've got my private key</Button
-            >
+            <Button buttonStyle="secondary" buttonSize="lg" @click="login">I've got my private key</Button>
         </div>
     </popup-container>
 </template>
@@ -17,6 +15,7 @@ import PopupContainer from '@/components/PopupContainer.vue';
 import Logo from '@/components/Logo.vue';
 import LogoTitle from '@/components/LogoTitle.vue';
 import Button from '@/components/Button.vue';
+import MultiAccounts from '@/common/multi-accounts';
 
 @Options({
     components: { PopupContainer, Logo, LogoTitle, Button },
@@ -24,6 +23,13 @@ import Button from '@/components/Button.vue';
 export default class Onboarding extends Vue {
     openOptionsPage() {
         chrome.runtime.openOptionsPage();
+    }
+    async login() {
+        if (await MultiAccounts.get()) {
+            await this.$router.push('/login-back');
+        } else {
+            await this.$router.push('/login');
+        }
     }
 }
 </script>

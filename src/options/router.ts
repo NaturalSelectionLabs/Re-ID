@@ -6,6 +6,7 @@ import StartIndex from './views/Start/Index.vue';
 import Start from './views/Start/Base.vue';
 import StartNew from './views/Start/New.vue';
 import StartLogin from './views/Start/Login.vue';
+import StartLoginBack from './views/Start/LoginBack.vue';
 import StartPrivateKey from './views/Start/PrivateKey.vue';
 import StartSavePrivateKey from './views/Start/SavePrivateKey.vue';
 import StartAddress from './views/Start/Address.vue';
@@ -21,6 +22,8 @@ import TabsAdvancedDelete from './views/Tabs/Advanced/Delete.vue';
 import TabsProfile from './views/Tabs/Profile.vue';
 import TabsInvite from './views/Tabs/Invite.vue';
 import TabsSettings from './views/Tabs/Settings.vue';
+import TabsFollowers from './views/Tabs/FollowUsers/Followers.vue';
+import TabsFollowing from './views/Tabs/FollowUsers/Following.vue';
 
 const routes = [
     {
@@ -39,6 +42,10 @@ const routes = [
             {
                 path: 'new',
                 component: StartNew,
+            },
+            {
+                path: 'login-back',
+                component: StartLoginBack,
             },
             {
                 path: 'login',
@@ -104,6 +111,14 @@ const routes = [
             {
                 path: 'settings',
                 component: TabsSettings,
+            },
+            {
+                path: 'followers',
+                component: TabsFollowers,
+            },
+            {
+                path: 'following',
+                component: TabsFollowing,
             },
         ],
     },

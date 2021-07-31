@@ -11,7 +11,7 @@ import { Options, Vue } from 'vue-class-component';
 import ItemList from '@/components/ItemList.vue';
 import SingleItem from '@/components/SingleItem.vue';
 import RSS3 from '@/common/rss3';
-import { RSS3Item, RSS3Items } from 'rss3/types/rss3';
+import { RSS3Item } from 'rss3/types/rss3';
 
 @Options({
     components: {
@@ -26,7 +26,7 @@ export default class TabsHome extends Vue {
     async mounted() {
         const rss3 = await RSS3.get();
         if (!rss3) {
-            this.$router.push('/start');
+            await this.$router.push('/start');
         } else {
             const list1 = await rss3.items.get();
             this.rss3items = list1.items;
@@ -36,10 +36,4 @@ export default class TabsHome extends Vue {
 }
 </script>
 
-<style lang="postcss" scoped>
-@layer components {
-    .home {
-        @apply mt-8;
-    }
-}
-</style>
+<style lang="postcss" scoped></style>

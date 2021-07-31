@@ -6,11 +6,15 @@ import Onboarding from './views/Onboarding.vue';
 import Pending from './views/Pending.vue';
 
 import Login from './views/Login.vue';
+import LoginBack from './views/LoginBack.vue';
 
 import Home from './views/Home.vue';
 import Invite from './views/Invite.vue';
 import Profile from './views/Profile.vue';
 import Account from './views/Account.vue';
+
+import Followers from '@/popup/views/FollowUsers/Followers.vue';
+import Following from '@/popup/views/FollowUsers/Following.vue';
 
 const routes = [
     {
@@ -30,6 +34,10 @@ const routes = [
         path: '/login',
         component: Login,
     },
+    {
+        path: '/login-back',
+        component: LoginBack,
+    },
 
     {
         path: '/home',
@@ -46,6 +54,15 @@ const routes = [
     {
         path: '/account',
         component: Account,
+    },
+
+    {
+        path: '/followers',
+        component: Followers,
+    },
+    {
+        path: '/following',
+        component: Following,
     },
 ];
 

@@ -14,6 +14,7 @@ import Button from '@/components/Button.vue';
 import Avatar from '@/components/Avatar.vue';
 import Input from '@/components/Input.vue';
 import RSS3 from '@/common/rss3';
+import MultiAccounts from '@/common/multi-accounts';
 
 @Options({
     components: {
@@ -59,6 +60,12 @@ export default class StartProfile extends Vue {
             }
             await rss3.profile.patch(profile);
             await rss3.persona.sync();
+            await MultiAccounts.set({
+                avatar: avatarUrl || this.avatarUrl,
+                name: this.name,
+                address: rss3.persona.id,
+                privateKey: rss3.persona.privateKey,
+            });
             await this.$router.push('/start/congrats');
         }
     }
