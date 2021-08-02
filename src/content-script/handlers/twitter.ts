@@ -111,7 +111,6 @@ function setTwitterColor(baseColor: string) {
 }
 
 async function keyEvent(e: KeyboardEvent) {
-    console.log(e);
     if (e.key === 'Enter' && e.ctrlKey) {
         await syncPost();
     }
