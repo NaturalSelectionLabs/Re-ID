@@ -110,9 +110,19 @@ function setTwitterColor(baseColor: string) {
     }
 }
 
+async function keyEvent(e: KeyboardEvent) {
+    console.log(e);
+    if (e.key === 'Enter' && e.ctrlKey) {
+        await syncPost();
+    }
+}
+
 async function syncPostWhenTweet(ele: Element) {
     const baseColor = window.getComputedStyle(ele, '').backgroundColor;
     setTwitterColor(baseColor);
+
+    document.removeEventListener('keydown', keyEvent);
+    document.addEventListener('keydown', keyEvent);
 
     ele.removeEventListener('click', syncPost); // if any, prevent multiple trigger
     ele.addEventListener('click', syncPost);
