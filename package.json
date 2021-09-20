@@ -45,7 +45,7 @@
         "@babel/core": "7.14.8",
         "@babel/preset-env": "7.14.9",
         "@types/chrome": "0.0.150",
-        "@types/lodash": "4.14.171",
+        "@types/lodash": "4.14.173",
         "@vue/compiler-sfc": "3.1.5",
         "autoprefixer": "10.3.1",
         "babel-loader": "8.2.2",
