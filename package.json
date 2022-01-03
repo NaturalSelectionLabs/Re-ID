@@ -42,7 +42,7 @@
         "vue-moment": "4.1.0"
     },
     "devDependencies": {
-        "@babel/core": "7.14.8",
+        "@babel/core": "7.16.7",
         "@babel/preset-env": "7.14.9",
         "@types/chrome": "0.0.150",
         "@types/lodash": "4.14.171",
