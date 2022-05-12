@@ -61,7 +61,7 @@
         "prettier": "2.3.2",
         "tailwindcss": "2.2.7",
         "terser-webpack-plugin": "5.1.4",
-        "ts-loader": "9.2.4",
+        "ts-loader": "9.3.0",
         "url-loader": "4.1.1",
         "vue-loader": "16.4.1",
         "vue-router": "4.0.10",
