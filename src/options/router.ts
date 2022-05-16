@@ -13,6 +13,7 @@ import StartAddress from './views/Start/Address.vue';
 import StartPending from './views/Start/Pending.vue';
 import StartProfile from './views/Start/Profile.vue';
 import StartCongrats from './views/Start/Congrats.vue';
+import StartMigrate from './views/Start/Migrate.vue';
 
 import TabsBase from './views/Tabs/Base.vue';
 import TabsHome from './views/Tabs/Home.vue';
@@ -74,6 +75,10 @@ const routes = [
             {
                 path: 'congrats',
                 component: StartCongrats,
+            },
+            {
+                path: 'migrate',
+                component: StartMigrate,
             },
         ],
     },

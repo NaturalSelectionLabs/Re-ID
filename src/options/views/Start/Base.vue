@@ -115,6 +115,15 @@ export default class StartBase extends Vue {
             title: 'Congrats!',
             description: 'You’ve all set! Welcome to RE: ID : )',
         },
+        migrate: {
+            title: 'Migrate your account',
+            description: "It's time to upgrade your account to latest RSS3!",
+            tips: [
+                "❶  Before start, you'll need some $CSB to create valid transactions.",
+                "❷  Don't worry, you can get some $CSB from faucet.",
+                '❸  Your data would be storage on Crossbell Chain.',
+            ],
+        },
     };
 
     get content() {
