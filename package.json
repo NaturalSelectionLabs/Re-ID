@@ -52,7 +52,7 @@
         "copy-webpack-plugin": "9.0.1",
         "css-loader": "6.2.0",
         "cssnano": "5.0.7",
-        "html-webpack-plugin": "5.3.2",
+        "html-webpack-plugin": "5.5.0",
         "husky": "8.0.1",
         "less-loader": "10.0.1",
         "lint-staged": "12.4.1",
