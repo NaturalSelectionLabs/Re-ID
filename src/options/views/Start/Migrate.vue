@@ -9,7 +9,9 @@
         </span>
     </div>
     <p class="flex justify-between mt-12">
-        <Button :buttonStyle="balance > 0 ? 'primary' : 'disabled'" buttonSize="xl" @click="doMig()">Proceed</Button>
+        <Button :buttonStyle="balance > 0 ? 'primary' : 'disabled'" buttonSize="xl" @click="doMig()">{{
+            isProcessing ? 'Processing...' : 'Proceed'
+        }}</Button>
         <Button :buttonStyle="balance < 0.1 ? 'secondary' : 'disabled'" buttonSize="xl" @click="getCSB()"
             >Get some $CSB</Button
         >
@@ -31,6 +33,7 @@ import RSS3 from '@/common/rss3';
 export default class StartPrivateKey extends Vue {
     address: string = '';
     balance: number = 0.1;
+    isProcessing: boolean = false;
 
     async mounted() {
         const rss3 = await RSS3.get();
@@ -44,10 +47,27 @@ export default class StartPrivateKey extends Vue {
             console.log('Insufficient balance');
             return;
         }
+        if (this.isProcessing) {
+            console.log('Already processing');
+            return;
+        }
         // Do migration
         console.log('Start migration');
+        this.isProcessing = true;
+        const rss3 = await RSS3.get();
+        const items = [];
+        let fileID: string | undefined = '';
+        while (fileID !== undefined) {
+            const its = await rss3?.items.get();
+            if (its?.items.length) {
+                items.push(...its.items);
+            }
+            fileID = its?.items_next;
+        }
+        console.log('Got items', items);
 
         // Finish
+        this.isProcessing = false;
         // this.next();
     }
 
