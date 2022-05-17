@@ -8,14 +8,20 @@
             <Button> (Refresh) </Button>
         </span>
     </div>
-    <p class="flex justify-between mt-12">
+    <div class="flex justify-between mt-12">
         <Button :buttonStyle="balance > 0 ? 'primary' : 'disabled'" buttonSize="xl" @click="doMig()">{{
             isProcessing ? 'Processing...' : 'Proceed'
         }}</Button>
         <Button :buttonStyle="balance < 0.1 ? 'secondary' : 'disabled'" buttonSize="xl" @click="getCSB()"
             >Get some $CSB</Button
         >
-    </p>
+    </div>
+    <div class="flex flex-row gap-3 items-center">
+        <div class="flex flex-grow bg-secondary rounded-full h-2.5">
+            <div class="bg-primary h-2.5 rounded-full" :style="`width: ${progress.current}%`"></div>
+        </div>
+        <label class="text-lg">{{ progress.status }}</label>
+    </div>
 </template>
 
 <script lang="ts">
@@ -34,6 +40,13 @@ export default class StartPrivateKey extends Vue {
     address: string = '';
     balance: number = 0.1;
     isProcessing: boolean = false;
+    progress: {
+        current: number;
+        status: string;
+    } = {
+        current: 3,
+        status: 'Waiting...',
+    };
 
     async mounted() {
         const rss3 = await RSS3.get();
@@ -54,6 +67,8 @@ export default class StartPrivateKey extends Vue {
         // Do migration
         console.log('Start migration');
         this.isProcessing = true;
+        this.progress.current = 1;
+        this.progress.status = 'Loading all items...';
         const rss3 = await RSS3.get();
         const items = [];
         let fileID: string | undefined = '';
@@ -65,8 +80,12 @@ export default class StartPrivateKey extends Vue {
             fileID = its?.items_next;
         }
         console.log('Got items', items);
+        this.progress.current = 10;
+        this.progress.status = 'Creating posts...';
 
         // Finish
+        this.progress.current = 100;
+        this.progress.status = 'Done';
         this.isProcessing = false;
         // this.next();
     }
