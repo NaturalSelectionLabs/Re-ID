@@ -46,7 +46,7 @@
         "@babel/preset-env": "7.17.10",
         "@types/chrome": "0.0.150",
         "@types/lodash": "4.14.182",
-        "@vue/compiler-sfc": "3.1.5",
+        "@vue/compiler-sfc": "3.2.40",
         "autoprefixer": "10.3.1",
         "babel-loader": "8.2.2",
         "copy-webpack-plugin": "9.0.1",
